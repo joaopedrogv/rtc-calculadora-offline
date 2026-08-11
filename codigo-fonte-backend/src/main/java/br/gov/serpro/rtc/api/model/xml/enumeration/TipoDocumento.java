@@ -11,17 +11,20 @@ import br.gov.serpro.rtc.api.model.xml.TipoDocumentoDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumeração que lista os tipos de documentos fiscais XML suportados pela API.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum TipoDocumento {
-    NFE("nfe", "NFe", "v1.30", true, true),
-    NFCE("nfce", "NFCe", "v1.30", true, true),
-    NFSE("nfse", "NFSe", "v1.01.02", false, true),
-    CTE("cte", "CTe", "v1.10", true, true),
-    CTE_SIMPLIFICADO("cte-simplificado", "CTe Simplificado", "v1.10", true, true),
-    BPE("bpe", "BPe", "v1.10", true, true),
-    BPE_TM("bpe-tm", "BPeTM", "v1.10", true, true),
-    NF3E("nf3e", "NF3E", "v1.10", true, true);
+    NFE("nfe", "NFe", "v1.36", true, true),
+    NFCE("nfce", "NFCe", "v1.36", true, true),
+    NFSE("nfse", "NFSe", "v1.01.03 - NT004", false, true),
+    CTE("cte", "CTe", "v1.14a", true, true),
+    CTE_SIMPLIFICADO("cte-simplificado", "CTe Simplificado", "v1.14a", true, true),
+    BPE("bpe", "BPe", "v1.14a", true, true),
+    BPE_TM("bpe-tm", "BPeTM", "v1.14a", true, true),
+    NF3E("nf3e", "NF3E", "v1.14a", true, true);
     /*
     GTVE,
     NFCOM,

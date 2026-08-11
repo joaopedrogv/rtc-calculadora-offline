@@ -15,6 +15,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Representa os valores de crédito presumido e de crédito presumido em condição
+ * suspensiva para IBS ou CBS.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

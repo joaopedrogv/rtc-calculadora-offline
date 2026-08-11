@@ -15,12 +15,17 @@ import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.api.model.roc.ROCDomain;
 import br.gov.serpro.rtc.api.openapi.controller.CalculadoraTributoControllerOpenApi;
 import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
+import br.gov.serpro.rtc.domain.service.AvisoDadosSimuladosService;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
 import br.gov.serpro.rtc.domain.service.VersaoAplicacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Controlador REST do endpoint principal de cálculo do regime geral, incluindo
+ * cabeçalhos de versão e aviso de dados simulados.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -29,6 +34,7 @@ public class CalculadoraTributoController implements CalculadoraTributoControlle
 
     private final CalculadoraService calculadoraService;
     private final VersaoAplicacaoService versaoAplicacaoService;
+    private final AvisoDadosSimuladosService avisoDadosSimuladosService;
 
     @Override    
     @PostMapping(
@@ -44,7 +50,7 @@ public class CalculadoraTributoController implements CalculadoraTributoControlle
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok()
                 .headers(versaoAplicacaoService.getHeaders());
 
-        TipoWarningDadosSimulados warningDadosSimulados = calculadoraService.getWarningDadosSimulados(operacao);
+        TipoWarningDadosSimulados warningDadosSimulados = avisoDadosSimuladosService.getWarningDadosSimulados(operacao);
         if (warningDadosSimulados != null) {
             responseBuilder.header("x-warning-dados-simulados", String.valueOf(warningDadosSimulados.getValor()));
         }

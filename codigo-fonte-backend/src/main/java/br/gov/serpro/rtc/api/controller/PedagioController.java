@@ -19,6 +19,10 @@ import br.gov.serpro.rtc.domain.service.pedagio.PedagioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador REST para cálculo de CBS/IBS incidente em operações de pedágio,
+ * com sinalização de dados simulados quando aplicável.
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("calculadora")

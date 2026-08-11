@@ -9,6 +9,11 @@ import java.time.format.DateTimeFormatter;
 
 import lombok.NonNull;
 
+/**
+ * Classe utilitária para formatação de datas usadas pela aplicação. Centraliza
+ * a conversão de {@link java.time.LocalDate} para o formato brasileiro e a
+ * serialização padrão de {@link java.time.OffsetDateTime}.
+ */
 public final class DateTimeUtils {
     private static final DateTimeFormatter PT_BR_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,6 +20,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.gov.serpro.rtc.api.exceptionhandler.enumeration.ProblemType;
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import br.gov.serpro.rtc.domain.service.exception.CaptchaException;
 import br.gov.serpro.rtc.domain.service.exception.EntidadeNaoEncontradaException;
@@ -27,6 +29,13 @@ import br.gov.serpro.rtc.domain.service.exception.EstruturaInconsistenteExceptio
 import br.gov.serpro.rtc.domain.service.exception.ValidacaoException;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Handler global de exceções da API que traduz erros de validação, negócio e
+ * falhas internas para respostas {@link ProblemDetail}.
+ *
+ * Também ajusta o nível de log conforme a natureza do erro e padroniza o
+ * payload retornado aos clientes.
+ */
 @Slf4j
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
@@ -49,6 +58,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         }
         
         return super.handleExceptionInternal(ex, body, headers, statusCode, request);
+    }
+    
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        ProblemDetail problemDetail = createProblem(ex, httpStatus);
+        problemDetail.setDetail(ex.getLocalizedMessage());
+        return handleExceptionInternal(ex, problemDetail, headers, httpStatus, request);
     }
     
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

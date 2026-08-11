@@ -17,6 +17,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Reúne a apuração monofásica do item, incluindo cenários padrão, sujeitos à
+ * retenção, retidos anteriormente, diferimento e totais monofásicos de IBS/CBS.
+ */
 @Getter
 @Setter
 @Builder

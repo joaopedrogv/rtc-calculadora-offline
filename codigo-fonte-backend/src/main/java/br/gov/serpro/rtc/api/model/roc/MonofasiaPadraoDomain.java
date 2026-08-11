@@ -22,6 +22,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Representa a tributação monofásica padrão do item, com quantidade tributável,
+ * alíquotas ad rem e valores de IBS e CBS.
+ */
 @Getter
 @Setter
 @Builder

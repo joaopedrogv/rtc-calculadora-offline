@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada para sinalizar classificação tributária não vinculada à
+ * situação tributária no domínio de cálculo tributário.
+ */
 public class ClassificacaoTributariaNaoVinculadaSituacaoTributariaException extends ValidacaoException {
 
     private static final long serialVersionUID = 5292642729761124983L;

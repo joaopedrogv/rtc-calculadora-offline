@@ -8,6 +8,10 @@ import java.math.BigDecimal;
 import br.gov.serpro.rtc.api.model.roc.MonofasiaDomain;
 import br.gov.serpro.rtc.api.model.roc.MonofasiaTotalDomain;
 
+/**
+ * Acumulador imutável usado para somar os componentes da tributação monofásica
+ * antes de materializar um {@link MonofasiaTotalDomain}.
+ */
 public class MonofasiaTotalAccumulator {
     private final BigDecimal vIBSMono;
     private final BigDecimal vCBSMono;

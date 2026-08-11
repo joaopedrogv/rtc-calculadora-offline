@@ -15,6 +15,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code EXCECAO_NCM_APLICAVEL} que registra exceções de
+ * NCM para vínculos de NCM aplicável por classificação tributária.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

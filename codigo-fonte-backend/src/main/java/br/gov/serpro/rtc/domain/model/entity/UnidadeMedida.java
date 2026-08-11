@@ -13,6 +13,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code UNIDADE_MEDIDA} que representa unidades de
+ * medida utilizadas nas alíquotas ad rem.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

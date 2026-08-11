@@ -8,6 +8,10 @@ import java.math.BigDecimal;
 import br.gov.serpro.rtc.api.model.roc.IBSMunDomain;
 import br.gov.serpro.rtc.api.model.roc.IBSMunTotalDomain;
 
+/**
+ * Acumulador imutável usado para somar os componentes do total de IBS municipal
+ * antes de materializar um {@link IBSMunTotalDomain}.
+ */
 public class IBSMunTotalAccumulator {
     private final BigDecimal vDif;
     private final BigDecimal vDevTrib;

@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
 import br.gov.serpro.rtc.domain.service.exception.ErroFaltaImplementacaoException;
-import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-testes.yml")
 @ActiveProfiles("testes")
 class Teste_validacao_22_ErroFaltaImplementacaoException {
-
-    private static JsonResourceObjectMapper<OperacaoInput> mapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,16 +43,11 @@ class Teste_validacao_22_ErroFaltaImplementacaoException {
     
     private OperacaoInput operacao; 
 
-    @BeforeAll
-    static void setup() {
-        mapper = new JsonResourceObjectMapper<>(OperacaoInput.class);
-    }
-
     @BeforeEach
     void beforeEach(
             final @Value("classpath:entradas/validacoes/Teste_validacao_22_ErroFaltaImplementacaoException.json") Resource resourceFile)
             throws Exception {
-        operacao = mapper.loadTestJson(resourceFile);
+        operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
     }
 
     @Test

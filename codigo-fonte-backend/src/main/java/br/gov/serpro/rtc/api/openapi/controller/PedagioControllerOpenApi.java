@@ -20,6 +20,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Contrato OpenAPI do endpoint de cálculo tributário de pedágio, com
+ * documentação do cabeçalho de dados simulados.
+ */
 @Tag(name = "Pedágio - VERSÃO BETA", description = "IVA - Calculadora de Tributos para o Pedágio")
 public interface PedagioControllerOpenApi {
 

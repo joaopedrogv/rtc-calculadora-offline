@@ -1,0 +1,35 @@
+{
+    "id": "507f1f77bcf86cd799439011",
+    "versao": "1.0.0",
+    "dataHoraEmissao": "2029-06-03T03:00:00-03:00",
+    "municipio": 1200013,
+    "uf": "AC",
+    "gCompraGov": {
+        "tpEnteGov": 2,
+        "tpOperGov": 1
+    },
+    "itens": [
+        {
+            "numero": 1,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 1,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550001",
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200032"
+            },
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "cClassTrib": "000001",
+                "unidade": "VN",
+                "quantidade": 1,
+                "impostoInformado": 0
+            }
+        }
+    ]
+}

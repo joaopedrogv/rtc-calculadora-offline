@@ -19,6 +19,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code CLASSIFICACAO_TRIBUTARIA} que representa uma
+ * classificação tributária com código, descrição, memória de cálculo, situação
+ * tributária, tipo de alíquota e indicadores de grupos fiscais.
+ */
 @SqlResultSetMapping(
         name = "ClassificacaoTributariaDTOMapping",
         classes = @ConstructorResult(

@@ -13,6 +13,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA que define tratamentos tributários aplicáveis às classificações
+ * usadas pela calculadora. Armazena expressões, indicadores e parâmetros que
+ * orientam o cálculo de alíquotas, reduções, incompatibilidades e demais regras
+ * de tributação.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

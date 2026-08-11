@@ -10,6 +10,10 @@ import br.gov.serpro.rtc.domain.model.entity.VersaoBaseDados;
 import br.gov.serpro.rtc.domain.repository.VersaoBaseDadosRepository;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por disponibilizar, com cache, a versão mais recente da
+ * base de dados carregada pela aplicação.
+ */
 @RequiredArgsConstructor
 @Service
 public class VersaoBaseDadosService {

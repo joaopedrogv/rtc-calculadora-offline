@@ -4,8 +4,9 @@
 package br.gov.serpro.rtc.domain.service.dadosabertos;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -15,26 +16,35 @@ import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDa
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TipoDfeClassificacaoDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ValidadeDfeClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.domain.model.dto.AliquotaAdRemDTO;
+import br.gov.serpro.rtc.domain.model.dto.ClassificacaoTributariaDTO;
 import br.gov.serpro.rtc.domain.model.entity.ClassificacaoTributaria;
 import br.gov.serpro.rtc.domain.model.entity.FundamentacaoLegal;
 import br.gov.serpro.rtc.domain.model.entity.SituacaoTributaria;
 import br.gov.serpro.rtc.domain.model.entity.TipoDfeClassificacao;
 import br.gov.serpro.rtc.domain.model.enumeration.SiglasDFeEnum;
 import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
+import br.gov.serpro.rtc.domain.repository.NbsAplicavelRepository;
 import br.gov.serpro.rtc.domain.repository.NbsRepository;
 import br.gov.serpro.rtc.domain.repository.NcmRepository;
+import br.gov.serpro.rtc.domain.repository.RedutorCompraGovernamentalRepository;
 import br.gov.serpro.rtc.domain.repository.SituacaoTributariaRepository;
+import br.gov.serpro.rtc.domain.repository.TransferenciaCBSRepository;
 import br.gov.serpro.rtc.domain.repository.TratamentoClassificacaoRepository;
 import br.gov.serpro.rtc.domain.service.AliquotaAdRemProdutoService;
 import br.gov.serpro.rtc.domain.service.AliquotaAdValoremProdutoService;
 import br.gov.serpro.rtc.domain.service.AliquotaAdValoremServicoService;
 import br.gov.serpro.rtc.domain.service.AliquotaPadraoService;
+import br.gov.serpro.rtc.domain.service.ClassificacaoTributariaService;
 import br.gov.serpro.rtc.domain.service.FundamentacaoClassificacaoService;
 import br.gov.serpro.rtc.domain.service.MunicipioService;
 import br.gov.serpro.rtc.domain.service.TipoDfeClassificacaoService;
@@ -42,9 +52,15 @@ import br.gov.serpro.rtc.domain.service.TributoSituacaoTributariaService;
 import br.gov.serpro.rtc.domain.service.UfService;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroGenericoValidacaoException;
+import br.gov.serpro.rtc.domain.service.exception.NbsNaoEncontradaException;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por consolidar as consultas públicas de dados abertos da
+ * calculadora tributária. Expõe localidades, classificações, alíquotas,
+ * nomenclaturas, redutores e vigências usados por integrações externas.
+ */
 @RequiredArgsConstructor
 @Service
 public class DadosAbertosService {
@@ -53,8 +69,12 @@ public class DadosAbertosService {
     private final MunicipioService municipioService;
     private final SituacaoTributariaRepository situacaoTributariaRepository;
     private final TratamentoClassificacaoRepository tratamentoClassificacaoRepository;
+    private final ClassificacaoTributariaService classificacaoTributariaService;
+    private final NbsAplicavelRepository nbsAplicavelRepository;
     private final NcmRepository ncmRepository;
     private final NbsRepository nbsRepository;
+    private final RedutorCompraGovernamentalRepository redutorCompraGovernamentalRepository;
+    private final TransferenciaCBSRepository transferenciaCBSRepository;
     private final AliquotaAdValoremProdutoService aliquotaAdValoremProdutoService;
     private final AliquotaAdValoremServicoService aliquotaAdValoremServicoService;
     private final AliquotaAdRemProdutoService aliquotaAdRemProdutoService;
@@ -231,6 +251,15 @@ public class DadosAbertosService {
         // if (nbs.length() != 9) {
         //     throw new ValidationException("O campo NBS deve ter exatamente 9 dígitos.");
         // }
+    }
+
+    public List<NbsListaDadosAbertosOutput> listarNbs(LocalDate data) {
+        return nbsRepository.listarNbs(data).stream()
+                .map(nbs -> NbsListaDadosAbertosOutput.builder()
+                        .codigo(nbs.getCodigo())
+                        .descricao(nbs.getDescricao())
+                        .build())
+                .toList();
     }
 
     public List<FundamentacaoClassificacaoDadosAbertosOutput> consultarFundamentacoesLegais(LocalDate data) {
@@ -413,6 +442,7 @@ public class DadosAbertosService {
                 .nomenclatura((String) resultado[1])
                 .exigeGrupoTributacaoRegular(resultado[2] != null && ((Number) resultado[2]).intValue() != 0)
                 .permiteDiferimento(resultado[3] != null && ((Number) resultado[3]).intValue() != 0)
+                .possibilidadeCreditoPresumido(resultado[4] != null && ((Number) resultado[4]).intValue() == 1)
                 .build();
     }
 
@@ -429,6 +459,81 @@ public class DadosAbertosService {
                         .descricao(t.getTipoDfe().getDescricao())
                         .build())
                 .toList();
+    }
+
+    public List<RedutorCompraGovernamentalDadosAbertosOutput> consultarRedutoresCompraGovernamental() {
+        return redutorCompraGovernamentalRepository.buscarTodos().stream()
+                .map(r -> RedutorCompraGovernamentalDadosAbertosOutput
+                        .builder()
+                        .valor(r.getValor())
+                        .inicioVigencia(r.getInicioVigencia())
+                        .fimVigencia(r.getFimVigencia())
+                        .build())
+                .toList();
+    }
+
+    public List<TransferenciaCBSDadosAbertosOutput> consultarTransferenciasCBS() {
+        return transferenciaCBSRepository.buscarTodos().stream()
+                .map(t -> TransferenciaCBSDadosAbertosOutput
+                        .builder()
+                        .valor(t.getValor())
+                        .inicioVigencia(t.getInicioVigencia())
+                        .fimVigencia(t.getFimVigencia())
+                        .build())
+                .toList();
+    }
+    
+    public List<TransferenciaIBSDadosAbertosOutput> consultarTransferenciasIBS() {
+        List<TransferenciaIBSDadosAbertosOutput> lista = new ArrayList<>();
+        lista.add(TransferenciaIBSDadosAbertosOutput.builder()
+                .valor(BigDecimal.ZERO)
+                .inicioVigencia(LocalDate.of(2026, 1, 1))
+                .fimVigencia(LocalDate.of(2026, 12, 31))
+                .build());
+        lista.add(TransferenciaIBSDadosAbertosOutput.builder()
+                .valor(BigDecimal.valueOf(100))
+                .inicioVigencia(LocalDate.of(2027, 1, 1))
+                .fimVigencia(null)
+                .build());
+        return lista;
+    }
+
+    public List<NbsListaDadosAbertosOutput> listarNbsAplicaveisPorClassificacao(String cClassTrib, LocalDate data) {
+        ClassificacaoTributariaDTO classificacao = classificacaoTributariaService
+                .buscarClassificacaoTributariaCbsIbs(cClassTrib, data);
+ 
+        if (!classificacao.nomenclatura().contains("NBS"))
+        {
+            return List.of();
+        }
+
+        boolean temVinculo = nbsAplicavelRepository.existeVinculoParaClassificacao(cClassTrib) == 1;
+        
+        if (!temVinculo) {
+            return listarNbs(data);
+        }
+
+        List<Object[]> results = nbsAplicavelRepository.listarNbsAplicaveisPorClassificacao(cClassTrib, data);
+
+        return results.stream()
+                .map(row -> NbsListaDadosAbertosOutput.builder()
+                        .codigo((String) row[0])
+                        .descricao((String) row[1])
+                        .build())
+                        .toList();
+    }
+
+    public List<String> listarClassificacaoAplicavelPorNbs(String nbs, LocalDate data) {
+        if (!nbsRepository.existeNbs(nbs, data)) {
+            throw new NbsNaoEncontradaException(nbs, data);
+        }
+        
+        List<String> vinculados = nbsAplicavelRepository.listarCodigosClassificacoesVinculadasPorNbs(nbs, data);
+        List<String> semVinculo = classificacaoTributariaService.listarCodigosClassificacoesServicoSemVinculoNbs(data);
+        List<String> resultado = new ArrayList<>();
+        resultado.addAll(vinculados);
+        resultado.addAll(semVinculo);
+        return resultado;
     }
 
     public TipoWarningDadosSimulados getWarningDadosSimuladosPorData(LocalDate data) {

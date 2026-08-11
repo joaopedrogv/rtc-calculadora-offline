@@ -3,6 +3,7 @@
  */
 package br.gov.serpro.rtc.testesunitarios.service;
 
+import static br.gov.serpro.rtc.core.util.ArredondamentoUtils.arredondarInterno;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
@@ -42,7 +43,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
         String expressao = "5/100";
         BigDecimal resultado = avaliador.evaluate(expressao, variables, 4);
         
-        assertEquals(new BigDecimal("0.0500"), resultado, 
+        assertEquals(new BigDecimal("0.05000000"), resultado, 
             "5/100 deve resultar em 0.05, não em 0 (divisão inteira)");
     }
 
@@ -57,11 +58,10 @@ public class Teste_AvaliadorExpressaoAritmetica {
         BigDecimal resultado = avaliador.evaluate(expressao, variables, 2);
         
         // Cálculo esperado: 0.05 * 7720 * 0.4285714 * 0.1922 = 31.81
-        BigDecimal esperado = new BigDecimal("0.05")
+        BigDecimal esperado = arredondarInterno(new BigDecimal("0.05")
             .multiply(new BigDecimal("7720"))
             .multiply(new BigDecimal("0.4285714"))
-            .multiply(new BigDecimal("0.1922"))
-            .setScale(2, java.math.RoundingMode.HALF_UP);
+            .multiply(new BigDecimal("0.1922")));
         
         assertEquals(esperado, resultado, 
             "A expressão com 5/100 deve calcular corretamente");
@@ -77,14 +77,12 @@ public class Teste_AvaliadorExpressaoAritmetica {
         String expressao = "0.05*quantidade*0.4285714*aliquotaAdRemSecundaria";
         BigDecimal resultado = avaliador.evaluate(expressao, variables, 2);
         
-        BigDecimal esperado = new BigDecimal("0.05")
+        BigDecimal esperado = arredondarInterno(new BigDecimal("0.05")
             .multiply(new BigDecimal("7720"))
             .multiply(new BigDecimal("0.4285714"))
-            .multiply(new BigDecimal("0.1922"))
-            .setScale(2, java.math.RoundingMode.HALF_UP);
+            .multiply(new BigDecimal("0.1922")));
         
-        assertEquals(esperado, resultado, 
-            "A expressão com 0.05 deve calcular corretamente");
+        assertEquals(esperado, resultado, "Aexpressão com 0.05 deve calcular corretamente");
     }
 
     @Test
@@ -94,7 +92,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
         String expressao = "1/2";
         BigDecimal resultado = avaliador.evaluate(expressao, variables, 2);
         
-        assertEquals(new BigDecimal("0.50"), resultado, "1/2 deve resultar em 0.50");
+        assertEquals(new BigDecimal("0.50000000"), resultado, "1/2 deve resultar em 0.50");
     }
 
     @Test
@@ -105,6 +103,6 @@ public class Teste_AvaliadorExpressaoAritmetica {
         String expressao = "valor * (3/4)";
         BigDecimal resultado = avaliador.evaluate(expressao, variables, 2);
         
-        assertEquals(new BigDecimal("75.00"), resultado, "100 * 3/4 deve resultar em 75.00");
+        assertEquals(new BigDecimal("75.00000000"), resultado, "100 * 3/4 deve resultar em 75.00000000");
     }
 }

@@ -14,6 +14,11 @@ import org.springframework.stereotype.Repository;
 import br.gov.serpro.rtc.domain.model.dto.AliquotaResultadoDTO;
 import br.gov.serpro.rtc.domain.model.entity.AliquotaPadrao;
 
+/**
+ * Repositório Spring Data JPA responsável por consultar alíquotas padrão e sua
+ * composição com alíquotas de referência. Aplica filtros de vigência e
+ * localização para recuperar a alíquota efetiva usada no cálculo tributário.
+ */
 @Repository
 public interface AliquotaPadraoRepository extends JpaRepository<AliquotaPadrao, Long> {
 

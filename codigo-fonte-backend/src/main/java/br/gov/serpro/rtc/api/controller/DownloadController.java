@@ -14,6 +14,10 @@ import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.annotations.Hidden;
 
+/**
+ * Controlador REST oculto da documentação OpenAPI que retorna a URL de download
+ * da aplicação offline e registra métricas por plataforma.
+ */
 @RestController
 @RequestMapping(
     value = "calculadora/download",

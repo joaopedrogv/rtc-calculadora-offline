@@ -12,6 +12,12 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA que representa anexos e itens normativos usados como referência
+ * legal das classificações tributárias. Armazena identificação, descrição e
+ * texto dos anexos vinculados às fundamentações legais utilizadas pela
+ * calculadora.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

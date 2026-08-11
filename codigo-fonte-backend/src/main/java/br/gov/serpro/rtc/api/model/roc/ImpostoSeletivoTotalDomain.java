@@ -17,6 +17,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida o valor total do Imposto Seletivo apurado no ROC.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

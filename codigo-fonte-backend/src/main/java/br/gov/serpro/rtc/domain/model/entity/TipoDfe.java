@@ -13,6 +13,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code TIPO_DFE} que representa tipos de documento
+ * fiscal eletrônico, com tipo numérico, sigla, descrição e vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

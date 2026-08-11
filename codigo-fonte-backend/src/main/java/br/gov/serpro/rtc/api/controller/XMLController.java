@@ -24,6 +24,10 @@ import jakarta.xml.bind.JAXBException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Controlador REST para geração, validação e listagem dos tipos de documentos
+ * XML suportados pela calculadora.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController

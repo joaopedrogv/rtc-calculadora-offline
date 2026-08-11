@@ -13,6 +13,10 @@ import br.gov.serpro.rtc.domain.model.entity.TipoDfeClassificacao;
 import br.gov.serpro.rtc.domain.repository.TipoDfeClassificacaoRepository;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por consultar os tipos de DF-e vinculados às
+ * classificações tributárias disponíveis.
+ */
 @RequiredArgsConstructor
 @Service
 public class TipoDfeClassificacaoService {

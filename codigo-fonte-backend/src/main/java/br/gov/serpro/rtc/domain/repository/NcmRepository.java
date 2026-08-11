@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.Ncm;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link Ncm}, com consultas de
+ * descrição e existência de NCM vigentes.
+ */
 @Repository
 public interface NcmRepository extends JpaRepository<Ncm, String> {
 

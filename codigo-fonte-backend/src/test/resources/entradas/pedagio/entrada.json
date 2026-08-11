@@ -1,0 +1,34 @@
+{
+    "dataHoraEmissao": "2026-06-03T03:00:00-03:00",
+    "ufMunicipioOrigem": "AC",
+    "codigoMunicipioOrigem": 1200013,
+    "cst": "000",
+    "cClassTrib": "000002",
+    "baseCalculo": 200,
+    "trechos": [
+        {
+            "numero": 1,
+            "uf": "AC",
+            "municipio": 1200013,
+            "extensao": 10
+        },
+        {
+            "numero": 2,
+            "uf": "AC",
+            "municipio": 1200054,
+            "extensao": 20
+        },
+        {
+            "numero": 3,
+            "uf": "AL",
+            "municipio": 2700102,
+            "extensao": 30
+        },
+        {
+            "numero": 4,
+            "uf": "AL",
+            "municipio": 2700201,
+            "extensao": 40
+        }
+    ]
+}

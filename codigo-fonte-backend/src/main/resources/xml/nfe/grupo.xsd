@@ -6,36 +6,43 @@
     xmlns="http://www.portalfiscal.inf.br/nfe"
     targetNamespace="http://www.portalfiscal.inf.br/nfe">
 
+	<xs:include schemaLocation="./originais/tiposBasico_v4.00.xsd"/>
     <xs:include schemaLocation="./originais/DFeTiposBasicos_v1.00.xsd" />
 
-    <xs:element name="infNFe">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="det" minOccurs="0" maxOccurs="999">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="imposto">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element name="IS" type="TIS" minOccurs="0"></xs:element>
-                                        <xs:element name="IBSCBS" type="TTribNFe"></xs:element>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                        <xs:attribute name="nItem" type="xs:string" use="required" />
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="total">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="ISTot" type="TISTot" minOccurs="0"></xs:element>
-                            <xs:element name="IBSCBSTot" type="TIBSCBSMonoTot" minOccurs="0"></xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
+	<xs:element name="infNFe">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ide" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="gCompraGov" type="TCompraGov" minOccurs="0"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="det" maxOccurs="990">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="imposto">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="IS" type="TIS" minOccurs="0"></xs:element>
+										<xs:element name="IBSCBS" type="TTribNFe"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="nItem" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="total">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ISTot" type="TISTot" minOccurs="0"></xs:element>
+							<xs:element name="IBSCBSTot" type="TIBSCBSMonoTot" minOccurs="0"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

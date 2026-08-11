@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * Modelo interno que representa as alíquotas ad valorem e ad rem do Imposto
+ * Seletivo, com a respectiva unidade de medida.
+ */
 @ToString
 @Getter
 @Builder

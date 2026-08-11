@@ -4,12 +4,17 @@ import static jakarta.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
 import static java.lang.Boolean.TRUE;
 
 import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental;
+import br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoOperacaoGovernamental;
+import br.gov.serpro.rtc.api.model.roc.CompraGovernamentalDomain;
 import br.gov.serpro.rtc.api.model.roc.ObjetoDomain;
 import br.gov.serpro.rtc.api.model.roc.ROCDomain;
 import br.gov.serpro.rtc.api.model.xml.nf3e.InfNF3E;
@@ -17,8 +22,11 @@ import br.gov.serpro.rtc.api.model.xml.nf3e.InfNF3E.NFdet;
 import br.gov.serpro.rtc.api.model.xml.nf3e.InfNF3E.NFdet.Det;
 import br.gov.serpro.rtc.api.model.xml.nf3e.InfNF3E.NFdet.Det.DetItem.Imposto;
 import br.gov.serpro.rtc.api.model.xml.nf3e.InfNF3E.Total;
+import br.gov.serpro.rtc.api.model.xml.nf3e.TCompraGovReduzido;
+import br.gov.serpro.rtc.core.util.ArredondamentoUtils;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 
 /**
  * Serviço para serialização de NF3E em XML.
@@ -29,17 +37,18 @@ import jakarta.xml.bind.JAXBException;
 public class Nf3eXmlService {
 
     private final JAXBContext jaxbContext;
-    private final ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper;
     
     public Nf3eXmlService(@Qualifier("jaxbInfNF3EContext") JAXBContext jaxbContext) {
         super();
         this.jaxbContext = jaxbContext;
+        this.mapper = new ModelMapper();
+        configureCompraGovMapping();
     }
 
     public String toXml(ROCDomain roc) throws JAXBException {
-        final var writer = new StringWriter();
-        // Criar um novo Marshaller para cada operação (thread-safety)
-        final var marshaller = jaxbContext.createMarshaller();
+        final StringWriter writer = new StringWriter();
+        Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(JAXB_FORMATTED_OUTPUT, TRUE);
         marshaller.marshal(convert(roc), writer);
         return writer.toString();
@@ -72,19 +81,56 @@ public class Nf3eXmlService {
         var dets = roc.getObjetos().stream().map(this::objetoToDet).toList();
         nfDet.setDet(dets);
         
+        var ide = operToIde(roc);
+        if (ide != null) {
+            infNf3e.setIde(ide);
+        }
+        
         infNf3e.setNFdet(List.of(nfDet));
         infNf3e.setTotal(this.mapper.map(roc.getTotal().getTribCalc(), Total.class));
         return infNf3e;
     }
 
     private Det objetoToDet(ObjetoDomain r) {
-        var det = new NFdet.Det();
+        final var det = new NFdet.Det();
         det.setNItem(r.getNObj().toString());
         
-        var detItem = new NFdet.Det.DetItem();
+        final var detItem = new NFdet.Det.DetItem();
         detItem.setImposto(this.mapper.map(r.getTribCalc(), Imposto.class));
         det.setDetItem(detItem);
         return det;
+    }
+
+    private InfNF3E.Ide operToIde(ROCDomain roc) {
+        if (roc.getOper() == null || roc.getOper().getGCompraGov() == null) {
+            return null;
+        }
+
+        var ide = new InfNF3E.Ide();
+        ide.setGCompraGov(compraGovToXml(roc.getOper().getGCompraGov()));
+        return ide;
+    }
+
+    private TCompraGovReduzido compraGovToXml(CompraGovernamentalDomain compraGov) {
+        return this.mapper.map(compraGov, TCompraGovReduzido.class);
+    }
+
+    private void configureCompraGovMapping() {
+        Converter<TipoEnteGovernamental, String> tpEnteGovConverter = context -> context.getSource() == null ? null
+                : String.valueOf(context.getSource().getCodigo());
+        Converter<TipoOperacaoGovernamental, String> tpOperGovConverter = context -> context.getSource() == null ? null
+                : String.valueOf(context.getSource().getCodigo());
+        Converter<BigDecimal, String> pRedutorConverter = context -> context.getSource() == null ? null
+                : ArredondamentoUtils.formatarAliquota(context.getSource());
+
+        this.mapper.typeMap(CompraGovernamentalDomain.class, TCompraGovReduzido.class).addMappings(mapping -> {
+            mapping.using(tpEnteGovConverter).map(CompraGovernamentalDomain::getTpEnteGov,
+                    TCompraGovReduzido::setTpEnteGov);
+            mapping.using(pRedutorConverter).map(CompraGovernamentalDomain::getPRedutor,
+                    TCompraGovReduzido::setPRedutor);
+            mapping.using(tpOperGovConverter).map(CompraGovernamentalDomain::getTpOperGov,
+                    TCompraGovReduzido::setTpOperGov);
+        });
     }
 
 }

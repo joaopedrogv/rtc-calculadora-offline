@@ -6,35 +6,45 @@ package br.gov.serpro.rtc.api.model.output.pedagio;
 import static java.math.BigDecimal.ZERO;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
+import br.gov.serpro.rtc.config.serializer.BigDecimalTDec1302Serializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * Saída com a consolidação dos valores apurados, devidos e desonerados de um
+ * tributo no pedágio.
+ */
 @Getter
 @Builder
 @JsonInclude(Include.NON_NULL)
 public final class TributoTotalPedagioOutput implements SerializationVisibility {
 
+    @JsonSerialize(using = BigDecimalTDec1302Serializer.class)
     @Schema(name = "baseCalculo", description = "Base de cálculo do imposto", example = "200.00")
     private final BigDecimal baseCalculo;
     
+    @JsonSerialize(using = BigDecimalTDec1302Serializer.class)
     @Schema(name = "valorApurado", description = "Valor de imposto apurado", example = "0.75")
     private final BigDecimal valorApurado;
     
+    @JsonSerialize(using = BigDecimalTDec1302Serializer.class)
     @Schema(name = "valorDevido", description = "Valor de imposto devido", example = "0.75")
     private final BigDecimal valorDevido;
 
+    @JsonSerialize(using = BigDecimalTDec1302Serializer.class)
     @Schema(name = "valorTributo", description = "Valor do tributo", example = "0.75")
     private final BigDecimal valorTributo;
     
+    @JsonSerialize(using = BigDecimalTDec1302Serializer.class)
     @Schema(name = "totalMontanteDesonerado", description = "Total do montante desonerado", example = "10.22")
     private final BigDecimal valorMontanteDesonerado;
 
@@ -87,7 +97,7 @@ public final class TributoTotalPedagioOutput implements SerializationVisibility 
     private static TributoTotalPedagioOutput getValorTotalIVA(List<TrechoPedagioOutput> trechosPedagio, BigDecimal totalBaseCalculo,
             Function<? super TrechoPedagioOutput, TributoPedagioOutput> functionTributoATotalizar,
             Function<? super TributoPedagioOutput, BigDecimal> functionTributoCalculado) {
-        final BigDecimal totalTributo = totalizaIVA(trechosPedagio, functionTributoATotalizar, functionTributoCalculado).setScale(2, RoundingMode.HALF_UP);
+        final BigDecimal totalTributo = totalizaIVA(trechosPedagio, functionTributoATotalizar, functionTributoCalculado);
 
         return TributoTotalPedagioOutput
             .builder()

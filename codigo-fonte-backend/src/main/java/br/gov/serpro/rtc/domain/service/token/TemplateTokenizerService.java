@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por decompor templates em partes literais e placeholders
+ * substituíveis. Dá suporte à renderização de conteúdos parametrizados da
+ * aplicação com reaproveitamento de tokens em cache.
+ */
 @RequiredArgsConstructor
 @Service
 public class TemplateTokenizerService {

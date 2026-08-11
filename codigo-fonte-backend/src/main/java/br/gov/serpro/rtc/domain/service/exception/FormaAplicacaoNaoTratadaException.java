@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada quando a forma de aplicação da alíquota configurada para uma
+ * classificação não possui tratamento implementado na lógica de cálculo.
+ */
 public class FormaAplicacaoNaoTratadaException extends ErroInternoSistemaException {
 
     private static final long serialVersionUID = 1L;

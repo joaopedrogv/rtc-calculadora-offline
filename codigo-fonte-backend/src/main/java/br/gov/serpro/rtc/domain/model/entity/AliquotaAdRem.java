@@ -16,6 +16,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code ALIQUOTA_AD_REM} que armazena a alíquota ad rem
+ * por tributo e unidade de medida, com período de vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

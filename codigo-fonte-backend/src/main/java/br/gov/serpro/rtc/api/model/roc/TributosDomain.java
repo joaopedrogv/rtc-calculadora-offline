@@ -15,6 +15,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Agrupa os tributos calculados para um item do ROC, contemplando Imposto
+ * Seletivo e o conjunto IBS/CBS.
+ */
 @Getter
 @Setter
 @Builder

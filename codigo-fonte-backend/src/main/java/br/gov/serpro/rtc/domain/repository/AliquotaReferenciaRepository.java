@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.AliquotaReferencia;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link AliquotaReferencia}, com
+ * consulta da alíquota de referência por tributo e data de vigência.
+ */
 @Repository
 public interface AliquotaReferenciaRepository extends JpaRepository<AliquotaReferencia, Long> {
 

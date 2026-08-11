@@ -7,6 +7,10 @@ import java.math.BigDecimal;
 
 import br.gov.serpro.rtc.api.model.roc.EstornoCreditoDomain;
 
+/**
+ * Acumulador imutável usado para somar os estornos de crédito antes de
+ * materializar um {@link EstornoCreditoDomain}.
+ */
 public class EstornoCreditoAccumulator {
     private final BigDecimal vIBSEstCred;
     private final BigDecimal vCBSEstCred;

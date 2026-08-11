@@ -4,9 +4,8 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
-package br.gov.serpro.rtc.api.model.xml.nfce;
 
-import java.math.BigDecimal;
+package br.gov.serpro.rtc.api.model.xml.nfce;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -15,29 +14,39 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de tributação de compra governamental do
+ * documento fiscal Nota Fiscal de Consumidor Eletrônica (NFCe), conforme o
+ * schema fiscal correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TTribCompraGov", propOrder = { "pAliqIBSUF", "vTribIBSUF", "pAliqIBSMun", "vTribIBSMun", "pAliqCBS",
-        "vTribCBS" })
+@XmlType(name = "TTribCompraGov", propOrder = {
+    "pAliqIBSUF",
+    "vTribIBSUF",
+    "pAliqIBSMun",
+    "vTribIBSMun",
+    "pAliqCBS",
+    "vTribCBS"
+})
 public class TTribCompraGov {
 
     @XmlElement(required = true)
-    private BigDecimal pAliqIBSUF;
+    private String pAliqIBSUF;
 
     @XmlElement(required = true)
-    private BigDecimal vTribIBSUF;
+    private String vTribIBSUF;
 
     @XmlElement(required = true)
-    private BigDecimal pAliqIBSMun;
+    private String pAliqIBSMun;
 
     @XmlElement(required = true)
-    private BigDecimal vTribIBSMun;
+    private String vTribIBSMun;
 
     @XmlElement(required = true)
-    private BigDecimal pAliqCBS;
+    private String pAliqCBS;
 
     @XmlElement(required = true)
-    private BigDecimal vTribCBS;
-
+    private String vTribCBS;
 }

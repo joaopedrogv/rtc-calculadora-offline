@@ -4,13 +4,15 @@
 package br.gov.serpro.rtc.domain.service.pedagio;
 
 import static br.gov.serpro.rtc.api.model.output.pedagio.TotalPedagioOutput.getTotal;
-import static br.gov.serpro.rtc.core.util.CalculadoraUtils.CEM;
-import static java.math.RoundingMode.HALF_UP;
+import static br.gov.serpro.rtc.core.util.ArredondamentoUtils.dividir;
+import static br.gov.serpro.rtc.core.util.ArredondamentoUtils.dividirPorCem;
+import static br.gov.serpro.rtc.core.util.ArredondamentoUtils.multiplicar;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,15 @@ import br.gov.serpro.rtc.api.model.output.pedagio.TributoPedagioOutput;
 import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
 import br.gov.serpro.rtc.domain.model.enumeration.TributoEnum;
 import br.gov.serpro.rtc.domain.service.AliquotaPadraoService;
+import br.gov.serpro.rtc.domain.service.MunicipioService;
 import br.gov.serpro.rtc.domain.service.UfService;
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por calcular CBS e IBS em operações de pedágio,
+ * distribuindo alíquotas por trecho e identificando avisos de dados simulados.
+ */
 @RequiredArgsConstructor
 @Service
 public class PedagioService {
@@ -33,7 +40,13 @@ public class PedagioService {
 
     private final UfService ufService;
 
+    private final MunicipioService municipioService;
+
     public PedagioOutput calcularCIBS(PedagioInput operacao) {
+
+        validarNumerosUnicos(operacao);
+        municipioService.validarMunicipio(operacao.getCodigoMunicipioOrigem(), operacao.getUfMunicipioOrigem());
+        operacao.getTrechos().forEach(t -> municipioService.validarMunicipio(t.getMunicipio(), t.getUf()));
 
         final List<TrechoPedagioOutput> trechosPedagio = getTrechosPedagio(operacao);
         return PedagioOutput.builder()
@@ -69,12 +82,12 @@ public class PedagioService {
                 throw new CampoInvalidoException("Erro ao obter alíquotas");
             }
 
-            BigDecimal valorAliquotaEfetivaCbs = valorAliquotaCbs
-                    .multiply(trecho.getExtensao()).divide(x, 8, RoundingMode.DOWN);
-            BigDecimal valorAliquotaEfetivaIbsEstadual = valorAliquotaIbsEstadual
-                    .multiply(trecho.getExtensao()).divide(x, 8, RoundingMode.DOWN);
-            BigDecimal valorAliquotaEfetivaIbsMunicipal = valorAliquotaIbsMunicipal
-                    .multiply(trecho.getExtensao()).divide(x, 8, RoundingMode.DOWN);
+            BigDecimal valorAliquotaEfetivaCbs = dividir(
+                    valorAliquotaCbs.multiply(trecho.getExtensao()), x);
+            BigDecimal valorAliquotaEfetivaIbsEstadual = dividir(
+                    valorAliquotaIbsEstadual.multiply(trecho.getExtensao()), x);
+            BigDecimal valorAliquotaEfetivaIbsMunicipal = dividir(
+                    valorAliquotaIbsMunicipal.multiply(trecho.getExtensao()), x);
 
             final TributoPedagioOutput cbs = obterCIBS(valorAliquotaCbs, valorAliquotaEfetivaCbs, baseCalculoCIBS);
             final TributoPedagioOutput ibsEstado = obterCIBS(valorAliquotaIbsEstadual, valorAliquotaEfetivaIbsEstadual,
@@ -109,13 +122,22 @@ public class PedagioService {
     }
 
     private static BigDecimal calcularTributo(BigDecimal baseCalculo, BigDecimal aliquota) {
-        return baseCalculo.multiply(aliquota).setScale(4, RoundingMode.HALF_UP);
+        return multiplicar(baseCalculo, aliquota);
     }
 
     public BigDecimal buscarAliquotaPadrao(TributoEnum tributo, LocalDate data, Long codigoUf, Long codigoMunicipio) {
         final var aliquota = aliquotaPadraoService.buscarAliquota(tributo.getCodigo(), codigoUf, codigoMunicipio, data);
-        return aliquota.valorAplicavel().divide(CEM)
-                .setScale(8, HALF_UP);
+        return dividirPorCem(aliquota.valorAplicavel());
+    }
+
+    private static void validarNumerosUnicos(PedagioInput operacao) {
+        Set<Integer> numerosVistos = new HashSet<>();
+        for (var trecho : operacao.getTrechos()) {
+            if (!numerosVistos.add(trecho.getNumero())) {
+                throw new CampoInvalidoException(
+                        "Número de trecho duplicado: " + trecho.getNumero());
+            }
+        }
     }
 
     public TipoWarningDadosSimulados getWarningDadosSimulados(PedagioInput operacao) {

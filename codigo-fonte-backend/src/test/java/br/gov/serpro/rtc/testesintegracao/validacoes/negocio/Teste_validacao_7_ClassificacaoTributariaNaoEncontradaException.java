@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
-import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-testes.yml")
 @ActiveProfiles("testes")
 class Teste_validacao_7_ClassificacaoTributariaNaoEncontradaException {
-
-    private static JsonResourceObjectMapper<OperacaoInput> mapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,16 +45,11 @@ class Teste_validacao_7_ClassificacaoTributariaNaoEncontradaException {
     
     private OperacaoInput operacao;
 
-    @BeforeAll
-    static void setup() {
-        mapper = new JsonResourceObjectMapper<>(OperacaoInput.class);
-    }
-    
     @BeforeEach
     void beforeEach(
             final @Value("classpath:entradas/validacoes/Teste_validacao_7_ClassificacaoTributariaNaoEncontradaException.json") Resource resourceFile)
             throws IOException {
-        operacao = mapper.loadTestJson(resourceFile);
+        operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
     }
 
     @Test

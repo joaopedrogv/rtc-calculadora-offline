@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
 
+/**
+ * Saída com o valor calculado da base de CBS e IBS para operações de NFS-e.
+ */
 @Value
 @Builder
 public class NfseBaseCalculoOutput implements SerializationVisibility {

@@ -12,6 +12,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída de dados abertos com a identificação e a descrição da situação
+ * tributária.
+ */
 @Getter
 @Setter
 @Builder

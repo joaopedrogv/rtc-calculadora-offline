@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada para sinalizar alíquota ad rem não encontrada no domínio de
+ * cálculo tributário.
+ */
 public class AliquotaAdRemNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 202504161234567890L;

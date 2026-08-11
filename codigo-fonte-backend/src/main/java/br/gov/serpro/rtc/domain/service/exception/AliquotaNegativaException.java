@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada para sinalizar alíquota negativa no domínio de cálculo
+ * tributário.
+ */
 public class AliquotaNegativaException extends ValidacaoException {
 
     private static final long serialVersionUID = 202601151234567890L;

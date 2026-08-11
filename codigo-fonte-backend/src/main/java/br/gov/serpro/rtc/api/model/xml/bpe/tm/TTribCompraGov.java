@@ -4,6 +4,7 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
+
 package br.gov.serpro.rtc.api.model.xml.bpe.tm;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -13,11 +14,22 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de tributação de compra governamental do
+ * documento fiscal Bilhete de Passagem Eletrônico TM (BPe TM), conforme o
+ * schema fiscal correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TTribCompraGov", propOrder = { "pAliqIBSUF", "vTribIBSUF", "pAliqIBSMun", "vTribIBSMun", "pAliqCBS",
-        "vTribCBS" })
+@XmlType(name = "TTribCompraGov", propOrder = {
+    "pAliqIBSUF",
+    "vTribIBSUF",
+    "pAliqIBSMun",
+    "vTribIBSMun",
+    "pAliqCBS",
+    "vTribCBS"
+})
 public class TTribCompraGov {
 
     @XmlElement(required = true)
@@ -37,5 +49,4 @@ public class TTribCompraGov {
 
     @XmlElement(required = true)
     private String vTribCBS;
-
 }

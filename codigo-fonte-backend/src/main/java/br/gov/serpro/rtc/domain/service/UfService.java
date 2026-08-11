@@ -12,6 +12,10 @@ import br.gov.serpro.rtc.domain.repository.UfRepository;
 import br.gov.serpro.rtc.domain.service.exception.UfNaoEncontradaException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por consultar UFs, validar siglas informadas e resolver o
+ * código da unidade federativa utilizado no cálculo.
+ */
 @RequiredArgsConstructor
 @Service
 public class UfService {

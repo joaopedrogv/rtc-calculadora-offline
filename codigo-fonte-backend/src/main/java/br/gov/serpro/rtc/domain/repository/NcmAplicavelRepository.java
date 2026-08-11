@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.NcmAplicavel;
 
+/**
+ * Repositório Spring Data JPA que gerencia os vínculos entre códigos NCM e
+ * classificações tributárias aplicáveis. É usado para validar se uma mercadoria
+ * pode ser enquadrada em determinada classificação, considerando exceções e
+ * vigência.
+ */
 @Repository
 public interface NcmAplicavelRepository extends JpaRepository<NcmAplicavel, Long> {
 

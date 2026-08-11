@@ -14,6 +14,10 @@ import br.gov.serpro.rtc.domain.repository.FundamentacaoClassificacaoRepository;
 import br.gov.serpro.rtc.domain.service.exception.FundamentacaoClassificacaoNaoEncontradaException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por consultar a fundamentação legal vinculada às
+ * classificações tributárias utilizadas pela calculadora.
+ */
 @RequiredArgsConstructor
 @Service
 public class FundamentacaoClassificacaoService {

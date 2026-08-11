@@ -17,8 +17,12 @@ import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDa
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ValidadeDfeClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.VersaoOutput;
@@ -31,7 +35,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.Pattern;
 
+/**
+ * Contrato OpenAPI das consultas de dados abertos da calculadora, cobrindo
+ * tabelas de referência, classificações tributárias, alíquotas e metadados de
+ * versão.
+ */
 @Tag(name = "Dados Abertos - VERSÃO BETA", description = "Consultas para os Dados Abertos")
 public interface DadosAbertosControllerOpenApi {
 
@@ -619,6 +629,191 @@ public interface DadosAbertosControllerOpenApi {
         @Parameter(description = "Código NBS sem formatação", example = "114052200", required = true) String nbs,
         @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data);
 
+    @Operation(summary = "Lista de Nomenclatura Brasileira de Serviços (NBS)", description = "Obtém a lista de todas as NBS válidas em uma data, incluindo todos os níveis hierárquicos (capítulo, posição, subposições e itens)")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = NbsListaDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Lista NBS Example",
+                    value = """
+                    [
+                      {
+                        "codigo": "101",
+                        "descricao": "Serviços de construção"
+                      },
+                      {
+                        "codigo": "10101",
+                        "descricao": "Serviços de construção de edificações"
+                      },
+                      {
+                        "codigo": "101011",
+                        "descricao": "Serviços de construção de edificações residenciais"
+                      },
+                      {
+                        "codigo": "101011100",
+                        "descricao": "Serviços de construção de edificações residenciais de um e dois pavimentos"
+                      },
+                      {
+                        "codigo": "101011200",
+                        "descricao": "Serviços de construção de edificações residenciais com mais de dois pavimentos"
+                      },
+                      {
+                        "codigo": "101012",
+                        "descricao": "Serviços de construção de edificações não residenciais"
+                      },
+                      {
+                        "codigo": "101012100",
+                        "descricao": "Serviços de construção de edificações industriais"
+                      },
+                      {
+                        "codigo": "101012200",
+                        "descricao": "Serviços de construção de edificações comerciais"
+                      },
+                      {
+                        "codigo": "101012900",
+                        "descricao": "Serviços de construção de edificações não residenciais não classificados em subposições anteriores"
+                      }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Required parameter 'data' is not present.",
+                      "instance": "/api/calculadora/dados-abertos/nbs"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/nbs"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<NbsListaDadosAbertosOutput>> listarNbs(
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data);
+
+    @Operation(
+        summary = "Lista de NBS aplicáveis por Classificação Tributária",
+        description = "Obtém a lista de NBS aplicáveis a um cClassTrib em uma determinada data. Se não houver NBS associados e a nomenclatura for aplicável a serviços (NBS ou 'NBS ou NCM'), retorna todos os NBS vigentes. Se não for aplicável a serviços (apenas NCM), retorna lista vazia."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = NbsListaDadosAbertosOutput.class),
+                examples = {
+                        @ExampleObject(
+                                name = "Lista NBS Aplicáveis Example",
+                                value = """
+                                [
+                                    {
+                                        "codigo": "114052200",
+                                        "descricao": "Serviços de atendimento, assistência ou tratamento para animais de corte"
+                                    },
+                                    {
+                                        "codigo": "114052300",
+                                        "descricao": "Serviços de atendimento, assistência ou tratamento para animais de produção"
+                                    }
+                                ]
+                                """
+                        ),
+                        @ExampleObject(
+                                name = "Lista NBS Aplicáveis Vazia Example",
+                                value = """
+                                []
+                                """
+                        )
+                }
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Required parameter 'data' is not present.",
+                      "instance": "/api/calculadora/dados-abertos/nbs/aplicaveis-por-classificacao"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "404", description = "Classificação tributária não encontrada",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Not Found Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Not Found",
+                      "status": 404,
+                      "detail": "Classificação tributária não encontrada para código 999999 e data 2026-01-01 (CBS/IBS)",
+                      "instance": "/api/calculadora/dados-abertos/nbs/aplicaveis-por-classificacao"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/nbs/aplicaveis-por-classificacao"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<NbsListaDadosAbertosOutput>> listarNbsAplicaveisPorClassificacao(
+        @Parameter(description = "Código da Classificação Tributária (cClassTrib)", example = "000001", required = true) 
+        @Pattern(regexp = "^\\d{6}$", message = "O código da Classificação Tributária deve conter exatamente 6 dígitos")
+        String cClassTrib,
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) 
+        LocalDate data);
+
+
     @Operation(summary = "Fundamentação Legal", description = "Obtém informações sobre as fundamentações legais")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
@@ -980,6 +1175,82 @@ public interface DadosAbertosControllerOpenApi {
         @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2026-01-01", required = true) LocalDate data);
 
     @Operation(
+        summary = "Classificações Tributárias aplicáveis por NBS",
+        description = "Obtém a lista dos códigos cClassTrib aplicáveis a um NBS em uma determinada data, considerando vínculos e regras de exceção. Também inclui classificações de serviço vigentes não vinculadas a nenhum NBS."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = String.class),
+                examples = @ExampleObject(
+                    name = "cClassTrib por NBS Example",
+                    value = """
+                    ["000001", "000002", "000003"]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Parâmetro inválido ou ausente.",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/nbs"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "404", description = "NBS não encontrado na data especificada",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Not Found Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Not Found",
+                      "status": 404,
+                      "detail": "Nenhum resultado foi encontrado para a NBS: 114052200 na data: 2026-01-01",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/nbs"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/nbs"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<String>> listarClassificacoesTributariasPorNbs(
+        @Parameter(description = "Código NBS sem formatação", example = "114052200", required = true)
+        @Pattern(regexp = "^\\d{9}$", message = "O código NBS deve conter exatamente 9 dígitos") 
+        String nbs,
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2026-01-01", required = true) 
+        LocalDate data);
+        
+    @Operation(
         summary = "Alíquota Padrão ou de Referência para IBS Estadual",
         description = "Obtém a alíquota padrão ou de referência para IBS Estadual"
     )
@@ -1243,4 +1514,135 @@ public interface DadosAbertosControllerOpenApi {
     })
     ResponseEntity<VersaoOutput> consultarVersao();
 
+    @Operation(summary = "Redutor de Compra Governamental", description = "Obtém a lista de todos os redutores de compra governamental cadastrados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = RedutorCompraGovernamentalDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Redutores Example",
+                    value = """
+                    [
+                        {
+                            "valor": 0,
+                            "inicioVigencia": "2026-01-01",
+                            "fimVigencia": "2026-12-31"
+                        },
+                        {
+                            "valor": 50,
+                            "inicioVigencia": "2027-01-01"
+                        }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/redutores-compra-governamental"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<RedutorCompraGovernamentalDadosAbertosOutput>> consultarRedutoresCompraGovernamental();
+
+    @Operation(summary = "Transferência CBS para Entes Governamentais", description = "Obtém a lista de todos os percentuais de transferência CBS cadastrados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = TransferenciaCBSDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Transferências CBS Example",
+                    value = """
+                    [
+                      {
+                        "valor": 0.15,
+                        "inicioVigencia": "2026-01-01",
+                      },
+                      {
+                        "valor": 0.10,
+                        "inicioVigencia": "2025-01-01",
+                        "fimVigencia": "2025-12-31"
+                      }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/transferencias-cbs"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<TransferenciaCBSDadosAbertosOutput>> consultarTransferenciasCBS();
+    
+        @Operation(summary = "Transferência IBS para Entes Governamentais", description = "Obtém a lista de todos os percentuais de transferência IBS cadastrados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = TransferenciaIBSDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Transferências IBS Example",
+                    value = """
+                    [
+                        {
+                            "valor": 0,
+                            "inicioVigencia": "2026-01-01",
+                            "fimVigencia": "2026-12-31"
+                        },
+                        {
+                            "valor": 100,
+                            "inicioVigencia": "2027-01-01"
+                        }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/transferencias-ibs"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<TransferenciaIBSDadosAbertosOutput>> consultarTransferenciasIBS();
 }

@@ -14,6 +14,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída da API de dados abertos que apresenta o detalhamento tributário
+ * completo de um código NCM. Expõe a hierarquia da classificação de mercadorias
+ * e os dados tributários associados para consulta pública das regras aplicáveis
+ * aos produtos.
+ */
 @Getter
 @Setter
 @Builder

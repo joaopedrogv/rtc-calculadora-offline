@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada quando a NBS informada não possui vínculo válido com a
+ * classificação tributária usada na operação.
+ */
 public class NbsNaoVinculadaException extends ValidacaoException {
 
     private static final long serialVersionUID = 1746374859333389372L;

@@ -4,9 +4,8 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
-package br.gov.serpro.rtc.api.model.xml.nfce;
 
-import java.math.BigDecimal;
+package br.gov.serpro.rtc.api.model.xml.nfce;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -15,109 +14,147 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de tributação monofásica de IBS/CBS do
+ * documento fiscal Nota Fiscal de Consumidor Eletrônica (NFCe), conforme o
+ * schema fiscal correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TMonofasia", propOrder = { "gMonoPadrao", "gMonoReten", "gMonoRet", "gMonoDif", "vTotIBSMonoItem",
-        "vTotCBSMonoItem" })
+@XmlType(name = "TMonofasia", propOrder = {
+    "gMonoPadrao",
+    "gMonoReten",
+    "gMonoRet",
+    "gMonoDif",
+    "vTotIBSMonoItem",
+    "vTotCBSMonoItem"
+})
 public class TMonofasia {
 
     private TMonofasia.GMonoPadrao gMonoPadrao;
+
     private TMonofasia.GMonoReten gMonoReten;
+
     private TMonofasia.GMonoRet gMonoRet;
+
     private TMonofasia.GMonoDif gMonoDif;
 
     @XmlElement(required = true)
-    private BigDecimal vTotIBSMonoItem;
+    private String vTotIBSMonoItem;
 
     @XmlElement(required = true)
-    private BigDecimal vTotCBSMonoItem;
+    private String vTotCBSMonoItem;
 
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "pDifIBS", "vIBSMonoDif", "pDifCBS", "vCBSMonoDif" })
+    @XmlType(name = "", propOrder = {
+        "pDifIBS",
+        "vIBSMonoDif",
+        "pDifCBS",
+        "vCBSMonoDif"
+    })
     public static class GMonoDif {
 
         @XmlElement(required = true)
-        private BigDecimal pDifIBS;
+        private String pDifIBS;
 
         @XmlElement(required = true)
-        private BigDecimal vIBSMonoDif;
+        private String vIBSMonoDif;
 
         @XmlElement(required = true)
-        private BigDecimal pDifCBS;
+        private String pDifCBS;
 
         @XmlElement(required = true)
-        private BigDecimal vCBSMonoDif;
+        private String vCBSMonoDif;
     }
+
 
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "qBCMono", "adRemIBS", "adRemCBS", "vIBSMono", "vCBSMono" })
+    @XmlType(name = "", propOrder = {
+        "qBCMono",
+        "adRemIBS",
+        "adRemCBS",
+        "vIBSMono",
+        "vCBSMono"
+    })
     public static class GMonoPadrao {
 
         @XmlElement(required = true)
-        private BigDecimal qBCMono;
+        private String qBCMono;
 
         @XmlElement(required = true)
-        private BigDecimal adRemIBS;
+        private String adRemIBS;
 
         @XmlElement(required = true)
-        private BigDecimal adRemCBS;
+        private String adRemCBS;
 
         @XmlElement(required = true)
-        private BigDecimal vIBSMono;
+        private String vIBSMono;
 
         @XmlElement(required = true)
-        private BigDecimal vCBSMono;
-
+        private String vCBSMono;
     }
+
 
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "qBCMonoRet", "adRemIBSRet", "vIBSMonoRet", "adRemCBSRet", "vCBSMonoRet" })
+    @XmlType(name = "", propOrder = {
+        "qBCMonoRet",
+        "adRemIBSRet",
+        "vIBSMonoRet",
+        "adRemCBSRet",
+        "vCBSMonoRet"
+    })
     public static class GMonoRet {
 
         @XmlElement(required = true)
-        private BigDecimal qBCMonoRet;
+        private String qBCMonoRet;
 
         @XmlElement(required = true)
-        private BigDecimal adRemIBSRet;
+        private String adRemIBSRet;
 
         @XmlElement(required = true)
-        private BigDecimal vIBSMonoRet;
+        private String vIBSMonoRet;
 
         @XmlElement(required = true)
-        private BigDecimal adRemCBSRet;
+        private String adRemCBSRet;
 
         @XmlElement(required = true)
-        private BigDecimal vCBSMonoRet;
+        private String vCBSMonoRet;
     }
+
 
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "qBCMonoReten", "adRemIBSReten", "vIBSMonoReten", "adRemCBSReten",
-            "vCBSMonoReten" })
+    @XmlType(name = "", propOrder = {
+        "qBCMonoReten",
+        "adRemIBSReten",
+        "vIBSMonoReten",
+        "adRemCBSReten",
+        "vCBSMonoReten"
+    })
     public static class GMonoReten {
 
         @XmlElement(required = true)
-        private BigDecimal qBCMonoReten;
+        private String qBCMonoReten;
 
         @XmlElement(required = true)
-        private BigDecimal adRemIBSReten;
+        private String adRemIBSReten;
 
         @XmlElement(required = true)
-        private BigDecimal vIBSMonoReten;
+        private String vIBSMonoReten;
 
         @XmlElement(required = true)
-        private BigDecimal adRemCBSReten;
+        private String adRemCBSReten;
 
         @XmlElement(required = true)
-        private BigDecimal vCBSMonoReten;
+        private String vCBSMonoReten;
     }
 
 }

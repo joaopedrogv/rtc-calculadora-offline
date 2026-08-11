@@ -23,10 +23,10 @@ import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoDefinidaExcep
 /**
  * Testes unitários para AliquotaResultadoDTO
  */
-public class Teste_AliquotaResultadoDTO {
+class Teste_AliquotaResultadoDTO {
 
     @Test
-    public void teste_CriacaoComApenasValorReferencia_DeveFuncionar() {
+    void teste_CriacaoComApenasValorReferencia_DeveFuncionar() {
         // Arrange & Act
         BigDecimal valorReferencia = new BigDecimal("10.50");
         AliquotaResultadoDTO dto = new AliquotaResultadoDTO(valorReferencia, null, null);
@@ -39,7 +39,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorAplicavel_SemValorPadrao_DeveRetornarValorReferencia() {
+    void teste_ValorAplicavel_SemValorPadrao_DeveRetornarValorReferencia() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("15.75");
         AliquotaResultadoDTO dto = new AliquotaResultadoDTO(valorReferencia, null, null);
@@ -53,7 +53,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_CriacaoComAcrescimo_DeveAplicarCorretamente() {
+    void teste_CriacaoComAcrescimo_DeveAplicarCorretamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("5.00");
@@ -69,7 +69,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorAplicavel_ComAcrescimo_DeveRetornarValorPadraoCalculado() {
+    void teste_ValorAplicavel_ComAcrescimo_DeveRetornarValorPadraoCalculado() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("50.00");
         BigDecimal valorPadrao = new BigDecimal("10.00");
@@ -84,7 +84,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_CriacaoComDecrescimo_DeveAplicarCorretamente() {
+    void teste_CriacaoComDecrescimo_DeveAplicarCorretamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("15.00");
@@ -100,7 +100,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorAplicavel_ComDecrescimo_DeveRetornarValorPadraoCalculado() {
+    void teste_ValorAplicavel_ComDecrescimo_DeveRetornarValorPadraoCalculado() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("80.00");
         BigDecimal valorPadrao = new BigDecimal("20.00");
@@ -115,7 +115,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_CriacaoComValorReferenciaNull_DeveLancarExcecao() {
+    void teste_CriacaoComValorReferenciaNull_DeveLancarExcecao() {
         // Arrange
         BigDecimal valorReferencia = null;
         BigDecimal valorPadrao = new BigDecimal("10.00");
@@ -127,7 +127,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_CriacaoComValorPadraoSemFormaAplicacao_DeveLancarExcecao() {
+    void teste_CriacaoComValorPadraoSemFormaAplicacao_DeveLancarExcecao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("10.00");
@@ -139,7 +139,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_CriacaoComFormaAplicacaoSemValorPadrao_DeveLancarExcecao() {
+    void teste_CriacaoComFormaAplicacaoSemValorPadrao_DeveLancarExcecao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = null;
@@ -151,7 +151,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_AcrescimoComValoresDecimais_DeveCalcularPrecisamente() {
+    void teste_AcrescimoComValoresDecimais_DeveCalcularPrecisamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("12.345");
         BigDecimal valorPadrao = new BigDecimal("2.655");
@@ -165,7 +165,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoComValoresDecimais_DeveCalcularPrecisamente() {
+    void teste_DecrescimoComValoresDecimais_DeveCalcularPrecisamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("25.750");
         BigDecimal valorPadrao = new BigDecimal("5.250");
@@ -179,7 +179,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_AcrescimoComValorZero_DeveManterValorReferencia() {
+    void teste_AcrescimoComValorZero_DeveManterValorReferencia() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("50.00");
         BigDecimal valorPadrao = BigDecimal.ZERO;
@@ -195,7 +195,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoComValorZero_DeveManterValorReferencia() {
+    void teste_DecrescimoComValorZero_DeveManterValorReferencia() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("50.00");
         BigDecimal valorPadrao = BigDecimal.ZERO;
@@ -211,7 +211,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorReferenciaNegativo_DeveLancarExcecao() {
+    void teste_ValorReferenciaNegativo_DeveLancarExcecao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("-10.00");
         
@@ -222,7 +222,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorPadraoNegativo_DeveLancarExcecao() {
+    void teste_ValorPadraoNegativo_DeveLancarExcecao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("-10.00");
@@ -234,7 +234,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoResultadoNegativo_DeveLancarExcecao() {
+    void teste_DecrescimoResultadoNegativo_DeveLancarExcecao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.00");
         BigDecimal valorPadrao = new BigDecimal("15.00");
@@ -246,7 +246,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValoresComMuitasCasasDecimais_DevePreservarPrecisao() {
+    void teste_ValoresComMuitasCasasDecimais_DevePreservarPrecisao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("123.456789");
         BigDecimal valorPadrao = new BigDecimal("0.000001");
@@ -260,7 +260,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_RecordEquality_MesmosValores_DeveSerIgual() {
+    void teste_RecordEquality_MesmosValores_DeveSerIgual() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("10.00");
@@ -274,7 +274,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_RecordToString_DeveConterInformacoes() {
+    void teste_RecordToString_DeveConterInformacoes() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("50.00");
         AliquotaResultadoDTO dto = new AliquotaResultadoDTO(valorReferencia, null, null);
@@ -289,7 +289,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_CriacaoComSubstituicao_DeveManterValorPadrao() {
+    void teste_CriacaoComSubstituicao_DeveManterValorPadrao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("25.00");
@@ -305,7 +305,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorAplicavel_ComSubstituicao_DeveRetornarValorPadrao() {
+    void teste_ValorAplicavel_ComSubstituicao_DeveRetornarValorPadrao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("50.00");
         BigDecimal valorPadrao = new BigDecimal("30.00");
@@ -320,7 +320,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_SubstituicaoComValorMaiorQueReferencia_DevePermitir() {
+    void teste_SubstituicaoComValorMaiorQueReferencia_DevePermitir() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.00");
         BigDecimal valorPadrao = new BigDecimal("50.00");
@@ -336,7 +336,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_SubstituicaoComValorMenorQueReferencia_DevePermitir() {
+    void teste_SubstituicaoComValorMenorQueReferencia_DevePermitir() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("80.00");
         BigDecimal valorPadrao = new BigDecimal("15.00");
@@ -352,7 +352,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_SubstituicaoComValoresDecimais_DevePreservarPrecisao() {
+    void teste_SubstituicaoComValoresDecimais_DevePreservarPrecisao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("45.678");
         BigDecimal valorPadrao = new BigDecimal("12.345");
@@ -368,7 +368,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_SubstituicaoComValorZero_DevePermitir() {
+    void teste_SubstituicaoComValorZero_DevePermitir() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("50.00");
         BigDecimal valorPadrao = BigDecimal.ZERO;
@@ -384,7 +384,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_AcrescimoComValoresGrandes_DeveCalcularCorretamente() {
+    void teste_AcrescimoComValoresGrandes_DeveCalcularCorretamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("9999999.99");
         BigDecimal valorPadrao = new BigDecimal("0.01");
@@ -400,7 +400,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoComValoresIguais_DeveResultarZero() {
+    void teste_DecrescimoComValoresIguais_DeveResultarZero() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("100.00");
@@ -416,7 +416,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_AcrescimoComValorReferenciaZero_DeveResultarValorPadrao() {
+    void teste_AcrescimoComValorReferenciaZero_DeveResultarValorPadrao() {
         // Arrange
         BigDecimal valorReferencia = BigDecimal.ZERO;
         BigDecimal valorPadrao = new BigDecimal("25.00");
@@ -432,7 +432,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoComValorReferenciaZero_DeveResultarNegativo() {
+    void teste_DecrescimoComValorReferenciaZero_DeveResultarNegativo() {
         // Arrange
         BigDecimal valorReferencia = BigDecimal.ZERO;
         BigDecimal valorPadrao = new BigDecimal("10.00");
@@ -444,7 +444,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_SubstituicaoComValorIgualReferencia_DevePermitir() {
+    void teste_SubstituicaoComValorIgualReferencia_DevePermitir() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("75.50");
         BigDecimal valorPadrao = new BigDecimal("75.50");
@@ -460,7 +460,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_AcrescimoComMuitasCasasDecimais_DevePreservarTodasCasas() {
+    void teste_AcrescimoComMuitasCasasDecimais_DevePreservarTodasCasas() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("1.123456789");
         BigDecimal valorPadrao = new BigDecimal("2.876543211");
@@ -474,7 +474,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoComResultadoMuitoPequeno_DevePreservarPrecisao() {
+    void teste_DecrescimoComResultadoMuitoPequeno_DevePreservarPrecisao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.000001");
         BigDecimal valorPadrao = new BigDecimal("10.000000");
@@ -490,7 +490,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorReferenciaZeroSemValorPadrao_DevePermitir() {
+    void teste_ValorReferenciaZeroSemValorPadrao_DevePermitir() {
         // Arrange
         BigDecimal valorReferencia = BigDecimal.ZERO;
         
@@ -505,7 +505,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_AcrescimoComValoresFracionarios_DeveCalcularCorretamente() {
+    void teste_AcrescimoComValoresFracionarios_DeveCalcularCorretamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("0.5");
         BigDecimal valorPadrao = new BigDecimal("0.3");
@@ -521,7 +521,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_DecrescimoComValoresFracionarios_DeveCalcularCorretamente() {
+    void teste_DecrescimoComValoresFracionarios_DeveCalcularCorretamente() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("0.9");
         BigDecimal valorPadrao = new BigDecimal("0.4");
@@ -537,7 +537,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_SubstituicaoComValorFracionario_DevePreservar() {
+    void teste_SubstituicaoComValorFracionario_DevePreservar() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.0");
         BigDecimal valorPadrao = new BigDecimal("0.25");
@@ -553,7 +553,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_ValorReferenciaUmCentavo_ComAcrescimo_DeveCalcular() {
+    void teste_ValorReferenciaUmCentavo_ComAcrescimo_DeveCalcular() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("0.01");
         BigDecimal valorPadrao = new BigDecimal("0.01");
@@ -567,7 +567,7 @@ public class Teste_AliquotaResultadoDTO {
     }
 
     @Test
-    public void teste_MultiplasCriacoesComMesmosValores_DevemSerIndependentes() {
+    void teste_MultiplasCriacoesComMesmosValores_DevemSerIndependentes() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("100.00");
         BigDecimal valorPadrao = new BigDecimal("10.00");

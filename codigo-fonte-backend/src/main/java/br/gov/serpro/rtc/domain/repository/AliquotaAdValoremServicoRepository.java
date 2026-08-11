@@ -13,6 +13,11 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.AliquotaAdValoremServico;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link AliquotaAdValoremServico},
+ * com consultas da alíquota ad valorem de serviço por NBS, tributo,
+ * classificação tributária e data.
+ */
 @Repository
 public interface AliquotaAdValoremServicoRepository extends JpaRepository<AliquotaAdValoremServico, Long> {
 

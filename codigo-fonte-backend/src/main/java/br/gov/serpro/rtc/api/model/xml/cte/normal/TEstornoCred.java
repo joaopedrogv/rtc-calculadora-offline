@@ -4,9 +4,8 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
-package br.gov.serpro.rtc.api.model.xml.cte.normal;
 
-import java.math.BigDecimal;
+package br.gov.serpro.rtc.api.model.xml.cte.normal;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -15,16 +14,23 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de estorno de crédito do documento fiscal
+ * Conhecimento de Transporte Eletrônico (CTe), conforme o schema fiscal
+ * correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TEstornoCred", propOrder = { "vIBSEstCred", "vCBSEstCred" })
+@XmlType(name = "TEstornoCred", propOrder = {
+    "vIBSEstCred",
+    "vCBSEstCred"
+})
 public class TEstornoCred {
 
     @XmlElement(required = true)
-    private BigDecimal vIBSEstCred;
+    private String vIBSEstCred;
 
     @XmlElement(required = true)
-    private BigDecimal vCBSEstCred;
-
+    private String vCBSEstCred;
 }

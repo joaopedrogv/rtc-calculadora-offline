@@ -12,6 +12,10 @@ import br.gov.serpro.rtc.domain.repository.TratamentoClassificacaoRepository;
 import br.gov.serpro.rtc.domain.service.exception.TratamentoClassificacaoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por recuperar o tratamento de classificação que direciona
+ * as regras de cálculo aplicáveis ao item.
+ */
 @RequiredArgsConstructor
 @Service
 public class TratamentoClassificacaoService {

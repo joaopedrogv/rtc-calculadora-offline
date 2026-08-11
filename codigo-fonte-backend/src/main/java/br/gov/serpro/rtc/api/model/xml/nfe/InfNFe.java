@@ -4,10 +4,10 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
+
 package br.gov.serpro.rtc.api.model.xml.nfe;
 
 import java.util.List;
-
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -17,13 +17,24 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Classe XML que representa o elemento infNFe do documento fiscal Nota Fiscal
+ * Eletrônica (NFe), conforme o schema fiscal correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "det", "total" })
+@XmlType(name = "", propOrder = {
+    "ide",
+    "det",
+    "total"
+})
 @XmlRootElement(name = "infNFe")
 public class InfNFe {
 
+    private InfNFe.Ide ide;
+
+    @XmlElement(required = true)
     private List<InfNFe.Det> det;
 
     @XmlElement(required = true)
@@ -32,7 +43,9 @@ public class InfNFe {
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "imposto" })
+    @XmlType(name = "", propOrder = {
+        "imposto"
+    })
     public static class Det {
 
         @XmlElement(required = true)
@@ -44,7 +57,10 @@ public class InfNFe {
         @Getter
         @Setter
         @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = { "IS", "IBSCBS" })
+        @XmlType(name = "", propOrder = {
+            "IS",
+            "IBSCBS"
+        })
         public static class Imposto {
 
             private TIS IS;
@@ -55,13 +71,30 @@ public class InfNFe {
 
     }
 
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "ISTot", "IBSCBSTot" })
+    @XmlType(name = "", propOrder = {
+        "gCompraGov"
+    })
+    public static class Ide {
+
+        private TCompraGov gCompraGov;
+    }
+
+
+    @Getter
+    @Setter
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "ISTot",
+        "IBSCBSTot"
+    })
     public static class Total {
 
         private TISTot ISTot;
+
         private TIBSCBSMonoTot IBSCBSTot;
     }
 

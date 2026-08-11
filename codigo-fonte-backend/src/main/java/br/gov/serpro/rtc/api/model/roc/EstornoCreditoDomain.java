@@ -17,6 +17,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida os valores de estorno de crédito de IBS e CBS apurados no item ou
+ * no total do ROC.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

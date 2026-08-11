@@ -6,6 +6,12 @@ package br.gov.serpro.rtc.domain.model.enumeration;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumera as formas de aplicação de uma alíquota padrão sobre a alíquota de
+ * referência.
+ *
+ * Valores: {@code SUBSTITUICAO}, {@code ACRESCIMO} e {@code DECRESCIMO}.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum FormaAplicacaoEnum {

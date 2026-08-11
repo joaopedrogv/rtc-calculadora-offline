@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import br.gov.serpro.rtc.api.model.xml.enumeration.TipoDocumento;
 
+/**
+ * Conversor Spring que transforma o mnemônico textual no enum {@link TipoDocumento}.
+ */
 @Component
 public class TipoDocumentoConverter implements Converter<String, TipoDocumento> {
     @Override

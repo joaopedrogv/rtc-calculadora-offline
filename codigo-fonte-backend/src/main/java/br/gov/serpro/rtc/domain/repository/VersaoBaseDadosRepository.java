@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.VersaoBaseDados;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link VersaoBaseDados}, incluindo
+ * a recuperação da versão mais recente da base de dados.
+ */
 @Repository
 public interface VersaoBaseDadosRepository extends JpaRepository<VersaoBaseDados, Long> {
     Optional<VersaoBaseDados> findTopByOrderByIdDesc();    

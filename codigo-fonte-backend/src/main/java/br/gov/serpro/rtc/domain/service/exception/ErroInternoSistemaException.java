@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada para representar falhas técnicas internas e inesperadas
+ * ocorridas durante o processamento do cálculo tributário.
+ */
 public class ErroInternoSistemaException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

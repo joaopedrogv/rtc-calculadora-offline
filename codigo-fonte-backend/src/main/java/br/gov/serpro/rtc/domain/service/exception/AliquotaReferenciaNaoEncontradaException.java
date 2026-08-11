@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada para sinalizar alíquota referência não encontrada no domínio
+ * de cálculo tributário.
+ */
 public class AliquotaReferenciaNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 202504161234567894L;

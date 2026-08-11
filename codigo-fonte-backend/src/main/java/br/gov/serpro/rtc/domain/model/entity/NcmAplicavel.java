@@ -15,6 +15,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code NCM_APLICAVEL} que vincula NCMs aplicáveis a
+ * classificações tributárias e anexos, com vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

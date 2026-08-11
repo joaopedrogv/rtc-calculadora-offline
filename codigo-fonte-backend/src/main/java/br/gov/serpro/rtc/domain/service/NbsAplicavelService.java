@@ -14,6 +14,10 @@ import br.gov.serpro.rtc.domain.service.exception.NbsCompletoNaoInformadoExcepti
 import br.gov.serpro.rtc.domain.service.exception.NbsNaoVinculadaException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por validar se uma NBS pode ser utilizada para a
+ * classificação tributária e a vigência informadas.
+ */
 @RequiredArgsConstructor
 @Service
 public class NbsAplicavelService {

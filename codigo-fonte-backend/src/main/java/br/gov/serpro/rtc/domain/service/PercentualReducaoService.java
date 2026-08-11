@@ -12,6 +12,10 @@ import br.gov.serpro.rtc.domain.repository.PercentualReducaoRepository;
 import br.gov.serpro.rtc.domain.service.exception.PercentualReducaoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por consultar o percentual de redução aplicável às
+ * classificações tributárias em determinada vigência.
+ */
 @RequiredArgsConstructor
 @Service
 public class PercentualReducaoService {

@@ -16,6 +16,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Representa um objeto/item do resultado do cálculo, identificado por número
+ * sequencial e pela estrutura completa de tributos apurados para o item.
+ */
 @Getter
 @Setter
 @Builder

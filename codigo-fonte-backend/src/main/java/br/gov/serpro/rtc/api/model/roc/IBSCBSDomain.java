@@ -18,6 +18,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Reúne a apuração de IBS e CBS do item no ROC.
+ *
+ * Contém códigos tributários, grupos de cálculo regular e monofásico,
+ * transferências, ajustes, estornos e créditos presumidos relacionados à
+ * operação.
+ */
 @Getter
 @Setter
 @Builder

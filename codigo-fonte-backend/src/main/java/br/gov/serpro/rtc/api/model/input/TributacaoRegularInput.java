@@ -3,8 +3,6 @@
  */
 package br.gov.serpro.rtc.api.model.input;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +13,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Entrada que representa a tributação regular de IBS e CBS aplicável ao item da
+ * operação. Informa a situação tributária e a classificação tributária usadas
+ * para determinar as regras e alíquotas do regime geral.
+ */
 @ToString
 @Getter
 @Setter
@@ -31,7 +34,6 @@ public final class TributacaoRegularInput implements SerializationVisibility {
     @Pattern(regexp = "\\d+", message = "Informar somente dígitos")
     @Size(min = 6, max = 6)
     @Schema(name = "cClassTrib", description = "Código da classificação tributária", example = "000000")
-    @JsonProperty("cClassTrib")
     private String cClassTrib;
 
 }

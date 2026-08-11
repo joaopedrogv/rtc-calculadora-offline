@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada quando a classificação tributária informada não é localizada
+ * para a vigência considerada no cálculo.
+ */
 public class ClassificacaoTributariaNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 202504161234567892L;

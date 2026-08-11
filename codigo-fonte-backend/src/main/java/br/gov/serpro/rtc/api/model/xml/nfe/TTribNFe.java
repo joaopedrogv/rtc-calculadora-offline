@@ -4,6 +4,7 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
+
 package br.gov.serpro.rtc.api.model.xml.nfe;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -13,11 +14,25 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de tributos IBS/CBS do documento fiscal Nota
+ * Fiscal Eletrônica (NFe), conforme o schema fiscal correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TTribNFe", propOrder = { "CST", "cClassTrib", "indDoacao", "gIBSCBS", "gIBSCBSMono", "gTransfCred",
-        "gAjusteCompet", "gEstornoCred", "gCredPresOper", "gCredPresIBSZFM" })
+@XmlType(name = "TTribNFe", propOrder = {
+    "CST",
+    "cClassTrib",
+    "indDoacao",
+    "gIBSCBS",
+    "gIBSCBSMono",
+    "gTransfCred",
+    "gAjusteCompet",
+    "gEstornoCred",
+    "gCredPresOper",
+    "gCredPresIBSZFM"
+})
 public class TTribNFe {
 
     @XmlElement(required = true)
@@ -27,12 +42,18 @@ public class TTribNFe {
     private String cClassTrib;
 
     private String indDoacao;
-    private TCIBS gIBSCBS;
-    private TMonofasia gIBSCBSMono;
-    private TTransfCred gTransfCred;
-    private TAjusteCompet gAjusteCompet;
-    private TEstornoCred gEstornoCred;
-    private TCredPresOper gCredPresOper;
-    private TCredPresIBSZFM gCredPresIBSZFM;
 
+    private TCIBS gIBSCBS;
+
+    private TMonofasia gIBSCBSMono;
+
+    private TTransfCred gTransfCred;
+
+    private TAjusteCompet gAjusteCompet;
+
+    private TEstornoCred gEstornoCred;
+
+    private TCredPresOper gCredPresOper;
+
+    private TCredPresIBSZFM gCredPresIBSZFM;
 }

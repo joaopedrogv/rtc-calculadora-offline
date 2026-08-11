@@ -10,6 +10,13 @@
 	<xs:element name="infBPe">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element name="ide" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="gCompraGov" type="TCompraGovReduzido" minOccurs="0"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="detBPeTM" maxOccurs="99">
 					<xs:complexType>
 						<xs:sequence>

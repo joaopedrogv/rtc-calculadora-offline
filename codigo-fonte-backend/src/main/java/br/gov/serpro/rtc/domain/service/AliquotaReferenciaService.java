@@ -12,6 +12,10 @@ import br.gov.serpro.rtc.domain.repository.AliquotaReferenciaRepository;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaReferenciaNaoEncontradaException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por recuperar a alíquota de referência utilizada nas
+ * fórmulas de cálculo de CBS e IBS.
+ */
 @RequiredArgsConstructor
 @Service
 public class AliquotaReferenciaService {

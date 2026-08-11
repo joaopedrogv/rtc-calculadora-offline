@@ -9,6 +9,10 @@ import java.util.stream.Stream;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumera os entes federativos associados aos tributos do domínio.
+ * Valores: {@code UNIAO}, {@code ESTADO} e {@code MUNICIPIO}.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum EnteFederativoEnum {

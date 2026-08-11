@@ -18,6 +18,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Value;
 
+/**
+ * Saída que consolida os totais de CBS e IBS apurados no cálculo tributário de
+ * pedágio. Agrupa os valores finais de cada tributo após a apuração dos
+ * diversos trechos considerados na operação.
+ */
 @Value
 @Builder
 @JsonInclude(Include.NON_NULL)

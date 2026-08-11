@@ -14,6 +14,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída com o detalhamento do tributo apurado para CBS ou IBS em um trecho de
+ * pedágio.
+ */
 @Getter
 @Setter
 @Builder

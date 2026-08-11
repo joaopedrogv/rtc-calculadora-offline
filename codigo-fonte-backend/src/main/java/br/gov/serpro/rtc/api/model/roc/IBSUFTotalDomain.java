@@ -18,6 +18,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida os totais do IBS de competência da UF, somando diferimento,
+ * devolução de tributos e valor apurado.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

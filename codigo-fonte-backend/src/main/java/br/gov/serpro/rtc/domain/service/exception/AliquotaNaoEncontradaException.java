@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada quando a alíquota necessária ao cálculo não é encontrada para
+ * a combinação de tributo, localidade e vigência informadas.
+ */
 public class AliquotaNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 202504161234567894L;

@@ -16,6 +16,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida os totais de IBS e CBS do ROC.
+ *
+ * Agrega a base de cálculo total e os grupos totais de IBS, CBS, monofasia e
+ * estorno de crédito.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)
@@ -50,7 +56,11 @@ public class IBSCBSTotalDomain implements SerializationVisibility {
             var gCBS = CBSTotalDomain.create(detalhes);
             ibsCbsTotal.setGCBS(gCBS != null ? gCBS : new CBSTotalDomain());
             
-            ibsCbsTotal.setGMono(MonofasiaTotalDomain.create(detalhes));
+            // Garantir que gMono sempre exista, mesmo que zerado.
+            // É obrigatório no layout do ROC: 1-1.
+            // Necessário para validação do XML.
+            var gMono = MonofasiaTotalDomain.create(detalhes);
+            ibsCbsTotal.setGMono(gMono != null ? gMono : new MonofasiaTotalDomain());
             ibsCbsTotal.setGEstornoCred(EstornoCreditoDomain.create(detalhes));
             return ibsCbsTotal;
         }

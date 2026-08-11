@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada quando o tipo de alíquota determinado para a combinação
+ * tributária não é reconhecido pela calculadora.
+ */
 public class TipoAliquotaDesconhecidoException extends ValidacaoException {
 
     private static final long serialVersionUID = 1234567890123456789L;

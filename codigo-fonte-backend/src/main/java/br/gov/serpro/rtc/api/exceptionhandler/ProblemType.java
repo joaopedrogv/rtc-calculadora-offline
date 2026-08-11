@@ -6,6 +6,7 @@ package br.gov.serpro.rtc.api.exceptionhandler;
 import java.net.URI;
 import java.util.stream.Stream;
 
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import br.gov.serpro.rtc.api.util.HttpUtils;
@@ -23,7 +24,6 @@ import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoDefinidaExcep
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoInformadoIndevidamenteException;
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoNaoInformadoException;
 import br.gov.serpro.rtc.domain.service.exception.IncompatibilidadeSuspensaoException;
-import br.gov.serpro.rtc.domain.service.exception.ItemDuplicadoException;
 import br.gov.serpro.rtc.domain.service.exception.MunicipioNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.MunicipioNaoPertencenteException;
 import br.gov.serpro.rtc.domain.service.exception.NbsCompletoNaoInformadoException;
@@ -43,6 +43,10 @@ import br.gov.serpro.rtc.domain.service.exception.UfNaoEncontradaException;
 import lombok.Getter;
 import lombok.NonNull;
 
+/**
+ * Enumera os tipos de problema retornados pela API, associando cada exceção
+ * mapeada ao título e ao caminho usados no {@link ProblemDetail}.
+ */
 @Getter
 public enum ProblemType {
 
@@ -101,8 +105,6 @@ public enum ProblemType {
 
     NBS_NAO_ENCONTRADO(NbsNaoEncontradaException.class, "NBS não encontrada", "nbs-nao-encontrada"),
 
-    ITEM_DUPLICADO(ItemDuplicadoException.class, "Item duplicado", "item-duplicado"),
-
     MUNICIPIO_NAO_ENCONTRADO(MunicipioNaoEncontradoException.class, "Município não encontrado",
             "municipio-nao-encontrado"),
     MUNICIPIO_NAO_PERTENCE_UF(MunicipioNaoPertencenteException.class, "Município não pertencente à UF",
@@ -122,6 +124,8 @@ public enum ProblemType {
     ERRO_CAPTCHA(CaptchaException.class, "Erro de Captcha", "erro-captcha"),
 
     METHOD_ARGUMENT_TYPE_MISMATCH(MethodArgumentTypeMismatchException.class, "Tipo de argumento inválido", "tipo-argumento-invalido"),
+    
+    ERRO_LEITURA_MENSAGEM(HttpMessageNotReadableException.class, "Erro na leitura da mensagem", "erro-leitura-mensagem"),
     
     ERRO_SISTEMA(Exception.class, "Erro de sistema não previsto", "erro-de-sistema-nao-previsto"),
     

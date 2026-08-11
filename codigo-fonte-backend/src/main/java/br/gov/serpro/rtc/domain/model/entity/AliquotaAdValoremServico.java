@@ -15,6 +15,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code ALIQUOTA_AD_VALOREM_SERVICO} que vincula uma
+ * NBS à alíquota ad valorem aplicável a serviços, com controle de vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

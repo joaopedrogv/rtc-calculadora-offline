@@ -12,6 +12,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída de dados abertos com as versões publicadas da aplicação, do banco de
+ * dados e do ambiente.
+ */
 @Getter
 @Setter
 @Builder

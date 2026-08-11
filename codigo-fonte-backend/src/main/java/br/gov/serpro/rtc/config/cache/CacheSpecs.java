@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Mapeia as propriedades dos caches Caffeine da aplicação a partir do prefixo
+ * {@code cache}. Centraliza nome do cache, expiração após acesso, capacidade
+ * inicial e tamanho máximo de cada região de cache.
+ */
 @Getter
 @Setter
 @Component

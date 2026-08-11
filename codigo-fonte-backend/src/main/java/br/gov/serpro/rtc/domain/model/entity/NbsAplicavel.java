@@ -15,6 +15,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code NBS_APLICAVEL} que vincula NBSs aplicáveis a
+ * classificações tributárias e anexos, com vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

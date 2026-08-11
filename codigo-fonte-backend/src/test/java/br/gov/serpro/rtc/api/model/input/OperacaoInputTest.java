@@ -23,7 +23,10 @@ class OperacaoInputTest {
     }
 
     @Test
+    @Deprecated
     void retornaDataDoDataHoraEmissaoQuandoDhFatoGeradorNulo() {
+        // dataHoraEmissao depreciado em favor do dhFatoGerador,
+        // excluir esse teste quando o campo for removido do input
         OperacaoInput input = new OperacaoInput();
         OffsetDateTime dataHoraEmissao = OffsetDateTime.parse("2026-01-10T09:00:00-03:00");
         input.setDataHoraEmissao(dataHoraEmissao);

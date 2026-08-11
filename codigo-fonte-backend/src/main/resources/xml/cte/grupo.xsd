@@ -6,11 +6,19 @@
     xmlns="http://www.portalfiscal.inf.br/cte"
     targetNamespace="http://www.portalfiscal.inf.br/cte">
 
-    <xs:include schemaLocation="./originais/DFeTiposBasicos_v1.00.xsd"/>
+	<xs:include schemaLocation="./originais/tiposGeralCTe_v4.00.xsd" />
+	<xs:include schemaLocation="./originais/DFeTiposBasicos_v1.00.xsd" />
 
-    <xs:element name="infCte">
-        <xs:complexType>
-            <xs:sequence>
+	<xs:element name="infCte">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ide" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="gCompraGov" type="TCompraGovReduzido" minOccurs="0"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>            
                 <xs:element name="imp">
                     <xs:complexType>
                         <xs:sequence>

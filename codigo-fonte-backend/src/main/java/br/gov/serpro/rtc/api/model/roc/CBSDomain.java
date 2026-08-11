@@ -17,6 +17,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Representa a apuração de CBS do item, incluindo alíquota, diferimento,
+ * devolução de tributos, redução de alíquota, valor devido e memória de
+ * cálculo.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

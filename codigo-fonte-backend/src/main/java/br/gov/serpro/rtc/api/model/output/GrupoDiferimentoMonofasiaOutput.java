@@ -14,6 +14,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Saída do grupo de diferimento aplicado à tributação monofásica.
+ */
 @ToString
 @Getter
 @Setter

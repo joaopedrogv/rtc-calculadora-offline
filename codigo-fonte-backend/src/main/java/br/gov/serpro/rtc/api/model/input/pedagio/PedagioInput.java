@@ -3,7 +3,6 @@
  */
 package br.gov.serpro.rtc.api.model.input.pedagio;
 
-import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 import static java.math.BigDecimal.ZERO;
 
 import java.math.BigDecimal;
@@ -11,29 +10,35 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.gov.serpro.rtc.api.model.SerializationVisibility;
 import br.gov.serpro.rtc.core.util.StreamUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entrada do cálculo de pedágio.
+ *
+ * Contém origem, classificação tributária, base de cálculo e os trechos usados
+ * para rateio dos tributos da operação.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
-public final class PedagioInput {
+public final class PedagioInput implements SerializationVisibility {
 
     @NotNull
-    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     @Schema(name = "dataHoraEmissao", description = "Data e hora de emissão do documento no formato UTC", example = "2027-01-01T09:50:05-03:00")
     private OffsetDateTime dataHoraEmissao;
 
@@ -56,10 +61,11 @@ public final class PedagioInput {
     @NotNull
     @Size(min = 6, max = 6)
     @Schema(name = "cClassTrib", description = "Código de classificação tributária", example = "000002")
-    @JsonProperty("cClassTrib")
     private String cClassTrib;
 
     @NotNull
+    @PositiveOrZero
+    @Digits(integer = 13, fraction = 2)
     @Schema(name = "baseCalculo", description = "Base de cálculo do imposto", example = "200.00")
     private BigDecimal baseCalculo;
 

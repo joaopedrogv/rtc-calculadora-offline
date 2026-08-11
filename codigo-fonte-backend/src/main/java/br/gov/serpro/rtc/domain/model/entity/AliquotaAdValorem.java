@@ -16,6 +16,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code ALIQUOTA_AD_VALOREM} que armazena o percentual
+ * de alíquota ad valorem por tributo e classificação tributária, com vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

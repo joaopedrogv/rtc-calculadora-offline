@@ -15,6 +15,12 @@ import java.math.BigDecimal;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
 
+/**
+ * Entrada para cálculo da base do Imposto Seletivo sobre mercadorias.
+ *
+ * Consolida os componentes monetários da operação que impactam a formação da
+ * base de cálculo no ano informado.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

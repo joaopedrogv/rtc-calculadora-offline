@@ -14,6 +14,10 @@ import br.gov.serpro.rtc.domain.service.exception.ErroGenericoValidacaoException
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Serviço responsável por consultar alíquotas ad valorem de serviços por NBS ou
+ * classificação tributária, respeitando a vigência informada.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service

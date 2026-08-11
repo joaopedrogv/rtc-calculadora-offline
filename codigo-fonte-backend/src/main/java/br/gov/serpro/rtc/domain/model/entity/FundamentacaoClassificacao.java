@@ -15,6 +15,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code FUNDAMENTACAO_CLASSIFICACAO} que vincula uma
+ * classificação tributária à fundamentação legal correspondente, com vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

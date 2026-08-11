@@ -16,6 +16,10 @@ import br.gov.serpro.rtc.api.model.output.basecalculo.BaseCalculoISMercadoriasMo
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por calcular as bases de cálculo de CBS, IBS e Imposto
+ * Seletivo, validando vigência e consistência dos valores informados.
+ */
 @RequiredArgsConstructor
 @Service
 public class BaseCalculoService {

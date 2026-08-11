@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada quando NCM e NBS são informadas simultaneamente para o mesmo
+ * item, violando a regra de uso exclusivo entre mercadoria e serviço.
+ */
 public class NcmNbsSimultaneasException extends ValidacaoException {
 
     private static final long serialVersionUID = 6773977945809079927L;

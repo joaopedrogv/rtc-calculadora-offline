@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
+import br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental;
 import br.gov.serpro.rtc.domain.service.exception.DataFatoGeradorNaoInformadaException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
@@ -20,6 +21,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entrada principal dos endpoints de cálculo de operações.
+ *
+ * Reúne a identificação do ROC, o fato gerador, a localização da operação, os
+ * dados de compra governamental e a lista de itens a processar.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -48,11 +55,19 @@ public final class OperacaoInput implements SerializationVisibility {
     @Size(min = 2, max = 2)
     @Schema(name = "uf", description = "Sigla da UF", example = "RS")
     private String uf;
+    
+    @Valid
+    @Schema(name = "gCompraGov", description = "Grupo de Compra Governamental")
+    private CompraGovernamentalInput gCompraGov;
 
     @Valid
     @NotEmpty
     @Schema(name = "itens", description = "Itens da Operação")
     private List<ItemOperacaoInput> itens;
+    
+    public TipoEnteGovernamental getTpEnteGov() {
+        return gCompraGov == null ? null : gCompraGov.getTpEnteGov();
+    }
     
     public LocalDate getFatoGeradorAplicavel() {
         if (dhFatoGerador != null) {

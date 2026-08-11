@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador REST disponível no perfil {@code offline} que informa o status da
+ * versão da aplicação offline.
+ */
 @Profile("offline")
 @RestController
 @RequiredArgsConstructor

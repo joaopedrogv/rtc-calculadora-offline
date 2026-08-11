@@ -4,17 +4,25 @@ import static jakarta.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
 import static java.lang.Boolean.TRUE;
 
 import java.io.StringWriter;
+import java.math.BigDecimal;
 
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental;
+import br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoOperacaoGovernamental;
+import br.gov.serpro.rtc.api.model.roc.CompraGovernamentalDomain;
 import br.gov.serpro.rtc.api.model.roc.ObjetoDomain;
 import br.gov.serpro.rtc.api.model.roc.ROCDomain;
 import br.gov.serpro.rtc.api.model.xml.nfe.InfNFe;
 import br.gov.serpro.rtc.api.model.xml.nfe.InfNFe.Det;
 import br.gov.serpro.rtc.api.model.xml.nfe.InfNFe.Det.Imposto;
+import br.gov.serpro.rtc.api.model.xml.nfe.InfNFe.Ide;
 import br.gov.serpro.rtc.api.model.xml.nfe.InfNFe.Total;
+import br.gov.serpro.rtc.api.model.xml.nfe.TCompraGov;
+import br.gov.serpro.rtc.core.util.ArredondamentoUtils;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -35,6 +43,7 @@ public class NfeXmlService {
         super();
         this.jaxbContext = jaxbContext;
         this.mapper = new ModelMapper();
+        configureCompraGovMapping();
     }
     
     public String toXml(ROCDomain roc) throws JAXBException {
@@ -58,6 +67,10 @@ public class NfeXmlService {
         }
         
         var infNfe = new InfNFe();
+        var ide = operToIde(roc);
+        if (ide != null) {
+            infNfe.setIde(ide);
+        }
         infNfe.setDet(roc.getObjetos().stream().map(this::objetoToDet).toList());
         infNfe.setTotal(this.mapper.map(roc.getTotal().getTribCalc(), Total.class));
         return infNfe;
@@ -69,5 +82,34 @@ public class NfeXmlService {
         d.setImposto(this.mapper.map(r.getTribCalc(), Imposto.class));
         return d;
     }
+
+	private Ide operToIde(ROCDomain roc) {
+		if (roc.getOper() == null || roc.getOper().getGCompraGov() == null) {
+			return null;
+		}
+
+		var ide = new Ide();
+		ide.setGCompraGov(compraGovToXml(roc.getOper().getGCompraGov()));
+		return ide;
+	}
+
+	private TCompraGov compraGovToXml(CompraGovernamentalDomain compraGov) {
+		return this.mapper.map(compraGov, TCompraGov.class);
+	}
+
+	private void configureCompraGovMapping() {
+		Converter<TipoEnteGovernamental, String> tpEnteGovConverter = context -> context.getSource() == null ? null
+				: String.valueOf(context.getSource().getCodigo());
+		Converter<TipoOperacaoGovernamental, String> tpOperGovConverter = context -> context.getSource() == null ? null
+				: String.valueOf(context.getSource().getCodigo());
+		Converter<BigDecimal, String> pRedutorConverter = context -> context.getSource() == null ? null
+				: ArredondamentoUtils.formatarAliquota(context.getSource());
+
+		this.mapper.typeMap(CompraGovernamentalDomain.class, TCompraGov.class).addMappings(mapping -> {
+			mapping.using(tpEnteGovConverter).map(CompraGovernamentalDomain::getTpEnteGov, TCompraGov::setTpEnteGov);
+			mapping.using(pRedutorConverter).map(CompraGovernamentalDomain::getPRedutor, TCompraGov::setPRedutor);
+			mapping.using(tpOperGovConverter).map(CompraGovernamentalDomain::getTpOperGov, TCompraGov::setTpOperGov);
+		});
+	}
 
 }

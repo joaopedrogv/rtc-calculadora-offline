@@ -8,6 +8,10 @@ import java.math.BigDecimal;
 import br.gov.serpro.rtc.api.model.roc.IBSUFDomain;
 import br.gov.serpro.rtc.api.model.roc.IBSUFTotalDomain;
 
+/**
+ * Acumulador imutável usado para somar os componentes do total de IBS da UF
+ * antes de materializar um {@link IBSUFTotalDomain}.
+ */
 public class IBSUFTotalAccumulator {
     private final BigDecimal vDif;
     private final BigDecimal vDevTrib;

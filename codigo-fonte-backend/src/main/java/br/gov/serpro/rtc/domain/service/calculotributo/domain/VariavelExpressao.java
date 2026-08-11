@@ -3,6 +3,10 @@ package br.gov.serpro.rtc.domain.service.calculotributo.domain;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumeração que centraliza os nomes das variáveis aceitas nas expressões
+ * aritméticas usadas no cálculo de tributos.
+ */
 @RequiredArgsConstructor
 @Getter
 public enum VariavelExpressao {
@@ -18,6 +22,7 @@ public enum VariavelExpressao {
     ALIQUOTA_REFERENCIA("aliquotaReferencia"),
     ALIQUOTA_PADRAO_OU_REFERENCIA("aliquotaPadraoOuReferencia"),
     PERCENTUAL_REDUCAO("percentualReducao"),
+    PERCENTUAL_REDUCAO_COMPRA_GOV("pRedutorCompraGov"),
     ALIQUOTA("aliquota"),
     QUANTIDADE("quantidade"),
     TRIBUTO_CALCULADO("tributoCalculado"),

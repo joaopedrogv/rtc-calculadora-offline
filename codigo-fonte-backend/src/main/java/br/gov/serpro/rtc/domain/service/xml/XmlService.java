@@ -20,6 +20,12 @@ import jakarta.xml.bind.JAXBException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Serviço responsável por validar documentos XML fiscais contra seus schemas e
+ * delegar sua serialização para o formato ROC. Centraliza o tratamento de XML
+ * na aplicação, escolhendo o serializador adequado conforme o tipo de documento
+ * fiscal.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -40,17 +46,19 @@ public class XmlService {
 
             final Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new StringReader(xml)));
+            log.debug("Validação de XML concluída com sucesso - TipoDocumento: {}, TipoXml: {}", tipo, subtipo);
             return true; // Validation successful
         } catch (SAXParseException e) {
-            log.error("Erro ao validar XML", e);
+            log.error("Erro ao validar XML - TipoDocumento: {}, TipoXml: {}", 
+                    tipo, subtipo, e);
             String msg = String.format("Erro na linha %d, coluna %d: %s", e.getLineNumber(), e.getColumnNumber(),
                     e.getMessage());
             throw new ErroXmlException(msg);
         } catch (SAXException e) {
-            log.error("Erro ao validar XML", e);
+            log.error("Erro SAX ao validar XML - TipoDocumento: {}, TipoXml: {}", tipo, subtipo, e);
             throw new ErroXmlException(e.getMessage());
         } catch (IOException e) {
-            log.error("Erro ao validar XML", e);
+            log.error("Erro de IO ao validar XML - TipoDocumento: {}, TipoXml: {}", tipo, subtipo, e);
             throw new ErroXmlException("Erro de IO na validação de XML: " + e.getMessage());
         }
     }

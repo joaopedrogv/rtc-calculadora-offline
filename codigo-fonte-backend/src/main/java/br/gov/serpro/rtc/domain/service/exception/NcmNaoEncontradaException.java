@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada para sinalizar NCM não encontrada no domínio de cálculo
+ * tributário.
+ */
 public class NcmNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 2582687430572466747L;

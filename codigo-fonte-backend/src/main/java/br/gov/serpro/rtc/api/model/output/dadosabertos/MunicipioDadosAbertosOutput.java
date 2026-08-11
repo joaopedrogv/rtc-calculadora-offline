@@ -12,6 +12,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída da API de dados abertos que expõe informações cadastrais de municípios
+ * brasileiros. Retorna código e nome do município para consultas de localização
+ * e validação geográfica usadas nas operações tributárias.
+ */
 @Getter
 @Setter
 @Builder

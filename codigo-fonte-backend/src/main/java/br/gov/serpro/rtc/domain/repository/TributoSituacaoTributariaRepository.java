@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.TributoSituacaoTributaria;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link TributoSituacaoTributaria},
+ * com consulta do tributo vinculado a uma situação tributária em determinada
+ * data.
+ */
 @Repository
 public interface TributoSituacaoTributariaRepository extends JpaRepository<TributoSituacaoTributaria, Long> {
 

@@ -13,6 +13,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code VERSAO_BASE_DADO} que registra a versão da
+ * carga da base de dados, com data, descrição e número da versão.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

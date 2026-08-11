@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import br.gov.serpro.rtc.domain.repository.NcmRepository;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por verificar a existência e a vigência de códigos NCM
+ * utilizados na calculadora.
+ */
 @RequiredArgsConstructor
 @Service
 public class NcmService {

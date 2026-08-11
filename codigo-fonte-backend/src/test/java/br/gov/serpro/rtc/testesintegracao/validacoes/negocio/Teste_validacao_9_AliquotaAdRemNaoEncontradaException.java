@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaAdRemNaoEncontradaException;
-import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 
 @Disabled
 @SpringBootTest
@@ -37,8 +35,6 @@ import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 @TestPropertySource(locations = "classpath:application-testes.yml")
 @ActiveProfiles("testes")
 class Teste_validacao_9_AliquotaAdRemNaoEncontradaException {
-
-    private static JsonResourceObjectMapper<OperacaoInput> mapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,16 +47,11 @@ class Teste_validacao_9_AliquotaAdRemNaoEncontradaException {
 
     private OperacaoInput operacao;
 
-    @BeforeAll
-    static void setup() {
-        mapper = new JsonResourceObjectMapper<>(OperacaoInput.class);
-    }
-
     @BeforeEach
     void beforeEach(
             final @Value("classpath:entradas/validacoes/Teste_validacao_9_AliquotaAdRemNaoEncontradaException.json") Resource resourceFile)
             throws IOException {
-        operacao = mapper.loadTestJson(resourceFile);
+        operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
     }
 
     @Test

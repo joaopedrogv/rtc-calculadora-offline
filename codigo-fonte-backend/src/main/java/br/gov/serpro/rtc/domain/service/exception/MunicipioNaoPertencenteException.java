@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada quando o município informado não pertence à unidade
+ * federativa indicada na operação.
+ */
 public class MunicipioNaoPertencenteException extends ValidacaoException {
 
     private static final long serialVersionUID = 396099297144289032L;

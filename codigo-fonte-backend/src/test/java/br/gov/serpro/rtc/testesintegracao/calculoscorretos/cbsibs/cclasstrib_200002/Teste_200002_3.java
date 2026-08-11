@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,36 +18,33 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.api.model.roc.CBSDomain;
-import br.gov.serpro.rtc.api.model.roc.ObjetoDomain;
 import br.gov.serpro.rtc.api.model.roc.IBSMunDomain;
 import br.gov.serpro.rtc.api.model.roc.IBSUFDomain;
+import br.gov.serpro.rtc.api.model.roc.ObjetoDomain;
 import br.gov.serpro.rtc.api.model.roc.TributacaoRegularDomain;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
-import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-testes.yml")
 @ActiveProfiles("testes")
 class Teste_200002_3 {
-
-    private static JsonResourceObjectMapper<OperacaoInput> mapper;
+    
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private CalculadoraService calculadoraService;
-
-    @BeforeAll
-    static void setup() {
-        mapper = new JsonResourceObjectMapper<>(OperacaoInput.class);
-    }
 
     @Test
     void testCalcularTributos(
             final @Value("classpath:entradas/calculoscorretos/Teste_200002_3.json") Resource resourceFile)
             throws Exception {
-        final var operacao = mapper.loadTestJson(resourceFile);
+        final var operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
         final var resultado = calculadoraService.calcularTributos(operacao);
         assertThat(resultado).isNotNull();
         final var objetos = resultado.getObjetos();
@@ -70,21 +66,24 @@ class Teste_200002_3 {
 
     private void assertCbs(final CBSDomain cbs) {
         assertThat(cbs).isNotNull();
-        isEqualByComparingTo(cbs.getPCBS(), new BigDecimal("0.90"));
+        // suspensão => sem alíquota no grupo principal
+        isEqualByComparingTo(cbs.getPCBS(), new BigDecimal("0.00"));
         isEqualByComparingTo(cbs.getVCBS(), ZERO);
         assertThat(cbs.getGRed()).isNull();
     }
 
     private void assertIbsEstadual(final IBSUFDomain ibsEstadual) {
         assertThat(ibsEstadual).isNotNull();
-        isEqualByComparingTo(ibsEstadual.getPIBSUF(), new BigDecimal("0.10"));
+        // suspensão => sem alíquota no grupo principal
+        isEqualByComparingTo(ibsEstadual.getPIBSUF(), new BigDecimal("0.00"));
         isEqualByComparingTo(ibsEstadual.getVIBSUF(), ZERO);
         assertThat(ibsEstadual.getGRed()).isNull();
     }
 
     private void assertIbsMunicipal(final IBSMunDomain ibsMunicipal) {
         assertThat(ibsMunicipal).isNotNull();
-        isEqualByComparingTo(ibsMunicipal.getPIBSMun(), ZERO);
+        // suspensão => sem alíquota no grupo principal
+        isEqualByComparingTo(ibsMunicipal.getPIBSMun(), new BigDecimal("0.00"));
         isEqualByComparingTo(ibsMunicipal.getVIBSMun(), ZERO);
         assertThat(ibsMunicipal.getGRed()).isNull();
     }

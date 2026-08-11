@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumeração que lista os tipos de artefato XML suportados pela API.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum TipoXml {

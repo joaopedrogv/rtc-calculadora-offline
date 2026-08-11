@@ -4,9 +4,8 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
-package br.gov.serpro.rtc.api.model.xml.nfe;
 
-import java.math.BigDecimal;
+package br.gov.serpro.rtc.api.model.xml.nfe;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -15,16 +14,23 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de transferência de crédito de IBS/CBS do
+ * documento fiscal Nota Fiscal Eletrônica (NFe), conforme o schema fiscal
+ * correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TTransfCred", propOrder = { "vIBS", "vCBS" })
+@XmlType(name = "TTransfCred", propOrder = {
+    "vIBS",
+    "vCBS"
+})
 public class TTransfCred {
 
     @XmlElement(required = true)
-    private BigDecimal vIBS;
+    private String vIBS;
 
     @XmlElement(required = true)
-    private BigDecimal vCBS;
-
+    private String vCBS;
 }

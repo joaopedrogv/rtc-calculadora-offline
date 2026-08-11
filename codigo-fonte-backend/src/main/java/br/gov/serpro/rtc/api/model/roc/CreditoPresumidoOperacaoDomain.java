@@ -16,6 +16,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Detalha o crédito presumido gerado na operação, com base de cálculo, código
+ * de classificação e desdobramento entre IBS e CBS.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

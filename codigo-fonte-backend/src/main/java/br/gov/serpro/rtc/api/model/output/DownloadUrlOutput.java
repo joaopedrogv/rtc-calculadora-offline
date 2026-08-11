@@ -6,6 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Saída que encapsula a URL de download de arquivos gerados dinamicamente pela
+ * API. É usado para devolver o endereço de recursos produzidos sob demanda,
+ * como documentos, exportações ou artefatos gerados pela aplicação.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

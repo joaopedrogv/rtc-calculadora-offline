@@ -1,0 +1,5601 @@
+{
+    "id": "507f1f77bcf86cd799439011",
+    "versao": "1.0.0",
+    "dataHoraEmissao": "2027-01-01T00:00:00-03:00",
+    "municipio": 1200013,
+    "uf": "AC",
+    "itens": [
+        {
+            "numero": 1,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 2,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 3,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 4,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 5,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 6,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 7,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 8,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "000",
+            "baseCalculo": 200,
+            "cClassTrib": "000004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 9,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "010",
+            "baseCalculo": 200,
+            "cClassTrib": "010001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 10,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "010",
+            "baseCalculo": 200,
+            "cClassTrib": "010001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 11,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "010",
+            "baseCalculo": 200,
+            "cClassTrib": "010002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 12,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "010",
+            "baseCalculo": 200,
+            "cClassTrib": "010002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 13,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 14,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 15,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 16,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 17,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 18,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 19,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 20,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 21,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011005",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 22,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "011",
+            "baseCalculo": 200,
+            "cClassTrib": "011005",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 23,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 24,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 25,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 26,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 27,
+            "ncm": "10063011",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 28,
+            "ncm": "10063011",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 29,
+            "ncm": "90181100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 30,
+            "ncm": "90181100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 31,
+            "ncm": "39269030",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200005",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 32,
+            "ncm": "39269030",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200005",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 33,
+            "ncm": "90181100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200006",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 34,
+            "ncm": "90181100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200006",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 35,
+            "ncm": "83024100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200007",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 36,
+            "ncm": "83024100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200007",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 37,
+            "ncm": "87089910",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200008",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 38,
+            "ncm": "87089910",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200008",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 39,
+            "ncm": "30049069",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200009",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 40,
+            "ncm": "30049069",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200009",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 41,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200010",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 42,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200010",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 43,
+            "ncm": "29362812",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200011",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 44,
+            "ncm": "29362812",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200011",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 45,
+            "ncm": "30049069",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200012",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 46,
+            "ncm": "30049069",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200012",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 47,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200013",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 48,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200013",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 49,
+            "ncm": "07020000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200014",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 50,
+            "ncm": "07020000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200014",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 51,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200015",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 52,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200015",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 53,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200016",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 54,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200016",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 55,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200017",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 56,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200017",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 57,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200018",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 58,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200018",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 59,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200019",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 60,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200019",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 61,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200020",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 62,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200020",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 63,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200021",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 64,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200021",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 65,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200022",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 66,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200022",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 67,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200023",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 68,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200023",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 69,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200024",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 70,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200024",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 71,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200025",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 72,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200025",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 73,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200026",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 74,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200026",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 75,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200027",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 76,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200027",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 77,
+            "ncm": null,
+            "nbs": "122012000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200028",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 78,
+            "ncm": null,
+            "nbs": "122012000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200028",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 79,
+            "ncm": null,
+            "nbs": "123011100",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200029",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 80,
+            "ncm": null,
+            "nbs": "123011100",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200029",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 81,
+            "ncm": "39269030",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200030",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 82,
+            "ncm": "39269030",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200030",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 83,
+            "ncm": "87089910",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200031",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 84,
+            "ncm": "87089910",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200031",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 85,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200032",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 86,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200032",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 87,
+            "ncm": "29362812",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200033",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 88,
+            "ncm": "29362812",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200033",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 89,
+            "ncm": "03073100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200034",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 90,
+            "ncm": "03073100",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200034",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 91,
+            "ncm": "34011190",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200035",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 92,
+            "ncm": "34011190",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200035",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 93,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200036",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 94,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200036",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 95,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200037",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 96,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200037",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 97,
+            "ncm": "31010000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200038",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 98,
+            "ncm": "31010000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200038",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 99,
+            "ncm": null,
+            "nbs": "111031000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200039",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 100,
+            "ncm": null,
+            "nbs": "111031000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200039",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 101,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200040",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 102,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200040",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 103,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200041",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 104,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200041",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 105,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200042",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 106,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200042",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 107,
+            "ncm": null,
+            "nbs": "115012000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200043",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 108,
+            "ncm": null,
+            "nbs": "115012000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200043",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 109,
+            "ncm": "87100000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200043",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 110,
+            "ncm": "87100000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200043",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 111,
+            "ncm": null,
+            "nbs": "115012000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200044",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 112,
+            "ncm": null,
+            "nbs": "115012000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200044",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 113,
+            "ncm": "87100000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200044",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 114,
+            "ncm": "87100000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200044",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 115,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200045",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 116,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200045",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 117,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200046",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 118,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200046",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 119,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200047",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 120,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200047",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 121,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200048",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 122,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200048",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 123,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200049",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 124,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200049",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 125,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200050",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 126,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200050",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 127,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200051",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 128,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200051",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 129,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200052",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 130,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200052",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 131,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200053",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 132,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "200",
+            "baseCalculo": 200,
+            "cClassTrib": "200053",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 133,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 134,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 135,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 136,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 137,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 138,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 139,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 140,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "221",
+            "baseCalculo": 200,
+            "cClassTrib": "221001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 141,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "222",
+            "baseCalculo": 200,
+            "cClassTrib": "222001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 142,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "222",
+            "baseCalculo": 200,
+            "cClassTrib": "222001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 143,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "400",
+            "baseCalculo": 200,
+            "cClassTrib": "400001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 144,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "400",
+            "baseCalculo": 200,
+            "cClassTrib": "400001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 145,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "400",
+            "baseCalculo": 200,
+            "cClassTrib": "400002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 146,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "400",
+            "baseCalculo": 200,
+            "cClassTrib": "400002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 147,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 148,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 149,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 150,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 151,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 152,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 153,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 154,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 155,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410005",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 156,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410005",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 157,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410006",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 158,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410006",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 159,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410007",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 160,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410007",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 161,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410008",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 162,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410008",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 163,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410009",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 164,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410009",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 165,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410010",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 166,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410010",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 167,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410011",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 168,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410011",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 169,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410012",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 170,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410012",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 171,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410013",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 172,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410013",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 173,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410014",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 174,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410014",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 175,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410015",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 176,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410015",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 177,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410016",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 178,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410016",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 179,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410017",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 180,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410017",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 181,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410018",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 182,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410018",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 183,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410019",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 184,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410019",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 185,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410020",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 186,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410020",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 187,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410021",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 188,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410021",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 189,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410022",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 190,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410022",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 191,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410023",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 192,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410023",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 193,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410024",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 194,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410024",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 195,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410025",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 196,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410025",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 197,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410026",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 198,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410026",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 199,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410027",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 200,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410027",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 201,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410028",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 202,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410028",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 203,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410029",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 204,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410029",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 205,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410030",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 206,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410030",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 207,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410031",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 208,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410031",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 209,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410032",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 210,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410032",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 211,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410033",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 212,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410033",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 213,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410034",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 214,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410034",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 215,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410035",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 216,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410035",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 217,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410999",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 218,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "410",
+            "baseCalculo": 200,
+            "cClassTrib": "410999",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 219,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "510",
+            "baseCalculo": 200,
+            "cClassTrib": "510001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 220,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "510",
+            "baseCalculo": 200,
+            "cClassTrib": "510001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 221,
+            "ncm": "31010000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "515",
+            "baseCalculo": 200,
+            "cClassTrib": "515001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 222,
+            "ncm": "31010000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "515",
+            "baseCalculo": 200,
+            "cClassTrib": "515001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 223,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "515",
+            "baseCalculo": 200,
+            "cClassTrib": "515001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 224,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "515",
+            "baseCalculo": 200,
+            "cClassTrib": "515001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 225,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 226,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 227,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 228,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 229,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 230,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 231,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 232,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 233,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550005",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 234,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550005",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 235,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550006",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 236,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550006",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 237,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550007",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 238,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550007",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 239,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550008",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 240,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550008",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 241,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550009",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 242,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550009",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 243,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550010",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 244,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550010",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 245,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550011",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 246,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550011",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 247,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550012",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 248,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550012",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 249,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550013",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 250,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550013",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 251,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550014",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 252,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550014",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 253,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550015",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 254,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550015",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 255,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550016",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 256,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550016",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 257,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550017",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 258,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550017",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 259,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550018",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 260,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550018",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 261,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550019",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 262,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550019",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 263,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550020",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 264,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550020",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 265,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550021",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 266,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550021",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 267,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550022",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 268,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "550",
+            "baseCalculo": 200,
+            "cClassTrib": "550022",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            },
+            "tributacaoRegular": {
+                "cst": "200",
+                "cClassTrib": "200025"
+            }
+        },
+        {
+            "numero": 269,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "800",
+            "baseCalculo": 200,
+            "cClassTrib": "800001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 270,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "800",
+            "baseCalculo": 200,
+            "cClassTrib": "800001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 271,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "800",
+            "baseCalculo": 200,
+            "cClassTrib": "800002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 272,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "800",
+            "baseCalculo": 200,
+            "cClassTrib": "800002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 273,
+            "ncm": null,
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "810",
+            "baseCalculo": 200,
+            "cClassTrib": "810001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 274,
+            "ncm": null,
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "810",
+            "baseCalculo": 200,
+            "cClassTrib": "810001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 275,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "811",
+            "baseCalculo": 200,
+            "cClassTrib": "811001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 276,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "811",
+            "baseCalculo": 200,
+            "cClassTrib": "811001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 277,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "811",
+            "baseCalculo": 200,
+            "cClassTrib": "811002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 278,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "811",
+            "baseCalculo": 200,
+            "cClassTrib": "811002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 279,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "811",
+            "baseCalculo": 200,
+            "cClassTrib": "811003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 280,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "811",
+            "baseCalculo": 200,
+            "cClassTrib": "811003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 281,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 282,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 283,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820002",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 284,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820002",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 285,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820003",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 286,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820003",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 287,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820004",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 288,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820004",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 289,
+            "ncm": null,
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820005",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 290,
+            "ncm": null,
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820005",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 291,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820006",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 292,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820006",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 293,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820007",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 294,
+            "ncm": null,
+            "nbs": "114109000",
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820007",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 295,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820008",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 296,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820008",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 297,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820009",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 298,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "820",
+            "baseCalculo": 200,
+            "cClassTrib": "820009",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        },
+        {
+            "numero": 299,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "830",
+            "baseCalculo": 200,
+            "cClassTrib": "830001",
+            "impostoSeletivo": {
+                "cst": "000",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "000001"
+            }
+        },
+        {
+            "numero": 300,
+            "ncm": "24021000",
+            "nbs": null,
+            "quantidade": 200,
+            "unidade": "VN",
+            "cst": "830",
+            "baseCalculo": 200,
+            "cClassTrib": "830001",
+            "impostoSeletivo": {
+                "cst": "100",
+                "baseCalculo": 200,
+                "quantidade": 1,
+                "unidade": "VN",
+                "impostoInformado": 0,
+                "cClassTrib": "100001"
+            }
+        }
+    ]
+}

@@ -15,6 +15,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code EXCECAO_AD_VALOREM_SERVICO} que registra NBSs
+ * excluídas da aplicação de uma alíquota ad valorem de serviço durante a
+ * vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

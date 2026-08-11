@@ -6,14 +6,31 @@ package br.gov.serpro.rtc.domain.service.nfse;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.util.List;
+
 
 import org.springframework.stereotype.Service;
 
 import br.gov.serpro.rtc.api.model.input.nfse.NfseBaseCalculoInput;
+import br.gov.serpro.rtc.api.model.input.nfse.NfseValidacaoIndicadorOperacaoInput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseBaseCalculoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseIndicadorOperacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseLocalOperacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseValidacaoIndicadorOperacaoOutput;
+import br.gov.serpro.rtc.domain.repository.IndicadorOperacaoRepository;
+import br.gov.serpro.rtc.domain.service.NbsService;
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
+import br.gov.serpro.rtc.domain.service.exception.IndicadorOperacaoNaoEncontradoException;
+import br.gov.serpro.rtc.domain.service.exception.NbsNaoEncontradaException;
 import lombok.RequiredArgsConstructor;
 
+
+/**
+ * Serviço responsável por apoiar cenários de NFS-e, calculando base de cálculo
+ * e consultando indicadores, local da operação e classificações por NBS.
+ */
 @RequiredArgsConstructor
 @Service
 public class NfseService {
@@ -22,8 +39,14 @@ public class NfseService {
 
     private static final int ANO_EXTINCAO_PIS_COFINS = 2027;
     private static final int ANO_EXTINCAO_ISS = 2033;
+
+    private static final String CCLASSTRIB_FALLBACK = "000001";
     
     private static final String MENSAGEM_ERRO_CBS_IBS = "O ano do fato gerador deve ser %d ou superior".formatted(ANO_INICIO_CBS_IBS);
+
+    private final IndicadorOperacaoRepository indicadorOperacaoRepository;
+    private final NbsService nbsService;
+
     
     /**
      * Afere a base de cálculo para NFS-e, considerando os campos que integram e não
@@ -64,6 +87,107 @@ public class NfseService {
         return NfseBaseCalculoOutput.builder()
                 .baseCalculo(baseCalculo)
                 .build();
+    }
+
+
+    public NfseValidacaoIndicadorOperacaoOutput validarIndicadorOperacao(NfseValidacaoIndicadorOperacaoInput input) {
+        String cTribNacFormatado = null;
+        
+        if (input.getCTribNac() != null && !input.getCTribNac().isEmpty()) {
+            String primeirosDoisDigitos = input.getCTribNac().substring(0, 2);
+            String segundosDoisDigitos = input.getCTribNac().substring(2, 4);
+            
+            int primeiroNumero = Integer.parseInt(primeirosDoisDigitos);
+            int segundoNumero = Integer.parseInt(segundosDoisDigitos);
+            
+            cTribNacFormatado = primeiroNumero + "." + String.format("%02d", segundoNumero);
+        }
+        
+        int resultado = indicadorOperacaoRepository.validarCombinacaoExiste(
+                input.getNbs(),
+                input.getCClassTrib(),
+                input.getCIndOp(),
+                cTribNacFormatado,
+                input.getDataOcorrenciaFatoGerador().toString());
+        
+        boolean combinacaoValida = resultado == 1;
+        
+        return NfseValidacaoIndicadorOperacaoOutput.builder()
+                .cIndOp(input.getCIndOp())
+                .cClassTrib(input.getCClassTrib())
+                .nbs(input.getNbs())
+                .cTribNac(input.getCTribNac())
+                .dataOcorrenciaFatoGerador(input.getDataOcorrenciaFatoGerador())
+                .valido(combinacaoValida)
+                .build();
+    }
+
+    public NfseLocalOperacaoOutput consultarLocalOperacao(String cIndOp, LocalDate dataOcorrenciaFatoGerador) {
+        String localOperacao = indicadorOperacaoRepository.buscarLocalOperacaoPorIndOp(
+                cIndOp, 
+                dataOcorrenciaFatoGerador.toString());
+
+        if (localOperacao == null) {
+            throw new IndicadorOperacaoNaoEncontradoException(cIndOp, dataOcorrenciaFatoGerador);
+        }
+
+        return NfseLocalOperacaoOutput.builder()
+                .cIndOp(cIndOp)
+                .dataOcorrenciaFatoGerador(dataOcorrenciaFatoGerador)
+                .localOperacao(localOperacao)
+                .build();
+    }
+    
+    public List<NfseIndicadorOperacaoOutput> consultarIndicadorOperacao(LocalDate dataOcorrenciaFatoGerador, String nbs) {
+        if (nbs != null && !nbs.isEmpty()) {
+            if (!nbsService.existeNbs(nbs, dataOcorrenciaFatoGerador)) {
+                throw new NbsNaoEncontradaException(nbs, dataOcorrenciaFatoGerador);
+            }
+            List<Object[]> rawData = indicadorOperacaoRepository.buscarIndicadorOperacaoPorDataComNbs(dataOcorrenciaFatoGerador, nbs);
+            if (rawData == null || rawData.isEmpty()) {
+                rawData = indicadorOperacaoRepository.buscarIndicadorOperacaoPorData(dataOcorrenciaFatoGerador);
+            }
+            return rawData.stream()
+                    .map(this::mapToIndicadorOperacaoOutput)
+                    .toList();
+        } else {
+            List<Object[]> rawData = indicadorOperacaoRepository.buscarIndicadorOperacaoPorData(dataOcorrenciaFatoGerador);
+            return rawData.stream()
+                    .map(this::mapToIndicadorOperacaoOutput)
+                    .toList();
+        }
+    }
+    
+    private NfseIndicadorOperacaoOutput mapToIndicadorOperacaoOutput(Object[] row) {
+        return new NfseIndicadorOperacaoOutput(
+                (String) row[0],  // cIndOp
+                (String) row[1],  // tipoOperacao
+                br.gov.serpro.rtc.domain.model.enumeration.LocalFornecimento.fromCodigo(((Number) row[2]).intValue()), // codigoLocalFornecimento
+                row[3] != null ? ((Number) row[3]).intValue() == 1 : null,  // prestacaoServicoOnerosa
+                row[4] != null ? ((Number) row[4]).intValue() == 1 : null   // adquirenteExterior
+        );
+    }
+    
+    public List<NfseSituacaoClassificacaoOutput> consultarSituacoesClassificacoesPorNbs(String nbs, LocalDate data) {
+        if (!nbsService.existeNbs(nbs, data)) {
+            throw new NbsNaoEncontradaException(nbs, data);
+        }
+
+        String dataStr = data.toString();
+
+        List<NfseSituacaoClassificacaoOutput> resultado =
+                indicadorOperacaoRepository.buscarSituacoesClassificacoesPorNbsEData(nbs, dataStr);
+
+        if (resultado == null || resultado.isEmpty()) {
+            NfseSituacaoClassificacaoOutput fallback =
+                    indicadorOperacaoRepository.buscarSituacaoClassificacaoPorClassificacao(CCLASSTRIB_FALLBACK, dataStr);
+            if (fallback == null) {
+                return List.of();
+            }
+            resultado = List.of(fallback);
+        }
+
+        return resultado;
     }
     
     /**

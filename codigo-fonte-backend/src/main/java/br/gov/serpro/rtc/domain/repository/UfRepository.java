@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.Uf;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link Uf}, com consultas de código
+ * e existência de unidades federativas por sigla.
+ */
 @Repository
 public interface UfRepository extends JpaRepository<Uf, Long> {
 

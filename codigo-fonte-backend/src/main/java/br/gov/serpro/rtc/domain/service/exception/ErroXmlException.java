@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada quando ocorre erro de estrutura, parsing ou validação em
+ * documentos XML processados pela calculadora.
+ */
 public class ErroXmlException extends ValidacaoException {
 
     private static final long serialVersionUID = 529876772972113L;

@@ -19,6 +19,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Detalha a tributação regular do item, com códigos tributários, alíquotas
+ * efetivas e valores de IBS da UF, IBS do município e CBS.
+ */
 @Getter
 @Setter
 @Builder

@@ -12,6 +12,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída da API de dados abertos que expõe o cadastro das unidades federativas
+ * brasileiras. Retorna código, nome e sigla da UF para consultas de localização
+ * e validações geográficas da calculadora.
+ */
 @Getter
 @Setter
 @Builder

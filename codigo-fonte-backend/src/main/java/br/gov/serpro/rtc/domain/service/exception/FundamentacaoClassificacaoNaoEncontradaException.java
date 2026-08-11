@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada quando a fundamentação legal associada à classificação
+ * tributária não é encontrada para a vigência consultada.
+ */
 public class FundamentacaoClassificacaoNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 2582681234562466747L;

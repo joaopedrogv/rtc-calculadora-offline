@@ -6,6 +6,14 @@ import br.gov.serpro.rtc.domain.service.exception.SiglaDFeNaoEncontradaException
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumera as siglas de documentos fiscais eletrônicos reconhecidas pelo
+ * domínio.
+ *
+ * Valores como {@code NFE}, {@code NFCE}, {@code CTE}, {@code NFSE}, {@code
+ * NFCOM}, {@code DERE}, {@code NFAG} e {@code NFGAS} são usados para
+ * normalização e validação de entrada.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum SiglasDFeEnum {
@@ -22,7 +30,7 @@ public enum SiglasDFeEnum {
     NFSEVIA("NFSe Via"),
     NFCOM("NFCom"),
     DERE("DERE"),
-    NFAQ("NFAq"),
+    NFAG("NFAg"),
     NFGAS("NFGas");
 
     private final String sigla;

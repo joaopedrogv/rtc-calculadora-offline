@@ -18,6 +18,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida os totais de CBS do ROC, somando diferimento, devolução de
+ * tributos, valor da contribuição e créditos presumidos.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

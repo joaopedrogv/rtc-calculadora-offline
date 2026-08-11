@@ -15,8 +15,6 @@ import br.gov.serpro.rtc.domain.service.exception.AliquotaReferenciaNaoEncontrad
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoVinculadaSituacaoTributariaException;
-import br.gov.serpro.rtc.domain.service.exception.TributacaoRegularInformadaIndevidamenteException;
-import br.gov.serpro.rtc.domain.service.exception.TributacaoRegularNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroAvaliadorExpressaoAritmeticaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroInternoSistemaException;
 import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoDefinidaException;
@@ -24,21 +22,22 @@ import br.gov.serpro.rtc.domain.service.exception.FundamentacaoClassificacaoNaoE
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoInformadoIndevidamenteException;
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoNaoInformadoException;
 import br.gov.serpro.rtc.domain.service.exception.IncompatibilidadeSuspensaoException;
-import br.gov.serpro.rtc.domain.service.exception.ItemDuplicadoException;
 import br.gov.serpro.rtc.domain.service.exception.MunicipioNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.MunicipioNaoPertencenteException;
+import br.gov.serpro.rtc.domain.service.exception.NbsCompletoNaoInformadoException;
 import br.gov.serpro.rtc.domain.service.exception.NbsNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.NbsNaoVinculadaException;
-import br.gov.serpro.rtc.domain.service.exception.NcmNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.NcmCompletoNaoInformadoException;
+import br.gov.serpro.rtc.domain.service.exception.NcmNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.NcmNaoVinculadaException;
-import br.gov.serpro.rtc.domain.service.exception.NbsCompletoNaoInformadoException;
 import br.gov.serpro.rtc.domain.service.exception.NcmNbsSimultaneasException;
 import br.gov.serpro.rtc.domain.service.exception.NomenclaturaException;
 import br.gov.serpro.rtc.domain.service.exception.PercentualReducaoNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.SituacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.TipoAliquotaDesconhecidoException;
 import br.gov.serpro.rtc.domain.service.exception.TratamentoClassificacaoNaoEncontradoException;
+import br.gov.serpro.rtc.domain.service.exception.TributacaoRegularInformadaIndevidamenteException;
+import br.gov.serpro.rtc.domain.service.exception.TributacaoRegularNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.UfNaoEncontradaException;
 
 class Teste_ConcreteException {
@@ -82,19 +81,6 @@ class Teste_ConcreteException {
         assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
     }
 
-    // @Test
-    // void Teste_TributoSituacaoTributariaNaoEncontradoException() {
-    //     // preparar
-    //     Long idTributo = 2L;
-    //     Long idSituacaoTributaria = 1L;
-    //     LocalDate data = LocalDate.now();
-    //     // executar e avaliar
-    //     Exception exception = assertThrows(TributoSituacaoTributariaNaoEncontradoException.class, () -> {
-    //         throw new TributoSituacaoTributariaNaoEncontradoException(idTributo, idSituacaoTributaria, data);
-    //     });
-    //     assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
-    // }
-
     @Test
     void Teste_AliquotaAdRemNaoEncontradaException() {
         // preparar
@@ -123,10 +109,6 @@ class Teste_ConcreteException {
 
     @Test
     void Teste_NomenclaturaException() {
-        // preparar
-        String cClassTrib = "200046";
-        String nomenclatura = "IBS";
-        String tributo = "CBS e IBS";
         // executar e avaliar
         Exception exception = assertThrows(NomenclaturaException.class, () -> {
             throw new NomenclaturaException("Só se aplica a IBS...");
@@ -314,17 +296,6 @@ class Teste_ConcreteException {
     }
 
     @Test
-    void Teste_ItemDuplicadoException() {
-        // preparar
-        String item = "1";
-        // executar e avaliar
-        Exception exception = assertThrows(ItemDuplicadoException.class, () -> {
-            throw new ItemDuplicadoException(item);
-        });
-        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
-    }
-
-    @Test
     void Teste_MunicipioNaoEncontradoException() {
         // preparar
         Long id = 9999999L;
@@ -409,51 +380,4 @@ class Teste_ConcreteException {
         });
         assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
     }
-
-    // @Test
-    // void Teste_ValidacaoException() {
-    //     // preparar
-    //     String cClassTrib = "000020";
-    //     String cst = "000";
-    //     String tributo = "Imposto Seletivo";
-    //     // executar e avaliar
-    //     Exception exception = assertThrows(ValidacaoException.class, () -> {
-    //         throw new ValidacaoException();
-    //     });
-    //     assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
-    // }
-
-        // @Test
-    // void Teste_NegocioException() {
-    //     // preparar
-    //     String mensagem = "Erro interno no sistema";
-    //     // executar e avaliar
-    //     Exception exception = assertThrows(NegocioException.class, () -> {
-    //         throw new NegocioException();
-    //     });
-    //     assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
-    // }
-
-    // @Test
-    // void Teste_EntidadeNaoEncontradaException() {
-    //     // preparar
-    //     String mensagem = "Erro interno no sistema";
-    //     // executar e avaliar
-    //     Exception exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-    //         throw new EntidadeNaoEncontradaException();
-    //     });
-    //     assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
-    // }
-
-    // @Test
-    // void Teste_EstruturaInconsistenteException() {
-    //     // preparar
-    //     String mensagem = "Erro interno no sistema";
-    //     // executar e avaliar
-    //     Exception exception = assertThrows(EstruturaInconsistenteException.class, () -> {
-    //         throw new EstruturaInconsistenteException();
-    //     });
-    //     assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
-    // }
-
 }

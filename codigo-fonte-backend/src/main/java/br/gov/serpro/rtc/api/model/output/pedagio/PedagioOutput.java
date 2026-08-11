@@ -3,26 +3,24 @@
  */
 package br.gov.serpro.rtc.api.model.output.pedagio;
 
-import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída do cálculo de pedágio, com origem, classificação tributária, base de
+ * cálculo, trechos e extensão total.
+ */
 @Setter
 @Getter
 @Builder
@@ -30,7 +28,6 @@ import lombok.Setter;
 public final class PedagioOutput implements SerializationVisibility {
 
     @Schema(name = "dataHoraEmissao", description = "Data e hora de emissão do documento no formato UTC", example = "2027-01-01T09:50:05-03:00")
-    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private OffsetDateTime dataHoraEmissao;
 
     @Schema(name = "municipioOrigem", description = "Código do Município (tabela IBGE)", example = "4314902")
@@ -45,7 +42,6 @@ public final class PedagioOutput implements SerializationVisibility {
 
     @Size(min = 6, max = 6)
     @Schema(name = "cClassTrib", description = "Código de classificação tributária", example = "000001")
-    @JsonProperty("cClassTrib")
     private String cClassTrib;
 
     @Schema(name = "baseCalculo", description = "Base de cálculo", example = "200.00")

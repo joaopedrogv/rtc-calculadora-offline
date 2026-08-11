@@ -12,6 +12,10 @@ import br.gov.serpro.rtc.domain.model.entity.Municipio;
 
 import java.util.List;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link Municipio}, com validação de
+ * municípios por código e UF e listagem por unidade federativa.
+ */
 @Repository
 public interface MunicipioRepository extends JpaRepository<Municipio, Long> {
 

@@ -14,6 +14,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entrada que agrupa os valores usados no cálculo da base de CBS e IBS em
+ * operações de NFS-e. Reúne valor do serviço e parcelas que compõem deduções,
+ * reduções, reembolsos e tributos a descontar da base tributável.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -13,6 +13,10 @@ import br.gov.serpro.rtc.domain.service.exception.AliquotaReferenciaNaoEncontrad
 import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoDefinidaException;
 import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoTratadaException;
 
+/**
+ * DTO interno que reúne a alíquota de referência, a alíquota padrão e a forma
+ * de aplicação usadas na composição do resultado.
+ */
 public record AliquotaResultadoDTO(BigDecimal valorReferencia, BigDecimal valorPadrao,
         FormaAplicacaoEnum formaAplicacao) {
     

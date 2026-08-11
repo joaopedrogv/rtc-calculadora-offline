@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por substituir placeholders em templates a partir dos
+ * tokens produzidos pelo TemplateTokenizerService.
+ */
 @RequiredArgsConstructor
 @Service
 public class TokenizerService {

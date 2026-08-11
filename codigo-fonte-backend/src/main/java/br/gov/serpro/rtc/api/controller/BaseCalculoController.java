@@ -20,6 +20,10 @@ import br.gov.serpro.rtc.domain.service.basecalculo.BaseCalculoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador REST que expõe os cálculos de base de cálculo de CBS/IBS e
+ * Imposto Seletivo.
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("calculadora/base-calculo")

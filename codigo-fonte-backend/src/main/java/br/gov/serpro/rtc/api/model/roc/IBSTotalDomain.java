@@ -16,6 +16,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida os totais de IBS do ROC, com desdobramento entre UF e município e
+ * somatório dos créditos presumidos.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

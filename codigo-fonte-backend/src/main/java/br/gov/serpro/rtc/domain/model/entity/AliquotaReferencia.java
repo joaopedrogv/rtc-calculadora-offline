@@ -16,6 +16,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code ALIQUOTA_REFERENCIA} que armazena a alíquota de
+ * referência de cada tributo ao longo da vigência.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

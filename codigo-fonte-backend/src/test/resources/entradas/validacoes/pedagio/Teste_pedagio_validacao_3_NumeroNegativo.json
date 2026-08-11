@@ -1,0 +1,16 @@
+{
+    "dataHoraEmissao": "2026-01-01T09:50:05-03:00",
+    "codigoMunicipioOrigem": 4314902,
+    "ufMunicipioOrigem": "RS",
+    "cst": "000",
+    "baseCalculo": 200,
+    "trechos": [
+        {
+            "numero": -1,
+            "municipio": 4314902,
+            "uf": "RS",
+            "extensao": 10
+        }
+    ],
+    "cClassTrib": "000002"
+}

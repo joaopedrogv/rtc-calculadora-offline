@@ -8,10 +8,10 @@ import static java.math.BigDecimal.ZERO;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -21,6 +21,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Entrada que reúne as informações necessárias para cálculo e validação do
+ * Imposto Seletivo de um item. Transporta CST, classificação tributária, base
+ * de cálculo, quantidade, unidade de medida e valor informado para o imposto
+ * seletivo.
+ */
 @ToString
 @Getter
 @Setter
@@ -37,15 +43,16 @@ public final class ImpostoSeletivoInput implements SerializationVisibility {
     @Pattern(regexp = "\\d+", message = "Informar somente dígitos")
     @Size(min = 6, max = 6)
     @Schema(name = "cClassTrib", description = "Código da classificação tributária", example = "000000")
-    @JsonProperty("cClassTrib")
     private String cClassTrib;
 
     @NotNull
     @PositiveOrZero
+    @Digits(integer = 13, fraction = 2)
     @Schema(name = "baseCalculo", description = "Base de cálculo do imposto", example = "200.00")
     private BigDecimal baseCalculo;
 
     @PositiveOrZero
+    @Digits(integer = 11, fraction = 4)
     @Schema(name = "quantidade", description = "Quantidade", example = "1")
     private BigDecimal quantidade;
 
@@ -54,6 +61,7 @@ public final class ImpostoSeletivoInput implements SerializationVisibility {
 
     @NotNull
     @PositiveOrZero
+    @Digits(integer = 13, fraction = 2)
     @Schema(name = "impostoInformado", description = "Imposto Seletivo informado pelo contribuinte", example = "12.00")
     private BigDecimal impostoInformado;
 

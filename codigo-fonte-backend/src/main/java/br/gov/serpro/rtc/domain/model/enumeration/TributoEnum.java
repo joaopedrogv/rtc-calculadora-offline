@@ -8,6 +8,12 @@ import java.util.stream.Stream;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumera os tributos suportados pelo domínio.
+ *
+ * Valores: {@code IS}, {@code CBS}, {@code IBS_ESTADUAL} e {@code
+ * IBS_MUNICIPAL}.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum TributoEnum {

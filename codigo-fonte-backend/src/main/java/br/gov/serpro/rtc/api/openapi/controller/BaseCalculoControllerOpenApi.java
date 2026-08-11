@@ -21,6 +21,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Contrato OpenAPI dos endpoints de base de cálculo para Imposto Seletivo e
+ * CBS/IBS.
+ */
 @Tag(name = "Base de Cálculo - VERSÃO BETA", description = "Serviço para Base de Cálculo")
 public interface BaseCalculoControllerOpenApi {
 

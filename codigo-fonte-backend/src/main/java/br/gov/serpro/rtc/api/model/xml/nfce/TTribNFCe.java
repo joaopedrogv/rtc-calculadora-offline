@@ -4,6 +4,7 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
+
 package br.gov.serpro.rtc.api.model.xml.nfce;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -13,10 +14,21 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de tributos IBS/CBS do documento fiscal Nota
+ * Fiscal de Consumidor Eletrônica (NFCe), conforme o schema fiscal
+ * correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TTribNFCe", propOrder = { "CST", "cClassTrib", "indDoacao", "gIBSCBS", "gIBSCBSMono" })
+@XmlType(name = "TTribNFCe", propOrder = {
+    "CST",
+    "cClassTrib",
+    "indDoacao",
+    "gIBSCBS",
+    "gIBSCBSMono"
+})
 public class TTribNFCe {
 
     @XmlElement(required = true)
@@ -26,7 +38,8 @@ public class TTribNFCe {
     private String cClassTrib;
 
     private String indDoacao;
-    private TCIBS gIBSCBS;
-    private TMonofasia gIBSCBSMono;
 
+    private TCIBS gIBSCBS;
+
+    private TMonofasia gIBSCBSMono;
 }

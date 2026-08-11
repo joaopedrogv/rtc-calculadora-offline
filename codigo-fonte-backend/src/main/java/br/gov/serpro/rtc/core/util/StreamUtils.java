@@ -6,6 +6,11 @@ package br.gov.serpro.rtc.core.util;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Classe utilitária para criação de streams com tratamento null-safe e decisão
+ * automática de paralelização. Escolhe entre stream sequencial e paralelo
+ * conforme o volume de dados para otimizar o processamento de coleções.
+ */
 public final class StreamUtils {
 
     private static final int QUANTIDADE_MINIMA_ITENS_PARALELIZAR = 20;

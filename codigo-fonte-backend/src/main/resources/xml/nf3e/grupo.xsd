@@ -11,6 +11,14 @@
 	<xs:element name="infNF3e">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element name="ide" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="gCompraGov" type="TCompraGovReduzido" minOccurs="0">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="NFdet" maxOccurs="13">
 					<xs:complexType>
 						<xs:sequence>

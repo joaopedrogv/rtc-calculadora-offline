@@ -4,6 +4,7 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
+
 package br.gov.serpro.rtc.api.model.xml.bpe.tm;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -13,10 +14,18 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de estorno de crédito do documento fiscal
+ * Bilhete de Passagem Eletrônico TM (BPe TM), conforme o schema fiscal
+ * correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TEstornoCred", propOrder = { "vIBSEstCred", "vCBSEstCred" })
+@XmlType(name = "TEstornoCred", propOrder = {
+    "vIBSEstCred",
+    "vCBSEstCred"
+})
 public class TEstornoCred {
 
     @XmlElement(required = true)
@@ -24,5 +33,4 @@ public class TEstornoCred {
 
     @XmlElement(required = true)
     private String vCBSEstCred;
-
 }

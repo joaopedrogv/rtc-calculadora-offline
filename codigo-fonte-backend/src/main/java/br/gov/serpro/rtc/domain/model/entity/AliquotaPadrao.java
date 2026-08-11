@@ -21,6 +21,11 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA da tabela {@code ALIQUOTA_PADRAO} que armazena a alíquota padrão
+ * derivada de uma alíquota de referência, sua forma de aplicação e os recortes
+ * por UF e município.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

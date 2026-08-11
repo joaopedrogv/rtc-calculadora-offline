@@ -4,6 +4,7 @@
 package br.gov.serpro.rtc.domain.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.cache.annotation.Cacheable;
@@ -14,6 +15,10 @@ import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.entity.Nbs;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link Nbs}, com consultas de
+ * descrição, existência e listagem de NBS vigentes.
+ */
 @Repository
 public interface NbsRepository extends JpaRepository<Nbs, String> {
 
@@ -44,5 +49,13 @@ public interface NbsRepository extends JpaRepository<Nbs, String> {
     boolean existeNbs(
             @Param("codigo") String codigo,
             @Param("data") LocalDate data);
+
+    @Query("""
+            SELECT n
+            FROM Nbs n
+            WHERE :data BETWEEN n.inicioVigencia AND COALESCE(n.fimVigencia, :data)
+            ORDER BY n.codigo
+            """)
+    List<Nbs> listarNbs(@Param("data") LocalDate data);
 
 }

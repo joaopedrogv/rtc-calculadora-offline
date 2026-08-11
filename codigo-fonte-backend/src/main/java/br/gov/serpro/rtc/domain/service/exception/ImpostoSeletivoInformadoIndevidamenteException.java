@@ -5,6 +5,10 @@ package br.gov.serpro.rtc.domain.service.exception;
 
 import java.time.LocalDate;
 
+/**
+ * Exceção lançada quando dados de Imposto Seletivo são informados para item que
+ * não está sujeito a esse tributo nas condições da operação.
+ */
 public class ImpostoSeletivoInformadoIndevidamenteException extends ValidacaoException {
 
     private static final long serialVersionUID = 529236772976113L;

@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +16,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
-import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 
 /**
  * Teste do indicador de grupo de redução (gRed) - CST 515.
@@ -35,21 +35,17 @@ import br.gov.serpro.rtc.util.JsonResourceObjectMapper;
 @ActiveProfiles("testes")
 class Teste_indicador_gRed_4_cst515 {
 
-    private static JsonResourceObjectMapper<OperacaoInput> mapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private CalculadoraService calculadoraService;
-
-    @BeforeAll
-    static void setup() {
-        mapper = new JsonResourceObjectMapper<>(OperacaoInput.class);
-    }
 
     @Test
     void testIndicadorGRedCST515(
             final @Value("classpath:entradas/indicadores/Teste_indicador_gRed_4_cst515.json") Resource resourceFile)
             throws Exception {
-        final var operacao = mapper.loadTestJson(resourceFile);
+        final var operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
         final var resultado = calculadoraService.calcularTributos(operacao);
 
         assertThat(resultado).isNotNull();

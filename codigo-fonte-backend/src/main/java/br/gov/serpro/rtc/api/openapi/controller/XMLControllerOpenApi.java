@@ -24,6 +24,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Contrato OpenAPI dos endpoints de geração, validação e consulta de tipos de
+ * DFe em XML.
+ */
 @Tag(name = "Calculadora - VERSÃO BETA", description = "Calculadora de Tributos")
 public interface XMLControllerOpenApi {
 

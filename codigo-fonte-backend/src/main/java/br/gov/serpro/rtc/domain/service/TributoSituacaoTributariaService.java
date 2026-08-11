@@ -11,6 +11,10 @@ import br.gov.serpro.rtc.domain.repository.TributoSituacaoTributariaRepository;
 import br.gov.serpro.rtc.domain.service.exception.TributoSituacaoTributariaNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por consultar os tributos vinculados a uma situação
+ * tributária para fins de parametrização e dados abertos.
+ */
 @RequiredArgsConstructor
 @Service
 public class TributoSituacaoTributariaService {

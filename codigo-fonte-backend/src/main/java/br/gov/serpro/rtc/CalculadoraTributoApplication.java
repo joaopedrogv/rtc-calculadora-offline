@@ -9,6 +9,10 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Classe principal que inicializa a aplicação Spring Boot da Calculadora de
+ * Tributos.
+ */
 @RequiredArgsConstructor
 @SpringBootApplication(exclude = UserDetailsServiceAutoConfiguration.class)
 public class CalculadoraTributoApplication {

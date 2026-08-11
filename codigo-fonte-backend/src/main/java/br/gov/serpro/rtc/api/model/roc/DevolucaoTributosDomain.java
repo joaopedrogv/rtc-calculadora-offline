@@ -16,6 +16,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Representa o valor de devolução de tributos vinculado à apuração do item.
+ */
 @Getter
 @Setter
 @Builder

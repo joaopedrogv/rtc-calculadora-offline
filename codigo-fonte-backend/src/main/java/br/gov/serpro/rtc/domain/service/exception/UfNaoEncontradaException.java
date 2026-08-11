@@ -3,6 +3,10 @@
  */
 package br.gov.serpro.rtc.domain.service.exception;
 
+/**
+ * Exceção lançada para sinalizar UF não encontrada no domínio de cálculo
+ * tributário.
+ */
 public class UfNaoEncontradaException extends EntidadeNaoEncontradaException {
 
     private static final long serialVersionUID = 202504161234567891L;

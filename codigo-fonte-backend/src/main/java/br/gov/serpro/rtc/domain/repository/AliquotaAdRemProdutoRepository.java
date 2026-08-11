@@ -14,6 +14,11 @@ import org.springframework.stereotype.Repository;
 import br.gov.serpro.rtc.domain.model.dto.AliquotaAdRemDTO;
 import br.gov.serpro.rtc.domain.model.entity.AliquotaAdRemProduto;
 
+/**
+ * Repositório Spring Data JPA para acesso a {@link AliquotaAdRemProduto}, com
+ * consulta da alíquota ad rem por NCM, tributo e data, considerando exceções
+ * vigentes.
+ */
 @Repository
 public interface AliquotaAdRemProdutoRepository extends JpaRepository<AliquotaAdRemProduto, Long> {
 

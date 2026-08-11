@@ -14,6 +14,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Representa o ajuste por competência do ROC, com período de apuração e valores
+ * ajustados de IBS e CBS.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

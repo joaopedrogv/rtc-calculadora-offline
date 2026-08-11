@@ -20,6 +20,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Contrato OpenAPI do endpoint principal de cálculo de tributos do regime
+ * geral, incluindo o cabeçalho de aviso de dados simulados.
+ */
 @Tag(name = "Calculadora - VERSÃO BETA", description = "Calculadora de Tributos")
 public interface CalculadoraTributoControllerOpenApi {
 

@@ -14,6 +14,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Saída da API de dados abertos que apresenta o detalhamento tributário
+ * completo de um código NBS. Expõe a estrutura classificatória do serviço e as
+ * informações tributárias associadas para consulta pública das regras vigentes.
+ */
 @Getter
 @Setter
 @Builder

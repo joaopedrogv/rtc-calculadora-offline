@@ -9,6 +9,10 @@ import br.gov.serpro.rtc.api.model.roc.CBSDomain;
 import br.gov.serpro.rtc.api.model.roc.CBSTotalDomain;
 import br.gov.serpro.rtc.api.model.roc.IBSCBSCreditoPresumidoDomain;
 
+/**
+ * Acumulador imutável usado para somar os componentes do total de CBS antes de
+ * materializar um {@link CBSTotalDomain}.
+ */
 public class CBSTotalAccumulator {
     private final BigDecimal vDif;
     private final BigDecimal vDevTrib;

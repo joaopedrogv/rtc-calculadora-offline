@@ -3,7 +3,9 @@
  */
 package br.gov.serpro.rtc.domain.service.calculotributo;
 
-import static br.gov.serpro.rtc.core.util.CalculadoraUtils.CEM;
+import static br.gov.serpro.rtc.core.util.ArredondamentoUtils.PRECISAO_INTERNA;
+
+import static br.gov.serpro.rtc.core.util.ArredondamentoUtils.dividirPorCem;
 import static br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExpressao.AJUSTE;
 import static br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExpressao.ALIQUOTA;
 import static br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExpressao.ALIQUOTA_AD_REM;
@@ -20,7 +22,6 @@ import static br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExp
 import static br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExpressao.REDUTOR;
 import static br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExpressao.TRIBUTO_CALCULADO;
 import static java.math.BigDecimal.ZERO;
-import static java.math.RoundingMode.HALF_UP;
 import static java.util.Map.ofEntries;
 import static java.util.Objects.requireNonNullElse;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -41,6 +42,10 @@ import br.gov.serpro.rtc.domain.service.calculotributo.domain.VariavelExpressao;
 import br.gov.serpro.rtc.domain.service.calculotributo.model.AliquotaImpostoSeletivoModel;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por calcular o Imposto Seletivo a partir do tratamento
+ * tributário, da alíquota aplicável e dos dados do item.
+ */
 @RequiredArgsConstructor
 @Service
 public class CalculoImpostoSeletivoService {
@@ -94,7 +99,7 @@ public class CalculoImpostoSeletivoService {
 
         valorAliquotaAdValorem = aliquotaImpostoSeletivo.getAliquotaAdValorem();
         if (valorAliquotaAdValorem != null) {
-            valorAliquotaAdValorem = valorAliquotaAdValorem.divide(CEM).setScale(8, HALF_UP);
+            valorAliquotaAdValorem = dividirPorCem(valorAliquotaAdValorem);
         }
         valorAliquotaAdRem = aliquotaImpostoSeletivo.getAliquotaAdRem();
 
@@ -150,7 +155,7 @@ public class CalculoImpostoSeletivoService {
                 entry(AJUSTE, valorAjuste),
                 entry(REDUTOR, valorRedutor));
 
-        resultadoBaseCalculo = avaliador.evaluate(expressaoBaseCalculo, variaveis2, 2);
+        resultadoBaseCalculo = avaliador.evaluate(expressaoBaseCalculo, variaveis2, PRECISAO_INTERNA);
 
         var variaveis3 = ofEntries(
                 entry(QUANTIDADE, quantidade),
@@ -168,7 +173,7 @@ public class CalculoImpostoSeletivoService {
                 entry(AJUSTE, valorAjuste),
                 entry(REDUTOR, valorRedutor));
 
-        resultadoTributoCalculado = avaliador.evaluate(expressaoTributoCalculado, variaveis3, 2);
+        resultadoTributoCalculado = avaliador.evaluate(expressaoTributoCalculado, variaveis3, PRECISAO_INTERNA);
 
         if (isNotBlank(expressaoTributoDevido)) {
 
@@ -189,7 +194,7 @@ public class CalculoImpostoSeletivoService {
                     entry(AJUSTE, valorAjuste),
                     entry(REDUTOR, valorRedutor));
 
-            resultadoTributoDevido = avaliador.evaluate(expressaoTributoDevido, variaveis4, 2);
+            resultadoTributoDevido = avaliador.evaluate(expressaoTributoDevido, variaveis4, PRECISAO_INTERNA);
         }
 
         return ImpostoSeletivoDomain

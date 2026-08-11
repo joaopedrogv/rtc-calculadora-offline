@@ -17,6 +17,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Agrupa a base de cálculo e a composição dos valores de IBS e CBS do item.
+ *
+ * Inclui o detalhamento por UF, município, CBS e grupos específicos de
+ * tributação regular ou compra governamental.
+ */
 @Getter
 @Setter
 @Builder

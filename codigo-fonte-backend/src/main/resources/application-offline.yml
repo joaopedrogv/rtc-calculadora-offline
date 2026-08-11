@@ -252,4 +252,4 @@ management:
         prometheus: "metrics"
 
 versao:
-  url: ${VERSAO_OFFLINE_URL:https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/versao}
+  url: ${VERSAO_OFFLINE_URL:https://consumo.tributos.gov.br/servico/calcular-tributos-consumo/api/calculadora/dados-abertos/versao}

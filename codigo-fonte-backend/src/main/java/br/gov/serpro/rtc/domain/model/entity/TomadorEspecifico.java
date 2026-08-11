@@ -13,6 +13,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Entidade JPA que cadastra tomadores de serviços com tratamento tributário
+ * diferenciado em determinadas classificações. Permite vincular perfis
+ * específicos de tomador a regras fiscais particulares aplicadas pela
+ * calculadora.
+ */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity

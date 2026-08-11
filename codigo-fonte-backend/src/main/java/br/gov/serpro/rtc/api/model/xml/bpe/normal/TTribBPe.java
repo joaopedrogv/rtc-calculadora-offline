@@ -4,6 +4,7 @@
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
 //
 
+
 package br.gov.serpro.rtc.api.model.xml.bpe.normal;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -13,10 +14,21 @@ import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tipo XML que representa o grupo de tributos IBS/CBS do documento fiscal
+ * Bilhete de Passagem Eletrônico (BPe), conforme o schema fiscal
+ * correspondente.
+ */
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TTribBPe", propOrder = { "CST", "cClassTrib", "indDoacao", "gIBSCBS", "gEstornoCred" })
+@XmlType(name = "TTribBPe", propOrder = {
+    "CST",
+    "cClassTrib",
+    "indDoacao",
+    "gIBSCBS",
+    "gEstornoCred"
+})
 public class TTribBPe {
 
     @XmlElement(required = true)
@@ -30,5 +42,4 @@ public class TTribBPe {
     private TCIBS gIBSCBS;
 
     private TEstornoCred gEstornoCred;
-
 }

@@ -8,6 +8,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * Modelo interno que agrupa os tratamentos de classificação e os metadados de
+ * desoneração aplicáveis ao item.
+ */
 @ToString
 @Getter
 @Builder

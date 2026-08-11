@@ -35,10 +35,11 @@ class Teste_dadosabertos_classificacoesTributariasPorCst {
                 .andExpect(jsonPath("$.length()", greaterThan(0)));
     }
 
+    // Estamos assumindo o uso de calculadora-pro.db, com o script "bash run-tests.sh".
     @Test
     void teste_controller_consultarClassificacoesTributariasCbsIbsPorCst() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/000")
-                .param("data", "2025-01-01")
+                .param("data", "2026-01-01")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", greaterThan(0)));

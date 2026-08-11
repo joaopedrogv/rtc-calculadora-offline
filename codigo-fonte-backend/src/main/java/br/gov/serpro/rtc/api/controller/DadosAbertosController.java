@@ -22,8 +22,12 @@ import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDa
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ValidadeDfeClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.VersaoOutput;
@@ -33,6 +37,11 @@ import br.gov.serpro.rtc.domain.service.VersaoBaseDadosService;
 import br.gov.serpro.rtc.domain.service.dadosabertos.DadosAbertosService;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador REST de consultas de dados abertos da calculadora, como UFs,
+ * municípios, classificações tributárias, alíquotas, versões e tabelas
+ * auxiliares.
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(
@@ -125,6 +134,14 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
     }
     
     @Override
+    @GetMapping("/classificacoes-tributarias/nbs")
+    public ResponseEntity<List<String>> listarClassificacoesTributariasPorNbs(
+        @RequestParam String nbs,
+        @RequestParam LocalDate data) {
+        return ResponseEntity.ok(dadosAbertosService.listarClassificacaoAplicavelPorNbs(nbs, data));
+    }
+
+    @Override
     @GetMapping("/situacoes-tributarias/imposto-seletivo")
     public ResponseEntity<List<SituacaoTributariaDadosAbertosOutput>> consultarSituacoesTributariasImpostoSeletivo(
             @RequestParam LocalDate data) {
@@ -143,6 +160,20 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
     public ResponseEntity<NbsDadosAbertosOutput> consultarNbs(
         @RequestParam String nbs, @RequestParam LocalDate data) {
         return ResponseEntity.ok(dadosAbertosService.consultarNbs(nbs, data));
+    }
+
+    @Override
+    @GetMapping("/nbs/lista")
+    public ResponseEntity<List<NbsListaDadosAbertosOutput>> listarNbs(
+        @RequestParam LocalDate data) {
+        return ResponseEntity.ok(dadosAbertosService.listarNbs(data));
+    }
+
+    @Override
+    @GetMapping("/nbs-aplicaveis")
+    public ResponseEntity<List<NbsListaDadosAbertosOutput>> listarNbsAplicaveisPorClassificacao(
+        @RequestParam String cClassTrib, @RequestParam LocalDate data) {
+        return ResponseEntity.ok(dadosAbertosService.listarNbsAplicaveisPorClassificacao(cClassTrib, data));
     }
 
     @Override
@@ -225,6 +256,30 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
                 .ambiente(ambiente)
                 .build();
         return ResponseEntity.ok(versaoOutput);
+    }
+
+    @Override
+    @GetMapping("/redutores-compra-governamental")
+    public ResponseEntity<List<RedutorCompraGovernamentalDadosAbertosOutput>> consultarRedutoresCompraGovernamental() {
+        return ResponseEntity.ok()
+                .header("Cache-Control", "public, max-age=3600")
+                .body(dadosAbertosService.consultarRedutoresCompraGovernamental());
+    }
+
+    @Override
+    @GetMapping("/transferencias-cbs")
+    public ResponseEntity<List<TransferenciaCBSDadosAbertosOutput>> consultarTransferenciasCBS() {
+        return ResponseEntity.ok()
+                .header("Cache-Control", "public, max-age=3600")
+                .body(dadosAbertosService.consultarTransferenciasCBS());
+    }
+
+    @Override
+    @GetMapping("/transferencias-ibs")
+    public ResponseEntity<List<TransferenciaIBSDadosAbertosOutput>> consultarTransferenciasIBS() {
+        return ResponseEntity.ok()
+                .header("Cache-Control", "public, max-age=3600")
+                .body(dadosAbertosService.consultarTransferenciasIBS());
     }
 
 }

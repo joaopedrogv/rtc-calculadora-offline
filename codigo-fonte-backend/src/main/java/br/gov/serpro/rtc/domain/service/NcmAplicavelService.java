@@ -14,6 +14,10 @@ import br.gov.serpro.rtc.domain.service.exception.NcmCompletoNaoInformadoExcepti
 import br.gov.serpro.rtc.domain.service.exception.NcmNaoVinculadaException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por validar se um NCM pode ser utilizado para a
+ * classificação tributária e a vigência informadas.
+ */
 @RequiredArgsConstructor
 @Service
 public class NcmAplicavelService {

@@ -8,6 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Saída com os valores de tributação monofásica, retenção e diferimento da
+ * operação.
+ */
 @ToString
 @Getter
 @Setter

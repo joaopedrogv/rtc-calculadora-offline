@@ -4,6 +4,7 @@
 package br.gov.serpro.rtc.domain.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,10 @@ import br.gov.serpro.rtc.domain.repository.ClassificacaoTributariaRepository;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável por localizar classificações tributárias de CBS, IBS e
+ * Imposto Seletivo e validar sua vinculação ao contexto de cálculo.
+ */
 @RequiredArgsConstructor
 @Service
 public class ClassificacaoTributariaService {
@@ -41,6 +46,10 @@ public class ClassificacaoTributariaService {
             throw new ClassificacaoTributariaNaoEncontradaException(id);
         }
         return c;
+    }
+    
+    public List<String> listarCodigosClassificacoesServicoSemVinculoNbs(LocalDate data) {
+        return repository.listarCodigosClassificacoesServicoSemVinculoNbs(data);
     }
 
 }

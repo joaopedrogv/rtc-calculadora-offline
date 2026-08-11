@@ -18,6 +18,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Consolida os totais da tributação monofásica do ROC, separados entre
+ * incidência padrão, sujeita à retenção e retida anteriormente.
+ */
 @Getter
 @Setter
 @JsonInclude(NON_NULL)

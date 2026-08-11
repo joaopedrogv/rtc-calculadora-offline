@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
 
+/**
+ * Saída com o valor calculado da base do Imposto Seletivo para mercadorias.
+ */
 @Value
 @Builder
 public class BaseCalculoISMercadoriasModel implements SerializationVisibility {
