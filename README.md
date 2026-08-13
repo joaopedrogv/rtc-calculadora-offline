@@ -1,58 +1,87 @@
-# Calculadora de Tributos da Receita Federal
+# 🧮 Sincronizador da Calculadora de Tributos - Reforma Tributária Brasil
 
-A Receita Federal do Brasil lançou a versão beta de sua Calculadora de Tributos oficial para os novos impostos sobre o consumo (CBS, IBS e Imposto Seletivo), como parte da reforma tributária do país. Esta ferramenta de código aberto visa padronizar os cálculos e promover uma relação mais cooperativa entre os contribuintes e a autoridade fiscal.
+## Visão Geral
 
-A calculadora está disponível tanto como um simulador online de fácil utilização quanto como um componente local que pode ser integrado aos sistemas ERP das empresas por meio de uma API. Ela também possui um "Assistente de Emissão" para ajudar a gerar corretamente as informações fiscais nas notas fiscais eletrônicas. Esta iniciativa está alinhada aos princípios modernos de administração tributária automatizada, fornecendo um motor de cálculo oficial transparente e auditável para o novo sistema tributário.
+Este projeto implementa uma solução de automação para manter sincronizada a versão mais recente da **Calculadora Oficial de Tributos** lançada pela Receita Federal, voltada para os novos modelos de impostos sobre consumo (CBS, IBS e Imposto Seletivo).
 
-[Link para a calculadora offline](https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/calculadora/calculadora-offline)
+A ferramenta funciona como um **intermediário inteligente** entre o servidor oficial da Receita Federal e este repositório, garantindo que desenvolvedores e empresas tenham sempre acesso à versão mais atualizada do código-fonte para integração em seus sistemas ERP.
 
-## O que este script faz?
+---
 
-Este é um **robô automatizado** que verifica diariamente se saiu uma atualização da Calculadora da Reforma Tributária e, quando sai, automaticamente baixa, organiza e publica a nova versão no GitHub — tudo sem precisar de intervenção humana! 🤖✨
+## 🚀 Funcionalidade Principal
 
-## Como funciona? (passo a passo simples)
+Um sistema automatizado que:
+- **Verifica diariamente** se existe uma nova versão da calculadora
+- **Extrai e processa** os arquivos quando atualizações são detectadas
+- **Valida as mudanças** através de comparação de integridade (MD5)
+- **Publica as atualizações** automaticamente no GitHub com releases versionadas
 
-### 1. **Agendamento Automático** ⏰
-- O robô **roda sozinho todos os dias à meia-noite** (horário UTC)
-- Também pode ser acionado **manualmente** quando necessário
+---
 
-### 2. **Obtenção da URL de Download** 🔗
-- Consulta a API oficial para obter a URL de download mais recente:
-  ```
-  https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/download/url?platform=default
-  ```
-- A URL é obtida dinamicamente, garantindo que sempre seja usada a versão mais atual
+## 🔧 Como Tudo Funciona
 
-### 3. **Download do Arquivo** 📥
-- Baixa o arquivo compactado (`calculadora.zip`) usando a URL obtida da API
+### Etapa 1: Acionamento
+```
+Execução automática: Todos os dias à meia-noite (UTC)
+Execução manual: Via GitHub Actions (button "Run workflow")
+```
 
-### 4. **Verificação de Nova Versão** 🔍
-- Calcula o hash MD5 do arquivo `codigo-fonte-backend.zip` baixado
-- Compara com o hash da versão anterior (armazenado em `codigo-fonte-backend.md5`)
-- Se os hashes forem diferentes, significa que há uma nova versão disponível
+### Etapa 2: Consulta da API Oficial
+Conecta-se ao endpoint da Receita Federal para obter o link de download atual:
+```
+https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/download/url?platform=default
+```
 
-### 5. **Atualização Automática** 💾
-*(Só acontece se houver nova versão)*
-- Descompacta o código-fonte completo na pasta `codigo-fonte-backend`
-- Atualiza o arquivo de hash MD5 (codigo-fonte-backend.md5)
-- Salva os arquivos na pasta (codigo-fonte-backend)
-- Cria um registro (commit) com a data da atualização
-- Envia tudo para o GitHub
+### Etapa 3: Aquisição do Pacote
+Realiza o download do arquivo compactado (calculadora.zip) usando a URL dinâmica obtida.
 
-### 6. **Publicação de Versão** 🎉
-*(Só acontece se houver nova versão)*
-- Cria uma nova "release" (versão publicada)
-- Anexa o arquivo `codigo-fonte-backend.zip` do código-fonte
-- Marca como versão "latest" (mais recente)
+### Etapa 4: Análise de Mudanças
+- Extrai e calcula o hash MD5 do `codigo-fonte-backend.zip`
+- Compara com o hash anterior salvo no repositório
+- Determina se houve alterações no código-fonte
 
-## 🔗 Links Úteis
+### Etapa 5: Atualização do Repositório
+Apenas se mudanças forem detectadas:
+- Descompacta os arquivos na pasta `codigo-fonte-backend`
+- Atualiza o checksum MD5 para a próxima comparação
+- Realiza commit com timestamp da atualização
+- Sincroniza tudo com o GitHub
 
-- [Calculadora Offline - Portal Oficial](https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/calculadora/calculadora-offline)
-- [API de Download](https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/download/url?platform=default)
+### Etapa 6: Liberação de Versão
+Quando há atualização:
+- Gera uma nova release (versão)
+- Anexa o pacote do código-fonte
+- Marca como "latest" (mais recente)
 
-## 📋 Como Executar Manualmente
+---
 
-1. Acesse a aba **Actions** do repositório
-2. Selecione o workflow **"Download and Update Código Fonte da Calculadora da Reforma Tributária"**
-3. Clique em **"Run workflow"**
-4. Selecione a branch `main` e confirme
+## 📚 Recursos Úteis
+
+| Recurso | Link |
+|---------|------|
+| **Calculadora Web** | https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/calculadora/calculadora-offline |
+| **Endpoint de Download** | https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/download/url?platform=default |
+
+---
+
+## ▶️ Disparando Execução Manual
+
+Precisa atualizar agora? Siga estes passos:
+
+1. Acesse a seção **Actions** neste repositório
+2. Procure pelo workflow **"Download and Update Código Fonte da Calculadora da Reforma Tributária"**
+3. Clique no botão **"Run workflow"**
+4. Escolha a branch `main` como destino
+5. Confirme a execução
+
+O processo será executado imediatamente e você acompanhará o progresso em tempo real.
+
+---
+
+## 🎯 Propósito
+
+Facilitar o acesso e integração da Calculadora de Tributos em:
+- Sistemas ERP empresariais
+- Plataformas de simulação tributária
+- Ferramentas de conformidade fiscal
+- Soluções de cálculo automático de impostos
