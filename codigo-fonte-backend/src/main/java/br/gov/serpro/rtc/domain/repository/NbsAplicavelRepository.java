@@ -99,16 +99,17 @@ public interface NbsAplicavelRepository extends JpaRepository<NbsAplicavel, Long
         LEFT JOIN EXCECAO_NBS_APLICAVEL e ON e.ENBS_NBSA_ID = n.NBSA_ID 
             AND :data BETWEEN e.ENBS_INICIO_VIGENCIA AND COALESCE(e.ENBS_FIM_VIGENCIA, :data)
         JOIN CLASSIFICACAO_TRIBUTARIA ct ON ct.CLTR_ID = n.NBSA_CLTR_ID
-        WHERE ct.CLTR_CD = :cClassTrib
+        WHERE ct.CLTR_ID = :classificacaoId
         AND :data BETWEEN n.NBSA_INICIO_VIGENCIA AND COALESCE(n.NBSA_FIM_VIGENCIA, :data)
         AND :data BETWEEN nbs.NBS_INICIO_VIGENCIA AND COALESCE(nbs.NBS_FIM_VIGENCIA, :data)
         AND :data BETWEEN ct.CLTR_INICIO_VIGENCIA AND COALESCE(ct.CLTR_FIM_VIGENCIA, :data)
         AND e.ENBS_ID IS NULL
+        AND LENGTH(nbs.NBS_CD) = 9
         ORDER BY nbs.NBS_CD
     """)
     @Cacheable(cacheNames = "NbsAplicavelRepository.listarNbsAplicaveisPorClassificacao")
     List<Object[]> listarNbsAplicaveisPorClassificacao(
-        @Param("cClassTrib") String cClassTrib,
+        @Param("classificacaoId") Long classificacaoId,
         @Param("data") LocalDate data);
 
     @NativeQuery(value = """
@@ -129,8 +130,8 @@ public interface NbsAplicavelRepository extends JpaRepository<NbsAplicavel, Long
         SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
         FROM NBS_APLICAVEL n
         JOIN CLASSIFICACAO_TRIBUTARIA ct ON ct.CLTR_ID = n.NBSA_CLTR_ID
-        WHERE ct.CLTR_CD = :cClassTrib
+        WHERE ct.CLTR_ID = :classificacaoId
     """)
     @Cacheable(cacheNames = "NbsAplicavelRepository.existeVinculoParaClassificacao")
-    Integer existeVinculoParaClassificacao(@Param("cClassTrib") String cClassTrib);
+    Integer existeVinculoParaClassificacao(@Param("classificacaoId") Long classificacaoId);
 }

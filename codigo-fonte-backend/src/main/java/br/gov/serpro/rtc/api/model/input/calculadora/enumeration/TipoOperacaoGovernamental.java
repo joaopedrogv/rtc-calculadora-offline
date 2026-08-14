@@ -13,15 +13,23 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Schema(type = "integer", 
-        description = "Tipo de operação com o ente governamental: 1 - Fornecimento, 2 - Recebimento do pagamento", 
-        allowableValues = {"1", "2"})
-public enum TipoOperacaoGovernamental {
-    
-    @Schema(description = "1 - Fornecimento")
-    FORNECIMENTO(1, "Fornecimento"),
-    
-    @Schema(description = "2 - Recebimento do pagamento")
-    RECEBIMENTO_PAGAMENTO(2, "Recebimento do pagamento");
+		description = """
+				Tipo de operação com o ente governamental.<p>
+				Valores:<p>
+				<ul>
+				<li>1 = Fornecimento com pagamento posterior
+				<li>2 = Recebimento do pagamento com fornecimento já realizado
+				<li>3 = Fornecimento com pagamento já realizado
+				<li>4 = Recebimento do pagamento com fornecimento posterior
+				<li>5 = Fornecimento e recebimento do pagamento concomitantes
+				</ul>
+				""")
+public enum TipoOperacaoGovernamental {    
+    FORNECIMENTO_PAGAMENTO_POSTERIOR(1, "Fornecimento com pagamento posterior"),
+    RECEBIMENTO_PAGAMENTO_FORNECIMENTO_REALIZADO(2, "Recebimento do pagamento com fornecimento já realizado"), 
+    FORNECIMENTO_PAGAMENTO_REALIZADO(3, "Fornecimento com pagamento já realizado"),
+    RECEBIMENTO_PAGAMENTO_FORNECIMENTO_POSTERIOR(4, "Recebimento do pagamento com fornecimento posterior"),
+    FORNECIMENTO_RECEBIMENTO_CONCOMITANTES(5, "Fornecimento e recebimento do pagamento concomitantes");
     
     private final Integer codigo;
     private final String descricao;

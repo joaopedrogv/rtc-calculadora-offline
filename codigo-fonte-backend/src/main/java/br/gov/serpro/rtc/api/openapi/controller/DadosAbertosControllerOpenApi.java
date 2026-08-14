@@ -11,13 +11,16 @@ import java.util.List;
 
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.gov.serpro.rtc.api.model.output.dadosabertos.AliquotaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
@@ -1645,4 +1648,132 @@ public interface DadosAbertosControllerOpenApi {
         )
     })
     ResponseEntity<List<TransferenciaIBSDadosAbertosOutput>> consultarTransferenciasIBS();
+
+    @Operation(summary = "Validar NBS Aplicável", description = "Valida se um NBS é aplicável para uma classificação tributária relacionada ao CBS e IBS em determinada data.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Validação realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = NbsAplicavelOutput.class),
+                examples = @ExampleObject(
+                    name = "NBS Aplicável Example",
+                    value = """
+                    {
+                      "cClassTrib": "000001",
+                      "nbs": "114052200",
+                      "dataOcorrenciaFatoGerador": "2026-01-01",
+                      "valido": true
+                    }
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Parâmetro inválido", content = {
+            @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/parametro-invalido",
+                      "title": "Parâmetro inválido",
+                      "status": 400,
+                      "detail": "NBS ou cClassTrib inválido.",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/nbs-aplicavel"
+                    }
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API", content = {
+            @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/nbs-aplicavel"
+                    }
+                    """
+                )
+            )
+        })
+    })
+    ResponseEntity<NbsAplicavelOutput> validarNbsAplicavel(
+        @Parameter(description = "Código da classificação tributária", required = true, example = "000001")
+        @RequestParam String cClassTrib,
+        @Parameter(description = "NBS", required = true, example = "114052200")
+        @RequestParam String nbs,
+        @Parameter(description = "Data de ocorrência do fato gerador", required = true, example = "2026-01-01")
+        @RequestParam LocalDate dataOcorrenciaFatoGerador
+    );
+
+    @Operation(summary = "Validar NCM Aplicável", description = "Valida se um NCM é aplicável para uma classificação tributária relacionada ao CBS e IBS em determinada data.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Validação realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = NcmAplicavelOutput.class),
+                examples = @ExampleObject(
+                    name = "NCM Aplicável Example",
+                    value = """
+                    {
+                      "cClassTrib": "000001",
+                      "ncm": "09024000",
+                      "dataOcorrenciaFatoGerador": "2026-01-01",
+                      "valido": true
+                    }
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Parâmetro inválido", content = {
+            @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/parametro-invalido",
+                      "title": "Parâmetro inválido",
+                      "status": 400,
+                      "detail": "NCM ou cClassTrib inválido.",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/ncm-aplicavel"
+                    }
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API", content = {
+            @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/ncm-aplicavel"
+                    }
+                    """
+                )
+            )
+        })
+    })
+    ResponseEntity<NcmAplicavelOutput> validarNcmAplicavel(
+        @Parameter(description = "Código da classificação tributária CBS/IBS", required = true, example = "000001")
+        @RequestParam String cClassTrib,
+        @Parameter(description = "NCM", required = true, example = "09024000")
+        @RequestParam String ncm,
+        @Parameter(description = "Data de ocorrência do fato gerador", required = true, example = "2026-01-01")
+        @RequestParam LocalDate dataOcorrenciaFatoGerador
+    );
 }

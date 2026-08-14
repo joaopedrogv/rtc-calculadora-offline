@@ -16,6 +16,7 @@ import br.gov.serpro.rtc.api.model.input.nfse.NfseBaseCalculoInput;
 import br.gov.serpro.rtc.api.model.input.nfse.NfseValidacaoIndicadorOperacaoInput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseBaseCalculoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseCodigoDescricaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseIndicadorOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseLocalOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseValidacaoIndicadorOperacaoOutput;
@@ -103,7 +104,10 @@ public interface NfseControllerOpenApi {
                                 {
                                   "cIndOp": "100301",
                                   "dataOcorrenciaFatoGerador": "2026-01-01",
-                                  "localOperacao": "Domicílio principal do adquirente"
+                                  "codigoLocalFornecimento": 11,
+                                  "localFornecimento": "Local do domicílio principal do adquirente residente ou domiciliado no País. Nas aquisições indicadas no art. 11, §4º, II, considera-se domicílio principal do adquirente o estabelecimentro matriz",
+                                  "codigoLocalIncidencia": 2,
+                                  "localIncidencia": "Endereço do Tomador/Adquirente"
                                 }
                                 """
                             )) }),
@@ -168,56 +172,54 @@ public interface NfseControllerOpenApi {
     @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
                  @Content(mediaType = APPLICATION_JSON_VALUE, 
-                         schema = @Schema(implementation = NfseLocalOperacaoOutput.class),
+                         schema = @Schema(implementation = NfseIndicadorOperacaoOutput.class),
                          examples = {
                                 @ExampleObject(
                              name = "Indicador Operação Example",
                              value = """
                                     [
-                                      {
+                                        {
                                         "cIndOp": "020101",
-                                        "tipoOperacao": "Operação com bem imóvel, bem imaterial, inclusive direito, relacionada a bem imóvel",
-                                        "codigoLocalFornecimento": 14
-                                      },
-                                      {
+                                        "tipoOperacao": "Operação com bem imóvel, bem imaterial, inclusive direito,  relacionada a bem imóvel",
+                                        "codigoLocalFornecimento": 14,
+                                        "localFornecimento": "Localidade do imóvel",
+                                        "codigoLocalIncidencia": 6,
+                                        "localIncidencia": "Localidade do Imóvel"
+                                        },
+                                        {
                                         "cIndOp": "020201",
                                         "tipoOperacao": "Serviço prestado fisicamente sobre bem imóvel",
-                                        "codigoLocalFornecimento": 14
-                                      },
-                                      {
+                                        "codigoLocalFornecimento": 14,
+                                        "localFornecimento": "Localidade do imóvel",
+                                        "codigoLocalIncidencia": 6,
+                                        "localIncidencia": "Localidade do Imóvel"
+                                        },
+                                        {
                                         "cIndOp": "020301",
                                         "tipoOperacao": "Serviço de administração e intermediação de bem imóvel",
-                                        "codigoLocalFornecimento": 14
-                                      }
+                                        "codigoLocalFornecimento": 14,
+                                        "localFornecimento": "Localidade do imóvel",
+                                        "codigoLocalIncidencia": 6,
+                                        "localIncidencia": "Localidade do Imóvel"
+                                        }
                                     ]
                              """
                          ),
                          @ExampleObject(
                              name = "Indicador Operação com NBS Example",
                              value = """
-                                    [
-                                      {
-                                        "cIndOp": "020101",
-                                        "tipoOperacao": "Operação com bem imóvel, bem imaterial, inclusive direito, relacionada a bem imóvel",
-                                        "codigoLocalFornecimento": 14,
+                                     [
+                                        {
+                                        "cIndOp": "100301",
+                                        "tipoOperacao": "Demais serviços, em operações onerosas",
+                                        "codigoLocalFornecimento": 11,
+                                        "localFornecimento": "Local do domicílio principal do adquirente residente ou domiciliado no País. Nas aquisições indicadas no art. 11, §4º, II, considera-se domicílio principal do adquirente o estabelecimentro matriz",
+                                        "codigoLocalIncidencia": 2,
+                                        "localIncidencia": "Endereço do Tomador/Adquirente",
                                         "prestacaoServicoOnerosa": true,
                                         "adquirenteExterior": false
-                                      },
-                                      {
-                                        "cIndOp": "020201",
-                                        "tipoOperacao": "Serviço prestado fisicamente sobre bem imóvel",
-                                        "codigoLocalFornecimento": 14,
-                                        "prestacaoServicoOnerosa": true,
-                                        "adquirenteExterior": false
-                                      },
-                                      {
-                                        "cIndOp": "020301",
-                                        "tipoOperacao": "Serviço de administração e intermediação de bem imóvel",
-                                        "codigoLocalFornecimento": 14,
-                                        "prestacaoServicoOnerosa": true,
-                                        "adquirenteExterior": false
-                                      }
-                                    ]
+                                        }
+                                     ]
                              """
                          )
                          }) }),
@@ -330,4 +332,36 @@ public interface NfseControllerOpenApi {
         @NotNull(message = "O campo data é obrigatório")
         LocalDate data
     );
+
+    @Operation(summary = "Locais de Fornecimento", 
+               description = "Retorna a lista de códigos e descrições dos locais de fornecimento. Se o parâmetro codigo for informado, retorna apenas o valor correspondente.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+                    @Content(mediaType = APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = NfseCodigoDescricaoOutput.class)) }),
+            @ApiResponse(responseCode = "400", description = "Código inválido", content = {
+                    @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                            schema = @Schema(implementation = ProblemDetail.class)) }),
+            @ApiResponse(responseCode = "500", description = "Erro interno na API", content = {
+                    @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                            schema = @Schema(implementation = ProblemDetail.class)) }) })
+    List<NfseCodigoDescricaoOutput> consultarLocaisFornecimento(
+            @Parameter(description = "Código do local de fornecimento (opcional)", example = "5", required = false)
+            Integer codigo);
+
+    @Operation(summary = "Locais de Incidência", 
+               description = "Retorna a lista de códigos e descrições dos locais de incidência. Se o parâmetro codigo for informado, retorna apenas o valor correspondente.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+                    @Content(mediaType = APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = NfseCodigoDescricaoOutput.class)) }),
+            @ApiResponse(responseCode = "400", description = "Código inválido", content = {
+                    @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                            schema = @Schema(implementation = ProblemDetail.class)) }),
+            @ApiResponse(responseCode = "500", description = "Erro interno na API", content = {
+                    @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                            schema = @Schema(implementation = ProblemDetail.class)) }) })
+    List<NfseCodigoDescricaoOutput> consultarLocaisIncidencia(
+            @Parameter(description = "Código do local de incidência (opcional)", example = "3", required = false)
+            Integer codigo);
 }

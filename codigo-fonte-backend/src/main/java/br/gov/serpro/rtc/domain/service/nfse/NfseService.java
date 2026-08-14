@@ -4,6 +4,7 @@
 package br.gov.serpro.rtc.domain.service.nfse;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
@@ -17,8 +18,11 @@ import br.gov.serpro.rtc.api.model.input.nfse.NfseValidacaoIndicadorOperacaoInpu
 import br.gov.serpro.rtc.api.model.output.nfse.NfseBaseCalculoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseIndicadorOperacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseCodigoDescricaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseLocalOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseValidacaoIndicadorOperacaoOutput;
+import br.gov.serpro.rtc.domain.model.enumeration.LocalFornecimento;
+import br.gov.serpro.rtc.domain.model.enumeration.LocalIncidencia;
 import br.gov.serpro.rtc.domain.repository.IndicadorOperacaoRepository;
 import br.gov.serpro.rtc.domain.service.NbsService;
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
@@ -90,18 +94,31 @@ public class NfseService {
     }
 
 
-    public NfseValidacaoIndicadorOperacaoOutput validarIndicadorOperacao(NfseValidacaoIndicadorOperacaoInput input) {
-        String cTribNacFormatado = null;
-        
-        if (input.getCTribNac() != null && !input.getCTribNac().isEmpty()) {
-            String primeirosDoisDigitos = input.getCTribNac().substring(0, 2);
-            String segundosDoisDigitos = input.getCTribNac().substring(2, 4);
-            
-            int primeiroNumero = Integer.parseInt(primeirosDoisDigitos);
-            int segundoNumero = Integer.parseInt(segundosDoisDigitos);
-            
-            cTribNacFormatado = primeiroNumero + "." + String.format("%02d", segundoNumero);
+    /**
+     * Formata o código de tributação nacional (cTribNac) adicionando pontos nos locais apropriados.
+     * Remove zeros à esquerda do primeiro segmento (ex: 01.01 -> 1.01, 03.04 -> 3.04).
+     * 
+     * @param cTribNac String com 4 ou 6 dígitos
+     * @return String formatada com pontos adicionados e sem zeros à esquerda no primeiro segmento, ou null se entrada for nula/vazia
+     */
+    private static String formatarCTribNac(String cTribNac) {
+        if (cTribNac == null || cTribNac.isEmpty()) {
+            return null;
         }
+        
+        if (cTribNac.length() == 4) {
+            String primeiroNum = String.valueOf(Integer.parseInt(cTribNac.substring(0, 2)));
+            return primeiroNum + "." + cTribNac.substring(2, 4);
+        } else if (cTribNac.length() == 6) {
+            String primeiroNum = String.valueOf(Integer.parseInt(cTribNac.substring(0, 2)));
+            return primeiroNum + "." + cTribNac.substring(2, 4) + "." + cTribNac.substring(4, 6);
+        }
+        
+        return null;
+    }
+
+    public NfseValidacaoIndicadorOperacaoOutput validarIndicadorOperacao(NfseValidacaoIndicadorOperacaoInput input) {
+        String cTribNacFormatado = formatarCTribNac(input.getCTribNac());
         
         int resultado = indicadorOperacaoRepository.validarCombinacaoExiste(
                 input.getNbs(),
@@ -123,19 +140,31 @@ public class NfseService {
     }
 
     public NfseLocalOperacaoOutput consultarLocalOperacao(String cIndOp, LocalDate dataOcorrenciaFatoGerador) {
-        String localOperacao = indicadorOperacaoRepository.buscarLocalOperacaoPorIndOp(
-                cIndOp, 
-                dataOcorrenciaFatoGerador.toString());
+        Object[] resultado = indicadorOperacaoRepository.buscarLocalOperacaoPorIndOp(
+            cIndOp, 
+            dataOcorrenciaFatoGerador.toString());
 
-        if (localOperacao == null) {
+        if (resultado == null || resultado.length == 0) {
             throw new IndicadorOperacaoNaoEncontradoException(cIndOp, dataOcorrenciaFatoGerador);
         }
 
-        return NfseLocalOperacaoOutput.builder()
-                .cIndOp(cIndOp)
-                .dataOcorrenciaFatoGerador(dataOcorrenciaFatoGerador)
-                .localOperacao(localOperacao)
-                .build();
+        Object[] resultadoQuery = (Object[]) resultado[0];
+
+        LocalFornecimento localFornecimento = resultadoQuery[0] != null
+                ? LocalFornecimento.fromCodigo(((Number) resultadoQuery[0]).intValue())
+                : null;
+        LocalIncidencia localIncidencia = resultadoQuery[1] != null
+                ? LocalIncidencia.fromCodigo(((Number) resultadoQuery[1]).intValue())
+                : null;
+
+	return NfseLocalOperacaoOutput.builder()
+		.cIndOp(cIndOp)
+		.dataOcorrenciaFatoGerador(dataOcorrenciaFatoGerador)
+		.codigoLocalFornecimento(localFornecimento)
+		.localFornecimento(localFornecimento != null ? localFornecimento.getDescricao() : null)
+		.codigoLocalIncidencia(localIncidencia)
+		.localIncidencia(localIncidencia != null ? localIncidencia.getDescricao() : null)
+		.build();
     }
     
     public List<NfseIndicadorOperacaoOutput> consultarIndicadorOperacao(LocalDate dataOcorrenciaFatoGerador, String nbs) {
@@ -158,16 +187,61 @@ public class NfseService {
         }
     }
     
-    private NfseIndicadorOperacaoOutput mapToIndicadorOperacaoOutput(Object[] row) {
-        return new NfseIndicadorOperacaoOutput(
-                (String) row[0],  // cIndOp
-                (String) row[1],  // tipoOperacao
-                br.gov.serpro.rtc.domain.model.enumeration.LocalFornecimento.fromCodigo(((Number) row[2]).intValue()), // codigoLocalFornecimento
-                row[3] != null ? ((Number) row[3]).intValue() == 1 : null,  // prestacaoServicoOnerosa
-                row[4] != null ? ((Number) row[4]).intValue() == 1 : null   // adquirenteExterior
-        );
-    }
+	private NfseIndicadorOperacaoOutput mapToIndicadorOperacaoOutput(Object[] row) {
+		LocalFornecimento lf = row[2] != null ? LocalFornecimento.fromCodigo(((Number) row[2]).intValue()) : null;
+		LocalIncidencia li = row[4] != null ? LocalIncidencia.fromCodigo(((Number) row[4]).intValue()) : null;
+		return NfseIndicadorOperacaoOutput.builder()
+				.cIndOp((String) row[0])
+				.tipoOperacao((String) row[1])
+				.codigoLocalFornecimento(lf)
+				.localFornecimento(lf != null ? lf.getDescricao() : null)
+				.codigoLocalIncidencia(li)
+				.localIncidencia(li != null ? li.getDescricao() : null)
+				.prestacaoServicoOnerosa(row[5] != null ? ((Number) row[5]).intValue() == 1 : null)
+				.adquirenteExterior(row[6] != null ? ((Number) row[6]).intValue() == 1 : null)
+				.build();
+	}
     
+    public List<NfseCodigoDescricaoOutput> consultarLocaisFornecimento(Integer codigo) {
+        if (codigo != null) {
+            try {
+                LocalFornecimento lf = LocalFornecimento.fromCodigo(codigo);
+                return List.of(NfseCodigoDescricaoOutput.builder()
+                        .codigo(lf.getCodigo())
+                        .descricao(lf.getDescricao())
+                        .build());
+            } catch (IllegalArgumentException e) {
+                throw new CampoInvalidoException(e.getMessage());
+            }
+        }
+        return Arrays.stream(LocalFornecimento.values())
+                .map(lf -> NfseCodigoDescricaoOutput.builder()
+                        .codigo(lf.getCodigo())
+                        .descricao(lf.getDescricao())
+                        .build())
+                .toList();
+    }
+
+    public List<NfseCodigoDescricaoOutput> consultarLocaisIncidencia(Integer codigo) {
+        if (codigo != null) {
+            try {
+                LocalIncidencia li = LocalIncidencia.fromCodigo(codigo);
+                return List.of(NfseCodigoDescricaoOutput.builder()
+                        .codigo(li.getCodigo())
+                        .descricao(li.getDescricao())
+                        .build());
+            } catch (IllegalArgumentException e) {
+                throw new CampoInvalidoException(e.getMessage());
+            }
+        }
+        return Arrays.stream(LocalIncidencia.values())
+                .map(li -> NfseCodigoDescricaoOutput.builder()
+                        .codigo(li.getCodigo())
+                        .descricao(li.getDescricao())
+                        .build())
+                .toList();
+    }
+
     public List<NfseSituacaoClassificacaoOutput> consultarSituacoesClassificacoesPorNbs(String nbs, LocalDate data) {
         if (!nbsService.existeNbs(nbs, data)) {
             throw new NbsNaoEncontradaException(nbs, data);

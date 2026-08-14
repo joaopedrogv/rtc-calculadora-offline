@@ -25,8 +25,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class NfseValidacaoIndicadorOperacaoInput implements SerializationVisibility {
 
-    @Pattern(regexp = "^\\d{4}$", message = "O campo cTribNac deve conter exatamente 4 dígitos numéricos")
-    @Schema(name = "cTribNac", description = "Código de Tributação Nacional - opcional (4 dígitos)", example = "0101")
+    @Pattern(regexp = "^\\d{4}$|^\\d{6}$", message = "O campo cTribNac deve conter exatamente 4 ou 6 dígitos numéricos")
+    @Schema(name = "cTribNac", description = "Código de Tributação Nacional - opcional (4 ou 6 dígitos)", example = "0101")
     private String cTribNac;
 
     @NotBlank(message = "O campo cIndOp é obrigatório")

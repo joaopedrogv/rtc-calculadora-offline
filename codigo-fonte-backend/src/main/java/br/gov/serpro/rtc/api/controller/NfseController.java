@@ -20,6 +20,7 @@ import br.gov.serpro.rtc.api.model.input.nfse.NfseBaseCalculoInput;
 import br.gov.serpro.rtc.api.model.input.nfse.NfseValidacaoIndicadorOperacaoInput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseBaseCalculoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseCodigoDescricaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseIndicadorOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseLocalOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseValidacaoIndicadorOperacaoOutput;
@@ -78,6 +79,20 @@ public class NfseController implements NfseControllerOpenApi {
         return nfseService.consultarIndicadorOperacao(dataOcorrenciaFatoGerador, nbs);
     }
     
+    @Override
+    @GetMapping(value = "locais-fornecimento", produces = APPLICATION_JSON_VALUE)
+    public List<NfseCodigoDescricaoOutput> consultarLocaisFornecimento(
+            @RequestParam(required = false) Integer codigo) {
+        return nfseService.consultarLocaisFornecimento(codigo);
+    }
+
+    @Override
+    @GetMapping(value = "locais-incidencia", produces = APPLICATION_JSON_VALUE)
+    public List<NfseCodigoDescricaoOutput> consultarLocaisIncidencia(
+            @RequestParam(required = false) Integer codigo) {
+        return nfseService.consultarLocaisIncidencia(codigo);
+    }
+
     @Override
     @GetMapping(
         value = "situacoes-classificacoes-tributarias",

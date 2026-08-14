@@ -1,8 +1,10 @@
 package br.gov.serpro.rtc.api.model.roc;
 
+import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.COMITE_GESTOR_IBS;
+import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.CONSORCIO_PUBLICO;
 import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.DISTRITO_FEDERAL;
-import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.ESTADOS;
-import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.MUNICIPIOS;
+import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.ESTADO;
+import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.MUNICIPIO;
 import static br.gov.serpro.rtc.api.model.input.calculadora.enumeration.TipoEnteGovernamental.UNIAO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
@@ -33,7 +35,7 @@ class TributacaoCompraGovernamentalDomainTest {
 		var domain = criarDomainBase();
 
 		assertThatNullPointerException()
-				.isThrownBy(() -> domain.getValoresEfetivos(ESTADOS, new BigDecimal("25"), null))
+				.isThrownBy(() -> domain.getValoresEfetivos(ESTADO, new BigDecimal("25"), null))
 				.withMessage("Data do fato gerador obrigatória");
 	}
 
@@ -42,7 +44,7 @@ class TributacaoCompraGovernamentalDomainTest {
 		var domain = criarDomainBase();
 
 		assertThatNullPointerException()
-				.isThrownBy(() -> domain.getValoresEfetivos(ESTADOS, null, LocalDate.of(2027, 1, 1)))
+				.isThrownBy(() -> domain.getValoresEfetivos(ESTADO, null, LocalDate.of(2027, 1, 1)))
 				.withMessage("Percentual de transferência da CBS obrigatória");
 	}
 
@@ -50,12 +52,12 @@ class TributacaoCompraGovernamentalDomainTest {
 	void deveRetornarMesmaInstanciaAntesDe2027() {
 		var domain = criarDomainBase();
 
-		var resultado = domain.getValoresEfetivos(ESTADOS, new BigDecimal("25"), LocalDate.of(2026, 12, 31));
+		var resultado = domain.getValoresEfetivos(ESTADO, new BigDecimal("25"), LocalDate.of(2026, 12, 31));
 
 		assertThat(resultado).isSameAs(domain);
 	}
 
-	@ParameterizedTest(name = "Uniao - ano={0}, transferencia={1}%")
+	@ParameterizedTest(name = "União - ano={0}, transferencia={1}%")
 	@MethodSource("cenariosUniaoPorAno")
 	void deveConcentrarTudoNaCbsQuandoUniaoCompraAPartirDe2027(int ano, BigDecimal pTransferenciaCBS,
 			BigDecimal esperadoPAliqCBS, BigDecimal esperadoVTribCBS, BigDecimal esperadoPAliqIBSUF,
@@ -77,7 +79,7 @@ class TributacaoCompraGovernamentalDomainTest {
 			BigDecimal esperadoVTribIBSUF, BigDecimal esperadoPAliqIBSMun, BigDecimal esperadoVTribIBSMun) {
 		var domain = criarDomainBase();
 
-		var resultado = domain.getValoresEfetivos(ESTADOS, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
+		var resultado = domain.getValoresEfetivos(ESTADO, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
 
 		assertSomasConservadas(domain, resultado);
 
@@ -85,14 +87,14 @@ class TributacaoCompraGovernamentalDomainTest {
 				esperadoPAliqIBSMun, esperadoVTribIBSMun);
 	}
 
-	@ParameterizedTest(name = "Municipio - ano={0}, transferencia={1}%")
+	@ParameterizedTest(name = "Município - ano={0}, transferencia={1}%")
 	@MethodSource("cenariosMunicipioPorAno")
 	void deveTransferirParaMunicipioQuandoMunicipioCompraAPartirDe2027(int ano, BigDecimal pTransferenciaCBS,
 			BigDecimal esperadoPAliqCBS, BigDecimal esperadoVTribCBS, BigDecimal esperadoPAliqIBSUF,
 			BigDecimal esperadoVTribIBSUF, BigDecimal esperadoPAliqIBSMun, BigDecimal esperadoVTribIBSMun) {
 		var domain = criarDomainBase();
 
-		var resultado = domain.getValoresEfetivos(MUNICIPIOS, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
+		var resultado = domain.getValoresEfetivos(MUNICIPIO, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
 
 		assertSomasConservadas(domain, resultado);
 
@@ -101,13 +103,43 @@ class TributacaoCompraGovernamentalDomainTest {
 	}
 
 	@ParameterizedTest(name = "Distrito Federal - ano={0}, transferencia={1}%")
-	@MethodSource("cenariosMunicipioPorAno")
+	@MethodSource("cenariosEstadoPorAno")
 	void deveTransferirParaMunicipioQuandoDistritoFederalCompraAPartirDe2027(int ano, BigDecimal pTransferenciaCBS,
 			BigDecimal esperadoPAliqCBS, BigDecimal esperadoVTribCBS, BigDecimal esperadoPAliqIBSUF,
 			BigDecimal esperadoVTribIBSUF, BigDecimal esperadoPAliqIBSMun, BigDecimal esperadoVTribIBSMun) {
 		var domain = criarDomainBase();
 
 		var resultado = domain.getValoresEfetivos(DISTRITO_FEDERAL, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
+
+		assertSomasConservadas(domain, resultado);
+
+		assertResultado(resultado, esperadoPAliqCBS, esperadoVTribCBS, esperadoPAliqIBSUF, esperadoVTribIBSUF,
+				esperadoPAliqIBSMun, esperadoVTribIBSMun);
+	}
+	
+	@ParameterizedTest(name = "Consórcio Público - ano={0}, transferencia={1}%")
+	@MethodSource("cenariosMunicipioPorAno")
+	void deveTransferirParaMunicipioQuandoConsorcioPublicoCompraAPartirDe2027(int ano, BigDecimal pTransferenciaCBS,
+			BigDecimal esperadoPAliqCBS, BigDecimal esperadoVTribCBS, BigDecimal esperadoPAliqIBSUF,
+			BigDecimal esperadoVTribIBSUF, BigDecimal esperadoPAliqIBSMun, BigDecimal esperadoVTribIBSMun) {
+		var domain = criarDomainBase();
+
+		var resultado = domain.getValoresEfetivos(CONSORCIO_PUBLICO, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
+
+		assertSomasConservadas(domain, resultado);
+
+		assertResultado(resultado, esperadoPAliqCBS, esperadoVTribCBS, esperadoPAliqIBSUF, esperadoVTribIBSUF,
+				esperadoPAliqIBSMun, esperadoVTribIBSMun);
+	}
+	
+	@ParameterizedTest(name = "Comitê Gestor IBS - ano={0}, transferencia={1}%")
+	@MethodSource("cenariosMunicipioPorAno")
+	void deveTransferirParaMunicipioQuandoComiteGestorIbsCompraAPartirDe2027(int ano, BigDecimal pTransferenciaCBS,
+			BigDecimal esperadoPAliqCBS, BigDecimal esperadoVTribCBS, BigDecimal esperadoPAliqIBSUF,
+			BigDecimal esperadoVTribIBSUF, BigDecimal esperadoPAliqIBSMun, BigDecimal esperadoVTribIBSMun) {
+		var domain = criarDomainBase();
+
+		var resultado = domain.getValoresEfetivos(COMITE_GESTOR_IBS, pTransferenciaCBS, LocalDate.of(ano, 1, 1));
 
 		assertSomasConservadas(domain, resultado);
 

@@ -54,6 +54,7 @@ public interface NbsRepository extends JpaRepository<Nbs, String> {
             SELECT n
             FROM Nbs n
             WHERE :data BETWEEN n.inicioVigencia AND COALESCE(n.fimVigencia, :data)
+            AND LENGTH(n.codigo) = 9
             ORDER BY n.codigo
             """)
     List<Nbs> listarNbs(@Param("data") LocalDate data);

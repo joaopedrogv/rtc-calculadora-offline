@@ -6,6 +6,8 @@ package br.gov.serpro.rtc.api.model.output.nfse;
 import java.time.LocalDate;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
+import br.gov.serpro.rtc.domain.model.enumeration.LocalFornecimento;
+import br.gov.serpro.rtc.domain.model.enumeration.LocalIncidencia;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Value;
@@ -25,6 +27,16 @@ public class NfseLocalOperacaoOutput implements SerializationVisibility {
     @Schema(description = "Data de ocorrência do fato gerador informada", example = "2026-01-01")
     private LocalDate dataOcorrenciaFatoGerador;
 
-    @Schema(description = "Local da operação", example = "Local do estabelecimento prestador")
-    private String localOperacao;
+    @Schema(description = "Código do local de fornecimento", example = "5")
+    private LocalFornecimento codigoLocalFornecimento;
+
+    @Schema(description = "Local de fornecimento", example = "Estabelecimento do Fornecedor")
+    private String localFornecimento;
+
+    @Schema(description = "Código do local de incidência", example = "3")
+    private LocalIncidencia codigoLocalIncidencia;
+    
+    @Schema(description = "Local de incidência", example = "Estabelecimento do Prestador/Fornecedor")
+    private String localIncidencia;
+
 }

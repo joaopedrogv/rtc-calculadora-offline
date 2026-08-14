@@ -6,6 +6,7 @@ package br.gov.serpro.rtc.domain.model.entity;
 import java.time.LocalDate;
 
 import br.gov.serpro.rtc.domain.model.enumeration.LocalFornecimento;
+import br.gov.serpro.rtc.domain.model.enumeration.LocalIncidencia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -46,4 +47,7 @@ public class IndicadorOperacao {
     
     @Column(name = "IOIC_CD_LOCAL_FORNECIMENTO_DFE")
     private LocalFornecimento localFornecimento;
+
+    @Column(name = "IOIC_CD_LOCAL_INCIDENCIA")
+    private LocalIncidencia codigoLocalIncidencia;
 }

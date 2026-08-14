@@ -31,6 +31,8 @@ import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAber
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ValidadeDfeClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.VersaoOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.openapi.controller.DadosAbertosControllerOpenApi;
 import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
 import br.gov.serpro.rtc.domain.service.VersaoBaseDadosService;
@@ -280,6 +282,28 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
         return ResponseEntity.ok()
                 .header("Cache-Control", "public, max-age=3600")
                 .body(dadosAbertosService.consultarTransferenciasIBS());
+    }
+
+    @Override
+    @GetMapping("/classificacoes-tributarias/nbs-aplicavel")
+    public ResponseEntity<NbsAplicavelOutput> validarNbsAplicavel(
+            @RequestParam String cClassTrib,
+            @RequestParam String nbs,
+            @RequestParam LocalDate dataOcorrenciaFatoGerador) {
+        return ResponseEntity.ok()
+                .header("Cache-Control", "public, max-age=3600")
+                .body(dadosAbertosService.validarNbsAplicavel(cClassTrib, nbs, dataOcorrenciaFatoGerador));
+    }
+
+    @Override
+    @GetMapping("/classificacoes-tributarias/ncm-aplicavel")
+    public ResponseEntity<NcmAplicavelOutput> validarNcmAplicavel(
+            @RequestParam String cClassTrib,
+            @RequestParam String ncm,
+            @RequestParam LocalDate dataOcorrenciaFatoGerador) {
+        return ResponseEntity.ok()
+                .header("Cache-Control", "public, max-age=3600")
+                .body(dadosAbertosService.validarNcmAplicavel(cClassTrib, ncm, dataOcorrenciaFatoGerador));
     }
 
 }

@@ -46,12 +46,14 @@ public interface IndicadorOperacaoRepository extends JpaRepository<IndicadorOpNb
             @Param("dataOcorrenciaFatoGerador") String dataOcorrenciaFatoGerador);
 
     @NativeQuery(value = """
-        SELECT io.IOIC_LOCAL_INCIDENCIA
+        SELECT 
+            io.IOIC_CD_LOCAL_FORNECIMENTO_DFE,
+            io.IOIC_CD_LOCAL_INCIDENCIA
         FROM INDICADOR_OPERACAO_IBS_CBS io
         WHERE io.IOIC_CD = :cIndOp
           AND :data BETWEEN io.IOIC_INICIO_VIGENCIA AND COALESCE(io.IOIC_FIM_VIGENCIA, :data)
             """)
-    String buscarLocalOperacaoPorIndOp(
+    Object[] buscarLocalOperacaoPorIndOp(
             @Param("cIndOp") String cIndOp,
             @Param("data") String data);
     
@@ -60,13 +62,14 @@ public interface IndicadorOperacaoRepository extends JpaRepository<IndicadorOpNb
             io.IOIC_CD,
             io.IOIC_TIPO_OPERACAO,
             io.IOIC_CD_LOCAL_FORNECIMENTO_DFE,
+            io.IOIC_LOCAL_INCIDENCIA,
+            io.IOIC_CD_LOCAL_INCIDENCIA,
             NULL,
             NULL
         FROM
             INDICADOR_OPERACAO_IBS_CBS io
         WHERE
-            io.IOIC_TIPO_OPERACAO IS NOT NULL 
-            AND io.IOIC_CD_LOCAL_FORNECIMENTO_DFE IS NOT NULL 
+            io.IOIC_TIPO_OPERACAO IS NOT NULL
             AND :data BETWEEN io.IOIC_INICIO_VIGENCIA AND COALESCE(io.IOIC_FIM_VIGENCIA, :data)
         ORDER BY io.IOIC_CD
         """)
@@ -77,6 +80,8 @@ public interface IndicadorOperacaoRepository extends JpaRepository<IndicadorOpNb
             io.IOIC_CD,
             io.IOIC_TIPO_OPERACAO,
             io.IOIC_CD_LOCAL_FORNECIMENTO_DFE,
+            io.IOIC_LOCAL_INCIDENCIA,
+            io.IOIC_CD_LOCAL_INCIDENCIA,
             c.CNIL_IN_PS_ONEROSA,
             c.CNIL_IN_ADQ_EXTERIOR
         FROM
@@ -87,7 +92,6 @@ public interface IndicadorOperacaoRepository extends JpaRepository<IndicadorOpNb
             AND :data BETWEEN io.IOIC_INICIO_VIGENCIA AND COALESCE(io.IOIC_FIM_VIGENCIA, :data)
             AND :data BETWEEN c.CNIL_INICIO_VIGENCIA AND COALESCE(c.CNIL_FIM_VIGENCIA, :data)
             AND io.IOIC_TIPO_OPERACAO IS NOT NULL
-            AND io.IOIC_CD_LOCAL_FORNECIMENTO_DFE IS NOT NULL
         ORDER BY io.IOIC_CD
         """)
     List<Object[]> buscarIndicadorOperacaoPorDataComNbs(
