@@ -138,7 +138,7 @@ class Teste_BaseCalculoCibs_Controller {
     void teste_novosCamposLC214() throws Exception {
         BaseCalculoCibsInput input = new BaseCalculoCibsInput();
         input.setAnoFatoGerador(2027);
-        input.setValorBem(new BigDecimal("500.00"));;
+        input.setValorBem(new BigDecimal("500.00"));
         input.setCosip(new BigDecimal("5.00"));
         input.setIpi(new BigDecimal("50.00"));
         input.setDescontoIncondicional(new BigDecimal("15.00"));

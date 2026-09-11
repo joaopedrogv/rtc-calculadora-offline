@@ -69,13 +69,11 @@ public class AvaliadorExpressaoAritmetica {
         
         @Override
         public BigDecimal toBigDecimal(Object value) {
-            if (value instanceof BigDecimal bd) {
-                return bd;
-            } else if (value instanceof Number n) {
-                return new BigDecimal(n.toString());
-            } else {
-                throw new ArithmeticException("Cannot convert to BigDecimal: " + value);
-            }
+            return switch (value) {
+              case BigDecimal bd -> bd;
+              case Number n -> new BigDecimal(n.toString());
+              default -> throw new ArithmeticException("Cannot convert to BigDecimal: " + value);
+            };
         }
     }
     

@@ -58,6 +58,11 @@ public interface NbsAplicavelRepository extends JpaRepository<NbsAplicavel, Long
             @Param("idClassificacaoTributaria") Long idClassificacaoTributaria, 
             @Param("data") LocalDate data);
 
+    /*
+     * Indica a existência de vínculo vigente cobrindo a NBS sem NENHUMA
+     * exceção vigente associada (o anexo modela um vínculo genérico duplicado
+     * por exceção; ver a tabela-verdade em NbsAplicavelService).
+     */
     @Query("""
             SELECT EXISTS (
                 SELECT 1
@@ -84,7 +89,8 @@ public interface NbsAplicavelRepository extends JpaRepository<NbsAplicavel, Long
             SELECT EXISTS (
                 SELECT 1
                 FROM NbsAplicavel n
-                WHERE n.classificacaoTributaria.id = :idClassificacaoTributaria)
+                WHERE n.classificacaoTributaria.id = :idClassificacaoTributaria
+                AND :data BETWEEN n.inicioVigencia AND COALESCE(n.fimVigencia, :data))
             """)
     // FIXME essa cache pode ser removida pois o serviço que a utiliza já faz cache
     @Cacheable(cacheNames = "NbsAplicavelRepository.tem")

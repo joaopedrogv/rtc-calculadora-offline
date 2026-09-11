@@ -35,4 +35,14 @@ class Teste_dadosabertos_6_consultarNcm {
                 .andExpect(jsonPath("$.tributadoPeloImpostoSeletivo").value(true));
     }
 
+    @Test
+    void teste_controller_consultarNcm_inexistente() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/ncm")
+                .param("data", "2027-01-01")
+                .param("ncm", "24020009")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.detail").value("NCM de código 24020009 não encontrada para a data 2027-01-01"));
+    }
+
 }

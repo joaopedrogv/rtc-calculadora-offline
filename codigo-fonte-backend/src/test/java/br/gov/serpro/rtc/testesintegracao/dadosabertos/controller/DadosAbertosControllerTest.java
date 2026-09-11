@@ -18,6 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 class DadosAbertosControllerTest {
 
     private static final String DATA = "2027-01-01";
+    // Alíquotas de referência/padrão só existem em lei até 2026; a partir de
+    // 2027 a consulta de alíquotas é criticada.
+    private static final String DATA_COM_ALIQUOTAS_EM_LEI = "2026-01-01";
     private static final String NCM = "09024000";
     private static final String NBS = "102020000";
     private static final String SIGLA_UF = "AC";
@@ -142,7 +145,7 @@ class DadosAbertosControllerTest {
     @Test
     void consultarAliquotaUniao() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/aliquota-uniao")
-                .param("data", DATA))
+                .param("data", DATA_COM_ALIQUOTAS_EM_LEI))
             .andExpect(status().isOk());
     }
 
@@ -150,7 +153,7 @@ class DadosAbertosControllerTest {
     void consultarAliquotaUf() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/aliquota-uf")
                 .param("codigoUf", CODIGO_UF)
-                .param("data", DATA))
+                .param("data", DATA_COM_ALIQUOTAS_EM_LEI))
             .andExpect(status().isOk());
     }
 
@@ -158,14 +161,97 @@ class DadosAbertosControllerTest {
     void consultarAliquotaMunicipio() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/aliquota-municipio")
                 .param("codigoMunicipio", CODIGO_MUNICIPIO)
-                .param("data", DATA))
+                .param("data", DATA_COM_ALIQUOTAS_EM_LEI))
             .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarAliquotaUniaoSemAliquotaDefinidaEmLei() throws Exception {
+        // A partir de 2027 as alíquotas de referência não existem em lei e não
+        // são mais divulgadas pela calculadora.
+        mockMvc.perform(get("/calculadora/dados-abertos/aliquota-uniao")
+                .param("data", DATA))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void consultarAliquotaUfSemAliquotaDefinidaEmLei() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/aliquota-uf")
+                .param("codigoUf", CODIGO_UF)
+                .param("data", DATA))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void consultarAliquotaMunicipioSemAliquotaDefinidaEmLei() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/aliquota-municipio")
+                .param("codigoMunicipio", CODIGO_MUNICIPIO)
+                .param("data", DATA))
+            .andExpect(status().isNotFound());
     }
 
     @Test
     void consultarValidadeDfeClassificacaoTributaria() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/"
                 + SIGLA_DFE + "/" + C_CLASS_TRIB)
+                .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarClassificacaoTributariaCbsIbsPorCodigoComSucesso() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/class-trib/" + C_CLASS_TRIB)
+                .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarClassificacaoTributariaCbsIbsPorCodigoNaoEncontrado() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/class-trib/999999")
+                .param("data", DATA))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void consultarClassificacaoTributariaCbsIbsPorCodigoValidaEstrutura() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/class-trib/" + C_CLASS_TRIB)
+                            .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarClassificacaoTributariaIsPorCodigoComSucesso() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/is/class-trib/" + C_CLASS_TRIB)
+                .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarClassificacaoTributariaIsPorCodigoNaoEncontrado() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/is/class-trib/999999")
+                .param("data", DATA))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void consultarCstsComClassificacoesCbsIbsPorSiglaDfe() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/situacoes-tributarias/cbs-ibs")
+                .param("siglaDfe", SIGLA_DFE)
+                .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarCstsComClassificacoesIsPorSiglaDfe() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/situacoes-tributarias/is")
+                .param("siglaDfe", SIGLA_DFE)
+                .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarCstsComClassificacoesIsSemSiglaDfe() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/situacoes-tributarias/is")
                 .param("data", DATA))
             .andExpect(status().isOk());
     }
@@ -191,6 +277,21 @@ class DadosAbertosControllerTest {
     @Test
     void consultarTransferenciasIBS() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/transferencias-ibs"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarNomenclatura() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/nomenclatura/"
+                + SIGLA_DFE + "/" + C_CLASS_TRIB)
+                .param("data", DATA))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void consultarAtoresAgrupados() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/ator/grupos")
+                .param("data", DATA))
             .andExpect(status().isOk());
     }
 }

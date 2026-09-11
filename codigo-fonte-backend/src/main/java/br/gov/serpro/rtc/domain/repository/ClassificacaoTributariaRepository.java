@@ -80,4 +80,61 @@ public interface ClassificacaoTributariaRepository extends JpaRepository<Classif
     """)
     @Cacheable(cacheNames = "ClassificacaoTributariaRepository.listarCodigosClassificacoesServicoSemVinculoNbs")
     List<String> listarCodigosClassificacoesServicoSemVinculoNbs(@Param("data") LocalDate data);
+
+    /**
+     * Retorna os códigos das classificações tributárias vigentes na data que
+     * admitem a combinação de atores informada e, opcionalmente, o tipo de
+     * DF-e. Classificação sem nenhum vínculo vigente em {@code ATOR_CLASSIFICACAO}
+     * no papel consultado é aplicável a qualquer ator naquele papel e permanece
+     * no resultado; filtros informados simultaneamente compõem um E lógico.
+     * Filtros {@code null} não restringem o papel/DF-e correspondente.
+     *
+     * @param data       data de referência para filtragem de vigência
+     * @param fornecedor ATOR_ID do ator no papel de fornecedor (opcional)
+     * @param adquirente ATOR_ID do ator no papel de adquirente (opcional)
+     * @param siglaDfe   sigla normalizada do tipo de DF-e (opcional), no mesmo
+     *                   formato de {@code buscarCstsComClassificacoesCbsIbs}
+     */
+    @NativeQuery(value = """
+            SELECT ct.CLTR_CD
+            FROM CLASSIFICACAO_TRIBUTARIA ct
+            WHERE :data BETWEEN ct.CLTR_INICIO_VIGENCIA AND COALESCE(ct.CLTR_FIM_VIGENCIA, :data)
+            AND ( :fornecedor IS NULL
+                  OR NOT EXISTS (SELECT 1 FROM ATOR_CLASSIFICACAO ac
+                                  WHERE ac.ATCL_CLTR_ID = ct.CLTR_ID
+                                    AND ac.ATCL_IN_PAPEL = 'Fornecedor'
+                                    AND :data BETWEEN ac.ATCL_INICIO_VIGENCIA
+                                                  AND COALESCE(ac.ATCL_FIM_VIGENCIA, :data))
+                  OR EXISTS (SELECT 1 FROM ATOR_CLASSIFICACAO ac
+                              WHERE ac.ATCL_CLTR_ID = ct.CLTR_ID
+                                AND ac.ATCL_IN_PAPEL = 'Fornecedor'
+                                AND ac.ATCL_ATOR_ID = :fornecedor
+                                AND :data BETWEEN ac.ATCL_INICIO_VIGENCIA
+                                              AND COALESCE(ac.ATCL_FIM_VIGENCIA, :data)) )
+            AND ( :adquirente IS NULL
+                  OR NOT EXISTS (SELECT 1 FROM ATOR_CLASSIFICACAO ac
+                                  WHERE ac.ATCL_CLTR_ID = ct.CLTR_ID
+                                    AND ac.ATCL_IN_PAPEL = 'Adquirente'
+                                    AND :data BETWEEN ac.ATCL_INICIO_VIGENCIA
+                                                  AND COALESCE(ac.ATCL_FIM_VIGENCIA, :data))
+                  OR EXISTS (SELECT 1 FROM ATOR_CLASSIFICACAO ac
+                              WHERE ac.ATCL_CLTR_ID = ct.CLTR_ID
+                                AND ac.ATCL_IN_PAPEL = 'Adquirente'
+                                AND ac.ATCL_ATOR_ID = :adquirente
+                                AND :data BETWEEN ac.ATCL_INICIO_VIGENCIA
+                                              AND COALESCE(ac.ATCL_FIM_VIGENCIA, :data)) )
+            AND ( :siglaDfe IS NULL
+                  OR EXISTS (SELECT 1 FROM TIPO_DFE_CLASSIFICACAO tdcl
+                              JOIN TIPO_DFE td ON tdcl.TDCL_TPDF_ID = td.TPDF_ID
+                              WHERE tdcl.TDCL_CLTR_ID = ct.CLTR_ID
+                                AND UPPER(REPLACE(REPLACE(REPLACE(td.TPDF_SIGLA, ' ', ''), '-', ''), '_', '')) = :siglaDfe
+                                AND :data BETWEEN tdcl.TDCL_INICIO_VIGENCIA
+                                              AND COALESCE(tdcl.TDCL_FIM_VIGENCIA, :data)) )
+            """)
+    @Cacheable(cacheNames = "ClassificacaoTributariaRepository.listarCodigosClassificacoesPorAtores")
+    List<String> listarCodigosClassificacoesPorAtores(
+            @Param("data") LocalDate data,
+            @Param("fornecedor") Long fornecedor,
+            @Param("adquirente") Long adquirente,
+            @Param("siglaDfe") String siglaDfe);
 }

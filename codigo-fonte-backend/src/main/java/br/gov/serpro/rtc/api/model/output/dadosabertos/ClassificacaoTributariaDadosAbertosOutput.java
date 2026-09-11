@@ -74,6 +74,9 @@ public class ClassificacaoTributariaDadosAbertosOutput implements SerializationV
     @Schema(name = "percentualReducaoIbsMun", description = "", example = "")
     private BigDecimal percentualReducaoIbsMun;
 
+    @Schema(name = "tipoReceitaBrutaSimplesNacional", description = "Tipo de Receita Bruta do Simples Nacional (tpRBSN): 0 = Não é receita bruta; 1 = Receita bruta - interna; 2 = Receita bruta - interna sem cálculo de IBS e CBS; 3 = Receita bruta - exportação direta; 4 = Receita bruta - exportação indireta; 5 = Receita bruta - mercado interno e exportação; 9 = Fornecimento incompatível com SN", example = "1")
+    private Integer tipoReceitaBrutaSimplesNacional;
+
     @Schema(name = "tiposDfeClassificacao", description = "", example = "")
     private List<TipoDfeClassificacaoDadosAbertosOutput> tiposDfeClassificacao;
 

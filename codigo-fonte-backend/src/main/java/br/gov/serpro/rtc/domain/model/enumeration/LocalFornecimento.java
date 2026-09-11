@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum LocalFornecimento {
 
-    LOCAL_1(1, "Endereço diverso do fornecedor, adquirente ou destinatário"), 
+    LOCAL_1(1, "Endereço diverso do fornecedor, adquirente ou destinatário"),
     LOCAL_2(2, "Local da prestação do serviço diverso do estabelecimento do fornecedor"),
     LOCAL_3(3, "Endereço do destinatário"),
     LOCAL_4(4, "Endereço fornecido para entrega do bem"),
@@ -26,13 +26,13 @@ public enum LocalFornecimento {
     LOCAL_8(8, "Local da retirada do bem"),
     LOCAL_9(9, "Local de início do transporte"),
     LOCAL_10(10, "Local do domicílio principal do destinatário residente ou domiciliado no País, caso o adquirente não seja residente ou domiciliado no País"),
-    LOCAL_11(11, "Local do domicílio principal do adquirente residente ou domiciliado no País. Nas aquisições indicadas no art. 11, §4º, II, considera-se domicílio principal do adquirente o estabelecimentro matriz"),
+    LOCAL_11(11, "Local do domicílio principal do adquirente residente ou domiciliado no País. Nas aquisições indicadas no art. 11, §4º, II, considera-se domicílio principal do adquirente o estabelecimento matriz"),
     LOCAL_12(12, "local do domicílio principal do destinatário residente ou domiciliado no País"),
     LOCAL_13(13, "Local do evento a que se refere o serviço"),
     LOCAL_14(14, "Localidade do imóvel"),
     LOCAL_15(15, "Estabelecimento do fornecedor como o local da entrega ou disponibilização do bem ao destinatário"),
     LOCAL_16(16, "Local da realização da operação e sua retirada"),
-    LOCAL_17(17, "Endereço do destinatário fornecido para entrega ou disponibilização (assim considerado o o destino final indicado pelo adquirente)"),
+    LOCAL_17(17, "Endereço do destinatário fornecido para entrega ou disponibilização (assim considerado o destino final indicado pelo adquirente)"),
     LOCAL_18(18, "Local onde se encontra o bem móvel material"),
     LOCAL_19(19, "Local onde se encontra o bem móvel material (Local da retirada)"),
     LOCAL_20(20, "Local do domicílio principal do adquirente (estabelecimento matriz)"),
@@ -47,12 +47,12 @@ public enum LocalFornecimento {
 
     private final int codigo;
     private final String descricao;
-    
+
     @JsonValue
     public int getCodigo() {
         return codigo;
     }
-    
+
     public static LocalFornecimento fromCodigo(int codigo) {
         for (LocalFornecimento lf : values()) {
             if (lf.codigo == codigo) {

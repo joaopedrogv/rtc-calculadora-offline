@@ -21,6 +21,6 @@ public final class TratamentoClassificacaoModel {
     private final TratamentoClassificacaoDTO tratamentoClassificacaoImpostoSeletivo;
     private final TratamentoClassificacaoDTO tratamentoClassificacaoCbsIbsDesoneracao;
     private final AliquotaImpostoSeletivoModel aliquotaImpostoSeletivo;
-    private final Boolean temDesoneracao;
+    private final boolean temDesoneracao;
 
 }

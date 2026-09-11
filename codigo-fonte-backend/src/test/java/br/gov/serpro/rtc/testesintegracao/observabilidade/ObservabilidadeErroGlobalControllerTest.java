@@ -29,7 +29,7 @@ class ObservabilidadeErroGlobalControllerTest {
     @Value("classpath:entradas/calculoscorretos/observabilidade/entrada_com_erro_global.json")
     private Resource entrada1Json;
 
-    @Value("classpath:entradas/calculoscorretos/observabilidade/entrada_com_erro_500.json")
+    @Value("classpath:entradas/calculoscorretos/observabilidade/entrada_com_erro_422.json")
     private Resource entrada2Json;
 
     @Test
@@ -43,13 +43,13 @@ class ObservabilidadeErroGlobalControllerTest {
     }
 
     @Test
-    void deveRetornar5xxQuandoErro500ViaEndpoint() throws Exception {
+    void deveRetornar4xxQuandoErro422ViaEndpoint() throws Exception {
         final String json = StreamUtils.copyToString(entrada2Json.getInputStream(), StandardCharsets.UTF_8);
 
         mockMvc.perform(post("/calculadora/observabilidade/regime-geral")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-            .andExpect(status().is5xxServerError());
+            .andExpect(status().is4xxClientError());
     }
 
 }

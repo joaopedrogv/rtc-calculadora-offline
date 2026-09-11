@@ -40,7 +40,7 @@ class ObservabilidadeErroGlobalServiceTest {
 
     @Test
     void deveLancarExcecaoQuandoErroGlobal5xx(
-            final @Value("classpath:entradas/calculoscorretos/observabilidade/entrada_com_erro_500.json") Resource resourceFile)
+            final @Value("classpath:entradas/calculoscorretos/observabilidade/entrada_com_erro_422.json") Resource resourceFile)
             throws Exception {
         final var operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
 

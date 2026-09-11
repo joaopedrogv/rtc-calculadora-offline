@@ -3,7 +3,6 @@
  */
 package br.gov.serpro.rtc.domain.repository;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.cache.annotation.Cacheable;
@@ -12,7 +11,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import br.gov.serpro.rtc.domain.model.dto.AliquotaAdValoremDTO;
 import br.gov.serpro.rtc.domain.model.entity.AliquotaAdValoremProduto;
+import br.gov.serpro.rtc.domain.model.enumeration.TributoEnum;
 
 /**
  * Repositório Spring Data JPA para acesso a {@link AliquotaAdValoremProduto},
@@ -23,7 +24,7 @@ import br.gov.serpro.rtc.domain.model.entity.AliquotaAdValoremProduto;
 public interface AliquotaAdValoremProdutoRepository extends JpaRepository<AliquotaAdValoremProduto, Long> {
 
     @Query("""
-            SELECT a.aliquotaAdValorem.valor
+            SELECT new br.gov.serpro.rtc.domain.model.dto.AliquotaAdValoremDTO(a.aliquotaAdValorem.valor)
             FROM AliquotaAdValoremProduto a
             WHERE EXISTS (
                 SELECT 1
@@ -51,9 +52,39 @@ public interface AliquotaAdValoremProdutoRepository extends JpaRepository<Aliquo
             LIMIT 1
             """)
     @Cacheable(cacheNames = "AliquotaAdValoremProdutoRepository.buscarAliquotaAdValorem")
-    BigDecimal buscarAliquotaAdValorem(
+    AliquotaAdValoremDTO buscarAliquotaAdValorem(
             @Param("ncm") String ncm,
             @Param("idTributo") Long idTributo,
+            @Param("data") LocalDate data);
+
+    @Query("""
+            SELECT count(1) > 0
+            FROM AliquotaAdValoremProduto a
+            WHERE EXISTS (
+                SELECT 1
+                FROM Ncm n
+                WHERE n.codigo = :ncm
+            )
+            AND a.ncm.codigo = SUBSTRING(:ncm, 1, LENGTH(a.ncm.codigo))
+            AND a.aliquotaAdValorem.tributo.id = :#{#tributo.codigo}
+            AND :data BETWEEN a.inicioVigencia AND COALESCE(a.fimVigencia, :data)
+            AND NOT EXISTS (
+                SELECT 1
+                FROM ExcecaoAdValoremProduto e
+                WHERE e.ncm.codigo = SUBSTRING(:ncm, 1, LENGTH(e.ncm.codigo))
+                AND e.aliquotaAdValoremProduto.id = a.id
+                AND :data BETWEEN e.inicioVigencia AND COALESCE(e.fimVigencia, :data)
+            )
+            AND NOT EXISTS (
+                SELECT 1
+                FROM ExcecaoAdValoremProduto e
+                WHERE e.ncm.codigo = SUBSTRING(a.ncm.codigo, 1, LENGTH(e.ncm.codigo))
+                AND e.aliquotaAdValoremProduto.id = a.id
+                AND :data BETWEEN e.inicioVigencia AND COALESCE(e.fimVigencia, :data)
+            )
+            """)
+    @Cacheable(cacheNames = "AliquotaAdValoremProdutoRepository.existeNcmAdValorem")
+    boolean existeNcmAdValorem(@Param("ncm") String ncm, @Param("tributo") TributoEnum tributo,
             @Param("data") LocalDate data);
 
 }

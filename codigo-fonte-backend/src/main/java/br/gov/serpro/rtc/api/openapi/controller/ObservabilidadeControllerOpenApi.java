@@ -11,6 +11,7 @@ import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.api.model.roc.ObservabilidadeROCDomain;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -22,12 +23,25 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * Contrato OpenAPI dos endpoints de observabilidade, incluindo cálculo com
  * erros por item e consulta ao catálogo de códigos de erro.
  */
-@Tag(name = "Observabilidade - Calculadora", description = "Endpoint de observabilidade da Calculadora de Tributos")
+@Tag(name = "Observabilidade - Calculadora - VERSÃO BETA", description = "Endpoint de observabilidade da Calculadora de Tributos")
 public interface ObservabilidadeControllerOpenApi {
 
     @Operation(summary = "Cálculo com observabilidade", description = "Processa todos os itens acumulando erros individuais. Retorna resultado parcial com estado de cada item.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Processamento realizado (itens podem ter erros individuais)", content = {
+            @ApiResponse(responseCode = "200", description = "Processamento realizado (itens podem ter erros individuais)", 
+            		headers = @Header(
+                    name = "x-warning-dados-simulados",
+                    description = "Indica que os dados são simulados. Valores possíveis:" +
+                    		"<ul>" +
+                            "<li>1 - alíquotas da CBS e do IBS ainda não definidas em lei" +
+                            "<li>2 - alíquotas da CBS e do IBS e redutor em Compras Governamentais ainda não definidos em lei" +
+                            "<li>3 - alíquotas da CBS e do IBS, alíquotas e Classificações Tributárias do IS ainda não definidos em lei" +
+                            "<li>4 - alíquotas da CBS e do IBS, redutor em Compras Governamentais fictícios, alíquotas e Classificações Tributárias do IS ainda não definidos em lei" +
+                            "<li>5 - para o cClassTrib informado a alíquota ainda não foi definida em lei" +
+                            "<li>6 - alíquotas da CBS, do IBS e do IS informadas pelo usuário e redutor em Compras Governamentais não definido" +
+                            "</ul>",
+                    schema = @Schema(type = "integer", example = "1")
+                ), content = {
                     @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ObservabilidadeROCDomain.class)) }),
             @ApiResponse(responseCode = "400", description = "Estrutura e/ou dados informados em formato não reconhecido", content = {
                     @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class)) }),

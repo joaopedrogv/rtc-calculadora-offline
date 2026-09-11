@@ -16,4 +16,8 @@ public class ErroFaltaImplementacaoException extends ValidacaoException {
         super(String.format(MESSAGE, erro));
     }
 
+    public ErroFaltaImplementacaoException(String mensagemFormatada, Object... args) {
+        super(String.format(mensagemFormatada, args));
+    }
+
 }

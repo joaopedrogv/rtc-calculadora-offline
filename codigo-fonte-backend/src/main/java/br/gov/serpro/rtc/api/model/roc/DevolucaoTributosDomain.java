@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
+import br.gov.serpro.rtc.config.serializer.BigDecimalTDec0302_04Serializer;
 import br.gov.serpro.rtc.config.serializer.BigDecimalTDec1302Serializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -23,8 +24,13 @@ import lombok.Setter;
 @Setter
 @Builder
 @JsonInclude(NON_NULL)
-@JsonPropertyOrder({ "vDevTrib" })
+@JsonPropertyOrder({ "pDevTrib", "vDevTrib" })
 public class DevolucaoTributosDomain implements SerializationVisibility {
+	
+    @JsonSerialize(using = BigDecimalTDec0302_04Serializer.class)
+    @Schema(description = "Percentual do tributo devolvido")
+    @Builder.Default
+	private BigDecimal pDevTrib = ZERO;
 
     @JsonSerialize(using = BigDecimalTDec1302Serializer.class)
     @Schema(description = "Valor do tributo devolvido")

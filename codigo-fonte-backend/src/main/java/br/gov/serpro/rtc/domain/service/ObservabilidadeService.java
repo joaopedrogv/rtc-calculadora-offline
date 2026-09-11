@@ -24,6 +24,7 @@ import br.gov.serpro.rtc.api.model.roc.ObservabilidadeROCDomain;
 import br.gov.serpro.rtc.api.model.roc.OperacaoConsumoDomain;
 import br.gov.serpro.rtc.api.model.roc.TributosDomain;
 import br.gov.serpro.rtc.api.model.roc.ValoresTotaisDomain;
+import br.gov.serpro.rtc.domain.model.entity.TipoDfe;
 import br.gov.serpro.rtc.domain.model.enumeration.EstadoItemEnum;
 import br.gov.serpro.rtc.domain.service.collector.ErrosCalculoException;
 import br.gov.serpro.rtc.domain.service.collector.ItemCollector;
@@ -50,6 +51,7 @@ public class ObservabilidadeService {
     private final MunicipioService municipioService;
     private final Validator validator;
     private final RedutorCompraGovernamentalService redutorCompraGovService;
+    private final TipoDfeService tipoDfeService;
 
     public ObservabilidadeROCDomain processarOperacao(OperacaoInput operacao, String baseURL) {
         // Validar campos globais estruturais via Bean Validation (id, versao, municipio, itens)
@@ -57,15 +59,28 @@ public class ObservabilidadeService {
         if (!errosGlobaisVal.isEmpty()) {
             throw new ErrosCalculoException(errosGlobaisVal);
         }
+        
+        LocalDate data;
+        TipoDfe tipoDfe;
+        try {
+        	// Validar globais de negócio — se falhar, lança exceção normalmente (422)
+        	if (operacao.getUf() == null) {
+        		operacao.setUf(municipioService.buscarUfPorMunicipio(operacao.getMunicipio()));
+        	}
+        	ufService.validarUf(operacao.getUf());
+        	municipioService.validarMunicipio(operacao.getMunicipio(), operacao.getUf());
 
-        // Validar globais de negócio — se falhar, lança exceção normalmente (422)
-        if (operacao.getUf() == null) {
-            operacao.setUf(municipioService.buscarUfPorMunicipio(operacao.getMunicipio()));
-        }
-        ufService.validarUf(operacao.getUf());
-        municipioService.validarMunicipio(operacao.getMunicipio(), operacao.getUf());
+        	data = operacao.getFatoGeradorAplicavel();
 
-        final LocalDate data = operacao.getFatoGeradorAplicavel();
+        	// Erro de operação: tpDoc inexistente ou fora de vigência interrompe
+        	// o processamento antes dos itens
+        	tipoDfe = tipoDfeService.buscarPorTipo(operacao.getTpDoc(), data);
+        } catch (Exception ex) {
+			log.error("Erro inesperado ao processar operação: {}", ex.getMessage(), ex);
+			ItemCollector collector = new ItemCollector(-1, baseURL);
+			collector.addErro(ex);
+			throw new ErrosCalculoException(collector.getErros());
+		}
 
         List<ItemOperacaoInput> itens = operacao.getItens();
 
@@ -78,7 +93,7 @@ public class ObservabilidadeService {
                 final ItemOperacaoInput item = itens.get(index);
 
                 CompletableFuture<ObservabilidadeItemDomain> future = CompletableFuture.supplyAsync(() ->
-                    processarItemComValidacao(operacao, item, index, data, baseURL), executor);
+                    processarItemComValidacao(operacao, item, index, data, tipoDfe, baseURL), executor);
 
                 futures.add(future);
             }
@@ -88,9 +103,9 @@ public class ObservabilidadeService {
                     .sorted(Comparator.comparing(ObservabilidadeItemDomain::getNObj))
                     .toList();
 
-            // Totalizar apenas itens CALCULADO
+            // Totalizar itens calculados e simulados juntos, sem distinção no payload
             List<ObjetoDomain> itensCalculados = resultados.stream()
-                    .filter(r -> r.getEstadoItem() == EstadoItemEnum.CALCULADO)
+                    .filter(r -> r.getEstadoItem() == EstadoItemEnum.CALCULADO || r.getEstadoItem() == EstadoItemEnum.CALCULO_SIMULADO)
                     .map(r -> ObjetoDomain.builder()
                             .nObj(r.getNObj())
                             .tribCalc(r.getTribCalc())
@@ -122,7 +137,8 @@ public class ObservabilidadeService {
     }
 
     private ObservabilidadeItemDomain processarItemComValidacao(
-            OperacaoInput operacao, ItemOperacaoInput item, int index, LocalDate data, String baseURL) {
+            OperacaoInput operacao, ItemOperacaoInput item, int index, LocalDate data, TipoDfe tipoDfe,
+            String baseURL) {
 
         ItemCollector collector = new ItemCollector(index, baseURL);
 
@@ -150,10 +166,10 @@ public class ObservabilidadeService {
 
         // 2. Tentar calcular
         try {
-            TributosDomain tributos = processamentoItemService.processarItem(operacao, item, data);
+            TributosDomain tributos = processamentoItemService.processarItem(operacao, item, data, tipoDfe);
             return ObservabilidadeItemDomain.builder()
                     .nObj(item.getNumero() != null ? item.getNumero() : index + 1)
-                    .estadoItem(EstadoItemEnum.CALCULADO)
+                    .estadoItem(item.getAliquotasNominais() == null ? EstadoItemEnum.CALCULADO : EstadoItemEnum.CALCULO_SIMULADO)	
                     .tribCalc(tributos)
                     .build();
         } catch (Exception ex) {

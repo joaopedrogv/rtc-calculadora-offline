@@ -42,6 +42,9 @@ public final class OperacaoInput implements SerializationVisibility {
     @Schema(name = "dhFatoGerador", description = "Data e hora do fato gerador no formato UTC", example = "2026-01-01T09:50:05-03:00")
     private OffsetDateTime dhFatoGerador;
 
+    /**
+     * @deprecated Este campo está obsoleto e será removido em breve. Use {@code dhFatoGerador} para informar a data e hora do fato gerador.
+     */
     @Deprecated(forRemoval = true)
     @Schema(name = "dataHoraEmissao", deprecated = true, description = "<u><<<<b>ATENÇÃO</b>>>><p>ESTE CAMPO SERÁ REMOVIDO EM FUTURO PRÓXIMO</p><p>Informar <b>dhFatoGerador</b></u></p><p>Data e hora de emissão do documento no formato UTC</p>", example = "2026-01-01T09:50:05-03:00")
     private OffsetDateTime dataHoraEmissao;
@@ -55,6 +58,11 @@ public final class OperacaoInput implements SerializationVisibility {
     @Size(min = 2, max = 2)
     @Schema(name = "uf", description = "Sigla da UF", example = "RS")
     private String uf;
+
+    @Min(1)
+    @Max(999)
+    @Schema(name = "tpDoc", description = "Tipo do documento fiscal eletrônico que origina a operação (código numérico do modelo, ex.: 55 = NF-e, 65 = NFC-e). Opcional: quando informado, o tipo deve existir e estar vigente na data do fato gerador, a classificação tributária dos itens deve possuir vínculo com o tipo de documento e a exigência de NCM/NBS passa a ser dirigida pela nomenclatura aplicável ao documento", example = "55")
+    private Integer tpDoc;
     
     @Valid
     @Schema(name = "gCompraGov", description = "Grupo de Compra Governamental")

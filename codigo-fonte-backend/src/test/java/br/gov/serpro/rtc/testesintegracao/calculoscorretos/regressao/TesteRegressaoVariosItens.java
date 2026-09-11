@@ -51,7 +51,8 @@ class TesteRegressaoVariosItens {
      * Para adicionar um novo campo, basta incluí-lo neste array.
      */
     private static final String[] CAMPOS_EXCLUIDOS = {
-            "memoriaCalculo"
+            "memoriaCalculo",
+    		"calculoSimulado"
     };
 
     private static final Set<String> CAMPOS_EXCLUIDOS_SET = new HashSet<>(Arrays.asList(CAMPOS_EXCLUIDOS));

@@ -3,12 +3,14 @@
 */
 package br.gov.serpro.rtc.testesintegracao.validacoes.negocio;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,8 +26,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
-import br.gov.serpro.rtc.domain.service.exception.NomenclaturaException;
 
+/**
+ * Regressão da abolição da coluna CLTR_NOMENCLATURA nas validações
+ * (Requisito 4): a entrada que antes disparava NomenclaturaException (NCM
+ * informado para classificação com CLTR_NOMENCLATURA restritiva) passa a ser
+ * aceita — a exigência/permissão de NCM/NBS é dirigida pelos anexos
+ * (NCM_APLICAVEL/NBS_APLICAVEL) e, com tpDoc, pela NomenclaturaService.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-testes.yml")
@@ -40,20 +48,21 @@ class Teste_validacao_11_NomenclaturaException {
 
     @Autowired
     private CalculadoraService calculadoraService;
-    
+
     private OperacaoInput operacao;
 
     @BeforeEach
     void beforeEach(
             final @Value("classpath:entradas/validacoes/Teste_validacao_11_NomenclaturaException.json") Resource resourceFile)
-            throws Exception {
+            throws IOException {
         operacao = objectMapper.readValue(resourceFile.getInputStream(), OperacaoInput.class);
     }
 
     @Test
+    @DisplayName("CLTR_NOMENCLATURA não bloqueia mais: NCM aceito para classificação sem anexo")
     void teste_service_CalcularTributos() {
-        assertThatThrownBy(() -> calculadoraService.calcularTributos(operacao))
-                .isExactlyInstanceOf(NomenclaturaException.class);
+        assertThatCode(() -> calculadoraService.calcularTributos(operacao))
+                .doesNotThrowAnyException();
     }
 
     @Test
@@ -62,8 +71,7 @@ class Teste_validacao_11_NomenclaturaException {
         mockMvc.perform(post("/calculadora/regime-geral")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonContent))
-                .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.title").value("Erro de nomenclatura"));
+                .andExpect(status().is2xxSuccessful());
     }
 
 }

@@ -9,7 +9,6 @@ import static br.gov.serpro.rtc.domain.model.enumeration.FormaAplicacaoEnum.SUBS
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,7 +32,7 @@ import br.gov.serpro.rtc.domain.service.dadosabertos.DadosAbertosService;
  * Testes unitários para o método consultarAliquota de DadosAbertosService
  */
 @ExtendWith(MockitoExtension.class)
-public class Teste_DadosAbertosService_ConsultarAliquota {
+class Teste_DadosAbertosService_ConsultarAliquota {
 
     @Mock
     private AliquotaPadraoService aliquotaPadraoService;
@@ -47,7 +46,7 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     private LocalDate data;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         idTributo = 2L; // CBS
         codigoUf = 35L; // SP
         codigoMunicipio = 3550308L; // São Paulo
@@ -55,12 +54,12 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_SemValorPadrao_DeveRetornarApenasReferencia() {
+    void teste_ConsultarAliquota_SemValorPadrao_DeveRetornarApenasReferencia() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("12.00");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(valorReferencia, null, null);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -77,18 +76,18 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
             "Forma de aplicação deve ser nula quando não há valor padrão");
         
         verify(aliquotaPadraoService, times(1))
-            .buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data));
+            .buscarAliquota(idTributo, codigoUf, codigoMunicipio, data);
     }
 
     @Test
-    public void teste_ConsultarAliquota_ComAcrescimo_DeveRetornarAliquotaPropria() {
+    void teste_ConsultarAliquota_ComAcrescimo_DeveRetornarAliquotaPropria() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.00");
         BigDecimal valorPadrao = new BigDecimal("2.00");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, ACRESCIMO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -105,18 +104,18 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
             "Forma de aplicação deve ser ACRESCIMO");
         
         verify(aliquotaPadraoService, times(1))
-            .buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data));
+            .buscarAliquota(idTributo, codigoUf, codigoMunicipio, data);
     }
 
     @Test
-    public void teste_ConsultarAliquota_ComDecrescimo_DeveRetornarAliquotaPropria() {
+    void teste_ConsultarAliquota_ComDecrescimo_DeveRetornarAliquotaPropria() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("15.00");
         BigDecimal valorPadrao = new BigDecimal("3.00");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, DECRESCIMO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -133,18 +132,18 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
             "Forma de aplicação deve ser DECRESCIMO");
         
         verify(aliquotaPadraoService, times(1))
-            .buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data));
+            .buscarAliquota(idTributo, codigoUf, codigoMunicipio, data);
     }
 
     @Test
-    public void teste_ConsultarAliquota_ComSubstituicao_DeveRetornarAliquotaPropria() {
+    void teste_ConsultarAliquota_ComSubstituicao_DeveRetornarAliquotaPropria() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.00");
         BigDecimal valorPadrao = new BigDecimal("8.50");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, SUBSTITUICAO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -161,18 +160,18 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
             "Forma de aplicação deve ser SUBSTITUICAO");
         
         verify(aliquotaPadraoService, times(1))
-            .buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data));
+            .buscarAliquota(idTributo, codigoUf, codigoMunicipio, data);
     }
 
     @Test
-    public void teste_ConsultarAliquota_ComValorPadraoZero_ComAcrescimo_DeveRetornarZero() {
+    void teste_ConsultarAliquota_ComValorPadraoZero_ComAcrescimo_DeveRetornarZero() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("12.00");
         BigDecimal valorPadrao = new BigDecimal("0.00");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, ACRESCIMO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -190,14 +189,14 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_ComValoresDecimais_DevePreservarPrecisao() {
+    void teste_ConsultarAliquota_ComValoresDecimais_DevePreservarPrecisao() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("12.345");
         BigDecimal valorPadrao = new BigDecimal("1.155");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, ACRESCIMO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -213,7 +212,7 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_ParaDiferentesTributos_DeveRetornarCorreto() {
+    void teste_ConsultarAliquota_ParaDiferentesTributos_DeveRetornarCorreto() {
         // Arrange - IBS (tributo 3)
         Long idTributoIbs = 3L;
         BigDecimal valorReferencia = new BigDecimal("17.50");
@@ -221,7 +220,7 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, DECRESCIMO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributoIbs), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributoIbs, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -239,7 +238,7 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_ParaDiferentesUfs_DeveRetornarCorreto() {
+    void teste_ConsultarAliquota_ParaDiferentesUfs_DeveRetornarCorreto() {
         // Arrange - Rio de Janeiro (código 33)
         Long codigoUfRj = 33L;
         Long codigoMunicipioRj = 3304557L; // Rio de Janeiro
@@ -248,7 +247,7 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, SUBSTITUICAO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUfRj), eq(codigoMunicipioRj), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUfRj, codigoMunicipioRj, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -264,13 +263,13 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_ParaDiferentesDatas_DeveRetornarCorreto() {
+    void teste_ConsultarAliquota_ParaDiferentesDatas_DeveRetornarCorreto() {
         // Arrange - Data futura
         LocalDate dataFutura = LocalDate.of(2027, 6, 15);
         BigDecimal valorReferencia = new BigDecimal("13.00");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(valorReferencia, null, null);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(dataFutura)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, dataFutura))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -286,14 +285,14 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_ComSubstituicaoZero_DeveRetornarZero() {
+    void teste_ConsultarAliquota_ComSubstituicaoZero_DeveRetornarZero() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("10.00");
         BigDecimal valorPadrao = BigDecimal.ZERO;
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(
             valorReferencia, valorPadrao, SUBSTITUICAO);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -311,12 +310,12 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
     }
 
     @Test
-    public void teste_ConsultarAliquota_VerificaChamadaCorretaAoService() {
+    void teste_ConsultarAliquota_VerificaChamadaCorretaAoService() {
         // Arrange
         BigDecimal valorReferencia = new BigDecimal("12.00");
         AliquotaResultadoDTO aliquotaDTO = new AliquotaResultadoDTO(valorReferencia, null, null);
         
-        when(aliquotaPadraoService.buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data)))
+        when(aliquotaPadraoService.buscarAliquota(idTributo, codigoUf, codigoMunicipio, data))
             .thenReturn(aliquotaDTO);
         
         // Act
@@ -324,6 +323,6 @@ public class Teste_DadosAbertosService_ConsultarAliquota {
         
         // Assert - Verifica se o service foi chamado com os parâmetros corretos
         verify(aliquotaPadraoService, times(1))
-            .buscarAliquota(eq(idTributo), eq(codigoUf), eq(codigoMunicipio), eq(data));
+            .buscarAliquota(idTributo, codigoUf, codigoMunicipio, data);
     }
 }

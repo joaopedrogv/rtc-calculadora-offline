@@ -29,6 +29,12 @@ public class NcmDadosAbertosOutput implements SerializationVisibility {
     @Schema(name = "tributadoPeloImpostoSeletivo", description = "Tributado pelo Imposto Seletivo", example = "")
     private final boolean tributadoPeloImpostoSeletivo;
 
+    @Schema(name = "temAliquotaAdValorem", description = "Indica se a NCM possui alíquota ad valorem do Imposto Seletivo, mesmo que o valor ainda não tenha sido definido em lei", example = "")
+    private final boolean temAliquotaAdValorem;
+
+    @Schema(name = "temAliquotaAdRem", description = "Indica se a NCM possui alíquota ad rem do Imposto Seletivo, mesmo que o valor ainda não tenha sido definido em lei", example = "")
+    private final boolean temAliquotaAdRem;
+
     @Schema(name = "aliquotaAdValorem", description = "Alíquota ad valorem do Imposto Seletivo", example = "")
     private final BigDecimal aliquotaAdValorem;
 

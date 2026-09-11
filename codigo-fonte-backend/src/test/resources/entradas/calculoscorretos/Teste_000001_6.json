@@ -20,6 +20,14 @@
         "unidade": "UN",
         "impostoInformado": 0,
         "cClassTrib": "000001"
+      },
+      "aliquotasNominais": {
+        "cbs": 8.4,
+        "ibsEstadual": 0.05,
+        "ibsMunicipal": 0.05,
+        "impostoSeletivo": {
+          "adValorem": 5.27
+        }
       }
     }
   ]

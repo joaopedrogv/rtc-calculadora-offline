@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,13 +26,16 @@ import lombok.Setter;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonInclude(NON_NULL)
-@JsonPropertyOrder({ "nObj", "tribCalc" })
+@JsonPropertyOrder({ "nObj", "tribCalc", "calculoSimulado" })
 public final class ObjetoDomain implements SerializationVisibility, Comparable<ObjetoDomain> {
     
     @EqualsAndHashCode.Include
     private Integer nObj;
     
     private TributosDomain tribCalc;
+    
+    @Schema(description = "Indica se o cálculo foi simulado (true), com base em alíquotas informadas pelo usuário, ou não (false)")
+    private boolean calculoSimulado;
     
     @JsonIgnore
     public boolean possuiImpostoSeletivo() {

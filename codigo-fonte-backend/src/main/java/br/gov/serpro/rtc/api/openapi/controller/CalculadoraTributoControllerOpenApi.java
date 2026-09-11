@@ -32,12 +32,15 @@ public interface CalculadoraTributoControllerOpenApi {
             @ApiResponse(responseCode = "200", description = "Cálculo realizado com sucesso",
             headers = @Header(
                 name = "x-warning-dados-simulados",
-                description = "Indica que os dados são simulados. Valores possíveis: " +
-                             "1 (alíquotas da CBS e do IBS ainda não definidas em lei), " +
-                             "2 (alíquotas da CBS e do IBS, e redutor em Compras Governamentais ainda não definidos em lei), " +
-                             "3 (alíquotas da CBS e do IBS, alíquotas e Classificações Tributárias do IS ainda não definidos em lei), " +
-                             "4 (alíquotas da CBS e do IBS, redutor em Compras Governamentais fictícios, alíquotas e Classificações Tributárias do IS ainda não definidos em lei), " +
-                             "5 (para o cClassTrib informado a alíquota ainda não foi definida em lei). ",
+                description = "Indica que os dados são simulados. Valores possíveis:" +
+                		"<ul>" +
+                        "<li>1 - alíquotas da CBS e do IBS ainda não definidas em lei" +
+                        "<li>2 - alíquotas da CBS e do IBS e redutor em Compras Governamentais ainda não definidos em lei" +
+                        "<li>3 - alíquotas da CBS e do IBS, alíquotas e Classificações Tributárias do IS ainda não definidos em lei" +
+                        "<li>4 - alíquotas da CBS e do IBS, redutor em Compras Governamentais fictícios, alíquotas e Classificações Tributárias do IS ainda não definidos em lei" +
+                        "<li>5 - para o cClassTrib informado a alíquota ainda não foi definida em lei" +
+                        "<li>6 - alíquotas da CBS, do IBS e do IS informadas pelo usuário e redutor em Compras Governamentais não definido" +
+                        "</ul>",
                 schema = @Schema(type = "integer", example = "1")
             ), content = {
                     @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ROCDomain.class)) }),

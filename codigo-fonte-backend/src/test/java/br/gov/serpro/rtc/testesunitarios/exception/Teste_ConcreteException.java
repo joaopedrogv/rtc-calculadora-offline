@@ -15,11 +15,13 @@ import br.gov.serpro.rtc.domain.service.exception.AliquotaReferenciaNaoEncontrad
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoVinculadaSituacaoTributariaException;
+import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoVinculadaTipoDfeException;
 import br.gov.serpro.rtc.domain.service.exception.ErroAvaliadorExpressaoAritmeticaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroInternoSistemaException;
 import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoDefinidaException;
 import br.gov.serpro.rtc.domain.service.exception.FundamentacaoClassificacaoNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoInformadoIndevidamenteException;
+import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoNaoAdmitidoTipoDfeException;
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoNaoInformadoException;
 import br.gov.serpro.rtc.domain.service.exception.IncompatibilidadeSuspensaoException;
 import br.gov.serpro.rtc.domain.service.exception.MunicipioNaoEncontradoException;
@@ -32,9 +34,13 @@ import br.gov.serpro.rtc.domain.service.exception.NcmNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.NcmNaoVinculadaException;
 import br.gov.serpro.rtc.domain.service.exception.NcmNbsSimultaneasException;
 import br.gov.serpro.rtc.domain.service.exception.NomenclaturaException;
+import br.gov.serpro.rtc.domain.service.exception.NomenclaturaIncompativelTipoDfeException;
+import br.gov.serpro.rtc.domain.service.exception.NomenclaturaNaoPermitidaTipoDfeException;
+import br.gov.serpro.rtc.domain.service.exception.NomenclaturaObrigatoriaNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.PercentualReducaoNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.SituacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.TipoAliquotaDesconhecidoException;
+import br.gov.serpro.rtc.domain.service.exception.TipoDfeNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.TratamentoClassificacaoNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.TributacaoRegularInformadaIndevidamenteException;
 import br.gov.serpro.rtc.domain.service.exception.TributacaoRegularNaoInformadaException;
@@ -364,6 +370,67 @@ class Teste_ConcreteException {
         // executar e avaliar
         Exception exception = assertThrows(CampoInvalidoException.class, () -> {
             throw new CampoInvalidoException(msg);
+        });
+        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
+    }
+
+    @Test
+    void Teste_TipoDfeNaoEncontradoException() {
+        // preparar
+        Integer tpDoc = 99;
+        LocalDate data = LocalDate.now();
+        // executar e avaliar
+        Exception exception = assertThrows(TipoDfeNaoEncontradoException.class, () -> {
+            throw new TipoDfeNaoEncontradoException(tpDoc, data);
+        });
+        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
+    }
+
+    @Test
+    void Teste_ClassificacaoTributariaNaoVinculadaTipoDfeException() {
+        // preparar
+        String cClassTrib = "200044";
+        Integer tpDoc = 55;
+        String tributos = "CBS e IBS";
+        // executar e avaliar
+        Exception exception = assertThrows(ClassificacaoTributariaNaoVinculadaTipoDfeException.class, () -> {
+            throw new ClassificacaoTributariaNaoVinculadaTipoDfeException(cClassTrib, tpDoc, tributos);
+        });
+        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
+    }
+
+    @Test
+    void Teste_NomenclaturaIncompativelTipoDfeException() {
+        // executar e avaliar
+        Exception exception = assertThrows(NomenclaturaIncompativelTipoDfeException.class, () -> {
+            throw new NomenclaturaIncompativelTipoDfeException("NBS", "200043", "NFe");
+        });
+        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
+    }
+
+    @Test
+    void Teste_NomenclaturaNaoPermitidaTipoDfeException() {
+        // executar e avaliar
+        Exception exception = assertThrows(NomenclaturaNaoPermitidaTipoDfeException.class, () -> {
+            throw new NomenclaturaNaoPermitidaTipoDfeException("200044", "NFCom");
+        });
+        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
+    }
+
+    @Test
+    void Teste_ImpostoSeletivoNaoAdmitidoTipoDfeException() {
+        // executar e avaliar
+        Exception exception = assertThrows(ImpostoSeletivoNaoAdmitidoTipoDfeException.class, () -> {
+            throw new ImpostoSeletivoNaoAdmitidoTipoDfeException(62, "NCM", "24021000");
+        });
+        assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
+    }
+
+    @Test
+    void Teste_NomenclaturaObrigatoriaNaoInformadaException() {
+        // executar e avaliar
+        Exception exception = assertThrows(NomenclaturaObrigatoriaNaoInformadaException.class, () -> {
+            throw new NomenclaturaObrigatoriaNaoInformadaException("200043", "NFSe");
         });
         assertEquals(false, exception.getMessage().isEmpty(), "Mensagem de exceção não deve ser vazia");
     }

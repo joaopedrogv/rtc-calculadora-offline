@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -39,12 +40,12 @@ class CalculadoraServiceTest {
     @ParameterizedTest
     @ValueSource(strings = { "010", "220", "221" })
     void deveRetornarCasoAliquotasFicticiasParaQualquerData(String cst) {
-        List<String> datas = List.of(
-                "2026-01-01T03:00:00-03:00",
-                "2026-12-31T23:59:59-03:00",
-                "2027-01-01T00:00:00-03:00",
-                "2028-05-10T12:00:00-03:00");
-        for (String data : datas) {
+        Map<String, TipoWarningDadosSimulados> datasAte2026 = Map.of(
+                "2026-01-01T03:00:00-03:00", TipoWarningDadosSimulados.CASO_ALIQUOTAS_FICTICIAS,
+                "2026-12-31T23:59:59-03:00", TipoWarningDadosSimulados.CASO_ALIQUOTAS_FICTICIAS,
+                "2027-01-01T00:00:00-03:00", TipoWarningDadosSimulados.CASO_CALCULOS_SIMULADOS,
+                "2028-05-10T12:00:00-03:00", TipoWarningDadosSimulados.CASO_CALCULOS_SIMULADOS);
+        datasAte2026.forEach((data, expected) -> {
             OperacaoInput operacao = new OperacaoInput();
             operacao.setDhFatoGerador(OffsetDateTime.parse(data));
             ItemOperacaoInput item = new ItemOperacaoInput();
@@ -52,11 +53,11 @@ class CalculadoraServiceTest {
             operacao.setItens(List.of(item));
             TipoWarningDadosSimulados resultado = avisoDadosSimuladosService.getWarningDadosSimulados(operacao);
             assertThat(resultado)
-                    .withFailMessage("Esperado CASO_ALIQUOTAS_FICTICIAS para CST %s na data %s",
+                    .withFailMessage("Esperado "+ expected +" para CST %s na data %s",
                             cst, data)
-                    .isEqualTo(TipoWarningDadosSimulados.CASO_ALIQUOTAS_FICTICIAS);
-            assertThat(resultado.getValor()).isEqualTo(5);
-        }
+                    .isEqualTo(expected);
+            assertThat(resultado.getValor()).isEqualTo(expected.getValor());
+        });
     }
 
     @Test
@@ -71,8 +72,8 @@ class CalculadoraServiceTest {
 
         TipoWarningDadosSimulados resultado = avisoDadosSimuladosService.getWarningDadosSimulados(operacao);
 
-        assertThat(resultado).isEqualTo(TipoWarningDadosSimulados.CASO_IMPOSTO_SELETIVO);
-        assertThat(resultado.getValor()).isEqualTo(3);
+        assertThat(resultado).isEqualTo(TipoWarningDadosSimulados.CASO_CALCULOS_SIMULADOS);
+        assertThat(resultado.getValor()).isEqualTo(6);
     }
 
     @Test
@@ -86,7 +87,7 @@ class CalculadoraServiceTest {
 
         TipoWarningDadosSimulados resultado = avisoDadosSimuladosService.getWarningDadosSimulados(operacao);
 
-        assertThat(resultado).isEqualTo(TipoWarningDadosSimulados.CASO_GERAL);
-        assertThat(resultado.getValor()).isEqualTo(1);
+        assertThat(resultado).isEqualTo(TipoWarningDadosSimulados.CASO_CALCULOS_SIMULADOS);
+        assertThat(resultado.getValor()).isEqualTo(6);
     }
 }

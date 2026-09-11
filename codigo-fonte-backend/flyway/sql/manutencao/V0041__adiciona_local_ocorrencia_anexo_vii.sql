@@ -8,6 +8,10 @@
 -- ************** É OBRIGATÓRIO INCLUIR O REGISTRO NA TABELA VERSAO_BASE_DADO **************
 -- *****************************************************************************************
 
+-- Adia a checagem de chave estrangeira para o COMMIT desta migração: o script
+-- referencia registros que só são criados/ajustados mais adiante nele mesmo.
+PRAGMA defer_foreign_keys = ON;
+
 INSERT INTO VERSAO_BASE_DADO (VRBD_DATA, VRBD_VERSAO_BASE_DADO, VRBD_DESCRICAO) VALUES
 (
     datetime('2026-07-07'),

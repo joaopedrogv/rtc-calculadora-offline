@@ -42779,3 +42779,10 @@ CREATE INDEX idx_situacao_tributaria_fim_vigencia ON SITUACAO_TRIBUTARIA(SITR_FI
 -- 🔧 PRAGMA statements executados via beforeMigrate.sql
 -- 📊 Total: 37 arquivos consolidados
 -- =====================================================
+
+-- =====================================================
+-- Religa a checagem de chave estrangeira. O Flyway executa este script fora de
+-- transação (por causa do PRAGMA foreign_keys acima), então o pragma tem efeito
+-- e vale para todas as migrações seguintes, executadas na mesma conexão.
+-- =====================================================
+PRAGMA foreign_keys = ON;

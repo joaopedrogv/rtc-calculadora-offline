@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
  * Enumera os avisos associados ao uso de dados simulados pela calculadora.
  *
  * Valores: {@code CASO_GERAL}, {@code CASO_COMPRAS_GOVERNAMENTAIS}, {@code
- * CASO_IMPOSTO_SELETIVO}, {@code CASO_COMPRAS_GOVERNAMENTAIS_IS} e {@code
- * CASO_ALIQUOTAS_FICTICIAS}.
+ * CASO_IMPOSTO_SELETIVO}, {@code CASO_COMPRAS_GOVERNAMENTAIS_IS}, {@code
+ * CASO_ALIQUOTAS_FICTICIAS} e {@code CASO_CALCULOS_SIMULADOS}.
  */
 @Getter
 @RequiredArgsConstructor
@@ -20,7 +20,8 @@ public enum TipoWarningDadosSimulados {
     CASO_COMPRAS_GOVERNAMENTAIS(2),
     CASO_IMPOSTO_SELETIVO(3),
     CASO_COMPRAS_GOVERNAMENTAIS_IS(4),
-    CASO_ALIQUOTAS_FICTICIAS(5);
+    CASO_ALIQUOTAS_FICTICIAS(5),
+    CASO_CALCULOS_SIMULADOS(6);
     
     private final int valor;
 }

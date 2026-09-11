@@ -18,12 +18,12 @@ import br.gov.serpro.rtc.domain.service.calculotributo.AvaliadorExpressaoAritmet
 /**
  * Testes unitários para o AvaliadorExpressaoAritmetica
  */
-public class Teste_AvaliadorExpressaoAritmetica {
+class Teste_AvaliadorExpressaoAritmetica {
 
     private AvaliadorExpressaoAritmetica avaliador;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         avaliador = new AvaliadorExpressaoAritmetica();
         // Chamar o método @PostConstruct manualmente para testes
         try {
@@ -36,7 +36,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
     }
 
     @Test
-    public void teste_DivisaoInteiros_DevolveFracao() {
+    void teste_DivisaoInteiros_DevolveFracao() {
         // Testa que 5/100 resulta em 0.05 e não em 0
         Map<String, BigDecimal> variables = new HashMap<>();
         
@@ -48,7 +48,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
     }
 
     @Test
-    public void teste_ExpressaoComVariaveis() {
+    void teste_ExpressaoComVariaveis() {
         // Testa a expressão completa do problema relatado
         Map<String, BigDecimal> variables = new HashMap<>();
         variables.put("quantidade", new BigDecimal("7720"));
@@ -68,7 +68,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
     }
 
     @Test
-    public void teste_DivisaoDecimaisExplicitos() {
+    void teste_DivisaoDecimaisExplicitos() {
         // Testa que decimais explícitos sempre funcionaram
         Map<String, BigDecimal> variables = new HashMap<>();
         variables.put("quantidade", new BigDecimal("7720"));
@@ -86,7 +86,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
     }
 
     @Test
-    public void teste_DivisaoSimples() {
+    void teste_DivisaoSimples() {
         Map<String, BigDecimal> variables = new HashMap<>();
         
         String expressao = "1/2";
@@ -96,7 +96,7 @@ public class Teste_AvaliadorExpressaoAritmetica {
     }
 
     @Test
-    public void teste_DivisaoComplexaComVariaveis() {
+    void teste_DivisaoComplexaComVariaveis() {
         Map<String, BigDecimal> variables = new HashMap<>();
         variables.put("valor", new BigDecimal("100"));
         

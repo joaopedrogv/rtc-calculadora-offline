@@ -41,7 +41,7 @@ class CompraGovControllerComObservabilidadeTest {
 
             // oper.gCompraGov
             .andExpect(jsonPath("$.oper.gCompraGov.tpEnteGov").value(2))
-            .andExpect(jsonPath("$.oper.gCompraGov.pRedutor").value("50.00"))
+            .andExpect(jsonPath("$.oper.gCompraGov.pRedutor").value("0.00"))
             .andExpect(jsonPath("$.oper.gCompraGov.tpOperGov").value(1))
 
             // objetos[0]
@@ -79,12 +79,12 @@ class CompraGovControllerComObservabilidadeTest {
 
             // gTribRegular
             .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.cClassTribReg").value("200032"))
-            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSUF").value("0.54"))
-            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSUF").value("1.35"))
+            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSUF").value("1.08"))
+            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSUF").value("2.69"))
             .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSMun").value("0.00"))
             .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSMun").value("0.00"))
-            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegCBS").value("1.53"))
-            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.vTribRegCBS").value("3.81"))
+            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegCBS").value("3.06"))
+            .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribRegular.vTribRegCBS").value("7.63"))
 
             // gTribCompraGov
             .andExpect(jsonPath("$.objetos[0].tribCalc.IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSUF").value("0.00"))

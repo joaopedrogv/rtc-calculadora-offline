@@ -79,8 +79,6 @@ public class XmlService {
             return bpeTmXmlService.toXml(roc);
         case NF3E:
             return nf3eXmlService.toXml(roc);
-        // case NFSE:
-        // return nfseXmlService.toXml(roc);
         default:
             throw new IllegalArgumentException("Tipo de documento não suportado: " + tipo);
         }

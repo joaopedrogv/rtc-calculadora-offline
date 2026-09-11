@@ -54,6 +54,11 @@ public interface NcmAplicavelRepository extends JpaRepository<NcmAplicavel, Long
             @Param("idClassificacaoTributaria") Long idClassificacaoTributaria, 
             @Param("data") LocalDate data);
 
+    /*
+     * Indica a existência de vínculo vigente cobrindo o NCM sem NENHUMA
+     * exceção vigente associada (o anexo modela um vínculo genérico duplicado
+     * por exceção; ver a tabela-verdade em NcmAplicavelService).
+     */
     @Query("""
             SELECT EXISTS (
                 SELECT 1
@@ -80,6 +85,7 @@ public interface NcmAplicavelRepository extends JpaRepository<NcmAplicavel, Long
                 SELECT 1
                 FROM NcmAplicavel n
                 WHERE n.classificacaoTributaria.id = :idClassificacaoTributaria
+                AND :data BETWEEN n.inicioVigencia AND COALESCE(n.fimVigencia, :data)
             )
             """)
     @Cacheable(cacheNames = "NcmAplicavelRepository.tem")

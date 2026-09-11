@@ -35,4 +35,14 @@ class Teste_dadosabertos_7_consultarNbs {
                 .andExpect(jsonPath("$.tributadoPeloImpostoSeletivo").value(false));
     }
 
+    @Test
+    void teste_controller_consultarNbs_inexistente() throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/nbs")
+                .param("data", "2027-01-01")
+                .param("nbs", "999999999")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.detail").value("NBS de código 999999999 não encontrada para a data 2027-01-01"));
+    }
+
 }

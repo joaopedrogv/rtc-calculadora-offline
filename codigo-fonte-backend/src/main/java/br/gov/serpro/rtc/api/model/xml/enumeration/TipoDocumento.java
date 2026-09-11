@@ -25,13 +25,7 @@ public enum TipoDocumento {
     BPE("bpe", "BPe", "v1.14a", true, true),
     BPE_TM("bpe-tm", "BPeTM", "v1.14a", true, true),
     NF3E("nf3e", "NF3E", "v1.14a", true, true);
-    /*
-    GTVE,
-    NFCOM,
-    NFSE_VIA,
-    DERE;
-    */    
-    
+
     private final String mnemonico;
     private final String nome;
     private final String versaoNotaTecnica;

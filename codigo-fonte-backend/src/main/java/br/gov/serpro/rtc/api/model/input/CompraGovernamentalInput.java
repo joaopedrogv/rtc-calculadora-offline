@@ -20,8 +20,8 @@ import lombok.Setter;
 public class CompraGovernamentalInput implements SerializationVisibility {
 
     @NotNull
-    public TipoEnteGovernamental tpEnteGov;
+    private TipoEnteGovernamental tpEnteGov;
     
-    @NotNull
-    public TipoOperacaoGovernamental tpOperGov;
+    //@NotNull
+    private TipoOperacaoGovernamental tpOperGov;
 }

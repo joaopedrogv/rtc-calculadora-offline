@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.gov.serpro.rtc.domain.model.dto.AliquotaAdValoremDTO;
+import br.gov.serpro.rtc.domain.model.enumeration.TributoEnum;
 import br.gov.serpro.rtc.domain.repository.AliquotaAdValoremServicoRepository;
 import br.gov.serpro.rtc.domain.service.exception.ErroGenericoValidacaoException;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +27,15 @@ public class AliquotaAdValoremServicoService {
 
     private final AliquotaAdValoremServicoRepository repository;
 
-    public BigDecimal buscarAliquotaAdValorem(String nbs, Long idTributo, Long idClassificacaoTributaria,
+    public BigDecimal buscarAliquotaAdValorem(String nbs, Long idTributo, Long idClassificacaoTributaria, LocalDate data) {
+        AliquotaAdValoremDTO aliquota = buscarAliquotaAdValoremDto(nbs, idTributo, idClassificacaoTributaria, data);
+        return aliquota != null ? aliquota.valor() : null;
+    }
+
+    public AliquotaAdValoremDTO buscarAliquotaAdValoremDto(String nbs, Long idTributo, Long idClassificacaoTributaria,
             LocalDate data) {
         try {
-            return repository.buscarAliquotaAdValorem(nbs, idTributo, idClassificacaoTributaria, data);
+            return repository.buscarAliquotaAdValoremDto(nbs, idTributo, idClassificacaoTributaria, data);
         } catch (IncorrectResultSizeDataAccessException e) {
             final var msg = String.format("Múltiplos valores encontrados para a consulta de alíquota ad valorem "
                     + "para o NBS %s, o tributo %d e classificação tributária %d em %s", nbs, idTributo, idClassificacaoTributaria, data);
@@ -36,6 +43,10 @@ public class AliquotaAdValoremServicoService {
             throw new ErroGenericoValidacaoException(
                     "Consulta retornou múltiplos valores quando apenas um era esperado.");
         }
+    }
+
+    public boolean existeNbsAdValorem(String nbs, TributoEnum tributo, LocalDate data) {
+        return repository.existeNbsAdValorem(nbs, tributo, data);
     }
 
     public BigDecimal buscarAliquotaAdValoremPorClassificacaoTributaria(Long idTributo, Long idClassificacaoTributaria,

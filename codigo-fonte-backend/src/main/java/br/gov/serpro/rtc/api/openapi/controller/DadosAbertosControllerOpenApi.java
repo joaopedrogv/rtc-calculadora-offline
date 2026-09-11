@@ -15,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.gov.serpro.rtc.api.model.output.dadosabertos.AliquotaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoDfeDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoAtorDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NomenclaturaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
@@ -29,6 +33,7 @@ import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAber
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ValidadeDfeClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.VersaoOutput;
+import br.gov.serpro.rtc.domain.model.enumeration.PapelAtorEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -163,82 +168,6 @@ public interface DadosAbertosControllerOpenApi {
     })
     ResponseEntity<List<MunicipioDadosAbertosOutput>> consultarMunicipiosPorSiglaUf(
         @Parameter(description = "Sigla da unidade federativa", example = "RS", required = true) String siglaUf);
-
-    @Operation(
-        summary = "Situação Tributária (CST)",
-        description = "Obtém a lista das situações tributárias cadastradas vigentes em uma determinada data para CBS/IBS"
-    )
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
-            @Content(
-                mediaType = APPLICATION_JSON_VALUE,
-                schema = @Schema(implementation = SituacaoTributariaDadosAbertosOutput.class),
-                examples = @ExampleObject(
-                    name = "Situações Tributárias Example",
-                    value = """
-                    [
-                        {
-                            "id": 1,
-                            "codigo": "000",
-                            "descricao": "Tributação integral"
-                        },
-                        {
-                            "id": 2,
-                            "codigo": "010",
-                            "descricao": "Tributação com alíquotas uniformes"
-                        },
-                        {
-                            "id": 3,
-                            "codigo": "011",
-                            "descricao": "Tributação com alíquotas uniformes reduzidas"
-                        },
-                        {
-                            "id": 4,
-                            "codigo": "200",
-                            "descricao": "Alíquota reduzida"
-                        }
-                    ]
-                    """
-                )
-            )
-        }),
-        @ApiResponse(responseCode = "400", description = "Requisição com problema",
-            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
-                schema = @Schema(implementation = ProblemDetail.class),
-                examples = @ExampleObject(
-                    name = "Bad Request Example",
-                    value = """
-                    {
-                        "type": "about:blank",
-                        "title": "Bad Request",
-                        "status": 400,
-                        "detail": "Required parameter 'data' is not present.",
-                        "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs"
-                    }
-                    """
-                )
-            )
-        ),
-        @ApiResponse(responseCode = "500", description = "Erro interno na API",
-            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
-                schema = @Schema(implementation = ProblemDetail.class),
-                examples = @ExampleObject(
-                    name = "Internal Server Error Example",
-                    value = """
-                    {
-                      "type": "http://url-ambiente/errors/erro-interno",
-                      "title": "Erro interno na API",
-                      "status": 500,
-                      "detail": "Falha ao processar a requisição.",
-                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/cbs-ibs"
-                    }
-                    """
-                )
-            )
-        )
-    })
-    ResponseEntity<List<SituacaoTributariaDadosAbertosOutput>> consultarSituacoesTributariasCbsIbs(
-        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2026-01-01", required = true) LocalDate data);
 
     @Deprecated(since = "2026-01-13", forRemoval = true)
     @Operation(
@@ -511,7 +440,7 @@ public interface DadosAbertosControllerOpenApi {
 
     @Operation(summary = "Nomenclatura Comum do Mercosul (NCM)", description = "Obtém informações sobre a NCM em relação ao Imposto Seletivo")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", headers = @Header(name = "x-warning-dados-simulados", description = "Indica que os dados são simulados. Valores possíveis: 1 (alíquotas do Imposto Seletivo ainda não definidas em lei).", schema = @Schema(type = "boolean", example = "true")), content = {
             @Content(
                 mediaType = APPLICATION_JSON_VALUE,
                 schema = @Schema(implementation = NcmDadosAbertosOutput.class),
@@ -520,8 +449,8 @@ public interface DadosAbertosControllerOpenApi {
                     value = """
                     {
                         "tributadoPeloImpostoSeletivo": true,
-                        "aliquotaAdValorem": 13,
-                        "aliquotaAdRem": 21.3,
+                        "temAliquotaAdValorem": true,
+                        "temAliquotaAdRem": true,
                         "capitulo": "Tabaco e seus sucedâneos manufaturados; produtos, mesmo com nicotina, destinados à inalação sem combustão; outros produtos que contenham nicotina destinados à absorção da nicotina pelo corpo humano.",
                         "posicao": "Charutos, cigarrilhas e cigarros, de tabaco ou dos seus sucedâneos.",
                         "subitem": "Charutos e cigarrilhas, que contenham tabaco",
@@ -544,6 +473,24 @@ public interface DadosAbertosControllerOpenApi {
                         "status": 400,
                         "detail": "Required parameter 'data' is not present.",
                         "instance": "/api/calculadora/dados-abertos/ncm/24021000"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "404", description = "NCM não encontrada na data especificada",
+            content = @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Not Found Example",
+                    value = """
+                    {
+                        "type": "http://url-ambiente/errors/ncm-nao-encontrada",
+                        "title": "NCM não encontrada",
+                        "status": 404,
+                        "detail": "NCM de código 24020009 não encontrada para a data 2026-08-25",
+                        "instance": "/api/calculadora/dados-abertos/ncm"
                     }
                     """
                 )
@@ -574,7 +521,7 @@ public interface DadosAbertosControllerOpenApi {
 
     @Operation(summary = "Nomenclatura Brasileira de Serviços (NBS)", description = "Obtém informações sobre a NBS em relação ao Imposto Seletivo")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", headers = @Header(name = "x-warning-dados-simulados", description = "Indica que os dados são simulados. Valores possíveis: 1 (alíquotas do Imposto Seletivo ainda não definidas em lei).", schema = @Schema(type = "boolean", example = "true")), content = {
             @Content(
                 mediaType = APPLICATION_JSON_VALUE,
                 schema = @Schema(implementation = NbsDadosAbertosOutput.class),
@@ -583,6 +530,7 @@ public interface DadosAbertosControllerOpenApi {
                     value = """
                     {
                       "tributadoPeloImpostoSeletivo": false,
+                      "temAliquotaAdValorem": false,
                       "capitulo": "Serviços veterinários",
                       "posicao": "Serviços veterinários para animais de corte",
                       "item": "Serviços de atendimento, assistência ou tratamento para animais de corte"
@@ -604,6 +552,24 @@ public interface DadosAbertosControllerOpenApi {
                       "status": 400,
                       "detail": "Required parameter 'data' is not present.",
                       "instance": "/api/calculadora/dados-abertos/nbs/114052200"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "404", description = "NBS não encontrada na data especificada",
+            content = @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Not Found Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/nbs-nao-encontrada",
+                      "title": "NBS não encontrada",
+                      "status": 404,
+                      "detail": "NBS de código 999999999 não encontrada para a data 2026-08-25",
+                      "instance": "/api/calculadora/dados-abertos/nbs"
                     }
                     """
                 )
@@ -1001,6 +967,225 @@ public interface DadosAbertosControllerOpenApi {
     })
     ResponseEntity<List<ClassificacaoTributariaDadosAbertosOutput>> consultarClassificacoesTributariasCbsIbs(
         @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2026-01-01", required = true) LocalDate data);
+
+    @Operation(
+        summary = "Classificação Tributária (cClassTrib) por Atores - CBS/IBS",
+        description = """
+            Obtém a lista das classificações tributárias (cClassTrib) para CBS e IBS aplicáveis \
+            à combinação de atores da operação. Uma classificação sem vínculo de ator vigente em \
+            um papel (fornecedor ou adquirente) é aplicável a qualquer ator naquele papel e é \
+            sempre retornada; quando fornecedor e adquirente são informados juntos, as duas \
+            condições devem ser satisfeitas simultaneamente. Sem filtros, o resultado é idêntico \
+            ao do endpoint de classificações tributárias CBS/IBS."""
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso",
+            headers = @Header(name = "Cache-Control", description = "public, max-age=3600"),
+            content = {
+                @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ClassificacaoTributariaDadosAbertosOutput.class),
+                    examples = @ExampleObject(
+                        name = "Classificações Tributárias por Atores Example",
+                        value = """
+                        [
+                            {
+                            "codigo": "200054",
+                            "descricao": "Fornecimento de bens e serviços por agente financeiro do FGTS",
+                            "tipoAliquota": "Padrão",
+                            "nomenclatura": "NBS",
+                            "descricaoTratamentoTributario": "Alíquota zero",
+                            "incompativelComSuspensao": false,
+                            "exigeGrupoDesoneracao": false,
+                            "possuiPercentualReducao": true,
+                            "indicaApropriacaoCreditoAdquirenteCbs": true,
+                            "indicaApropriacaoCreditoAdquirenteIbs": true,
+                            "indicaCreditoPresumidoFornecedor": false,
+                            "indicaCreditoPresumidoAdquirente": false,
+                            "creditoOperacaoAntecedente": "Manutenção",
+                            "percentualReducaoCbs": 100,
+                            "percentualReducaoIbsUf": 100,
+                            "percentualReducaoIbsMun": 100,
+                            "tipoReceitaBrutaSimplesNacional": 1,
+                            "tiposDfeClassificacao": [
+                                {
+                                "tipo": 91,
+                                "sigla": "NFSe",
+                                "descricao": "Nota Fiscal de Serviços Eletrônica"
+                                }
+                            ],
+                            "dataAtualizacao": "2025-12-15"
+                            }
+                        ]
+                        """
+                    )
+                )
+            }
+        ),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                        "type": "about:blank",
+                        "title": "Bad Request",
+                        "status": 400,
+                        "detail": "Required parameter 'data' is not present.",
+                        "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/por-atores"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(
+                mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                        "type": "http://url-ambiente/errors/erro-interno",
+                        "title": "Erro interno na API",
+                        "status": 500,
+                        "detail": "Falha ao processar a requisição.",
+                        "instance": "/api/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/por-atores"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<ClassificacaoTributariaDadosAbertosOutput>> consultarClassificacoesTributariasCbsIbsPorAtores(
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data,
+        @Parameter(description = "ATOR_ID do ator no papel de fornecedor da operação (opcional)", example = "27") Long fornecedor,
+        @Parameter(description = "ATOR_ID do ator no papel de adquirente da operação (opcional)", example = "28") Long adquirente,
+        @Parameter(description = "Sigla do tipo de DF-e (opcional), em qualquer formato (ex.: NFe, NF-e, nfe)", example = "NFSe") String siglaDfe);
+
+    @Operation(
+        summary = "Classificação Tributária (cClassTrib) por código - CBS/IBS", 
+        description = "Obtém uma classificação tributária específica por seu código (cClassTrib) para CBS/IBS"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = ClassificacaoTributariaDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Classificação CBS/IBS por código Example",
+                    value = """
+                    {
+                        "codigo": "000001",
+                        "descricao": "Situações tributadas integralmente pelo IBS e CBS.",
+                        "tipoAliquota": "Padrão",
+                        "nomenclatura": "NBS ou NCM",
+                        "descricaoTratamentoTributario": "Tributação integral",
+                        "incompativelComSuspensao": false,
+                        "exigeGrupoDesoneracao": false,
+                        "possuiPercentualReducao": true,
+                        "indicaApropriacaoCreditoAdquirenteCbs": true,
+                        "indicaApropriacaoCreditoAdquirenteIbs": true,
+                        "indicaCreditoPresumidoFornecedor": false,
+                        "indicaCreditoPresumidoAdquirente": false,
+                        "creditoOperacaoAntecedente": "Manutenção",
+                        "percentualReducaoCbs": 0,
+                        "percentualReducaoIbsUf": 0,
+                        "percentualReducaoIbsMun": 0,
+                        "tipoReceitaBrutaSimplesNacional": 1,
+                        "tiposDfeClassificacao": [
+                            {
+                            "tipo": 55,
+                            "sigla": "NFe",
+                            "descricao": "Nota Fiscal Eletrônica"
+                            },
+                            {
+                            "tipo": 65,
+                            "sigla": "NFCe",
+                            "descricao": "Nota Fiscal de Consumidor Eletrônica"
+                            }
+                        ],
+                        "dataAtualizacao": "2025-12-15"
+                    }
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class)
+            )
+        ),
+        @ApiResponse(responseCode = "404", description = "Classificação não encontrada",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class)
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class)
+            )
+        )
+    })
+    ResponseEntity<ClassificacaoTributariaDadosAbertosOutput> consultarClassificacaoTributariaCbsIbsPorCodigo(
+        @Parameter(description = "Código da Classificação Tributária (cClassTrib)", example = "000001", required = true) String cClassTrib,
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data);
+
+    @Operation(
+        summary = "Classificação Tributária (cClassTrib) por código - IS",
+        description = "Obtém uma classificação tributária específica por seu código (cClassTrib) para o Imposto Seletivo (IS)"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = ClassificacaoTributariaDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Classificação IS por código Example",
+                    value = """
+                    {
+                        "codigo": "000001",
+                        "descricao": "Primeiro fornecimento a qualquer título de bem",
+                        "tipoAliquota": "Alíquotas Combinadas (Ad Valorem e Ad Rem)",
+                        "nomenclatura": "NBS ou NCM",
+                        "descricaoTratamentoTributario": "Tributação com Imposto Seletivo",
+                        "incompativelComSuspensao": false,
+                        "exigeGrupoDesoneracao": false,
+                        "possuiPercentualReducao": false,
+                        "tiposDfeClassificacao": [
+                            {
+                            "tipo": 55,
+                            "sigla": "NFe",
+                            "descricao": "Nota Fiscal Eletrônica"
+                            }
+                        ],
+                        "dataAtualizacao": "2025-12-15"
+                    }
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class)
+            )
+        ),
+        @ApiResponse(responseCode = "404", description = "Classificação não encontrada",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class)
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class)
+            )
+        )
+    })
+    ResponseEntity<ClassificacaoTributariaDadosAbertosOutput> consultarClassificacaoTributariaIsPorCodigo(
+        @Parameter(description = "Código da Classificação Tributária (cClassTrib)", example = "000001", required = true) String cClassTrib,
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data);
 
     @Operation(
         summary = "Classificação Tributária (cClassTrib) para Imposto Seletivo",
@@ -1476,6 +1661,203 @@ public interface DadosAbertosControllerOpenApi {
         @Parameter(description = "Código da classificação tributária", example = "000001", required = true) String cClassTrib,
         @Parameter(description = "Data do fato gerador (yyyy-MM-dd)", example = "2026-01-01", required = true) LocalDate data);
 
+    @Operation(summary = "Situações Tributárias (CSTs) com Classificações Tributárias - CBS/IBS",
+               description = "Obtém a lista de situações tributárias (CSTs) com suas classificações tributárias aplicáveis para CBS/IBS em uma data informada. "
+                   + "Quando o parâmetro siglaDfe é informado, retorna apenas as CSTs e classificações aplicáveis ao tipo de DFe; "
+                   + "quando omitido, retorna todas as situações sem filtro de DFe.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = SituacaoClassificacaoAninhadoOutput.class),
+                examples = @ExampleObject(
+                    name = "CSTs CBS/IBS with Classifications Example",
+                    value = """
+                    [
+                      {
+                        "id": 1,
+                        "codigo": "000",
+                        "descricao": "Tributação Integral",
+                        "classificacoesTributarias": [
+                          {
+                            "codigo": "000001",
+                            "descricao": "Situações tributadas integralmente pelo IBS e CBS."
+                          },
+                          {
+                            "codigo": "000002",
+                            "descricao": "Operação Interestadual"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 5,
+                        "codigo": "060",
+                        "descricao": "Diferimento",
+                        "classificacoesTributarias": [
+                          {
+                            "codigo": "060001",
+                            "descricao": "Operação com Diferimento"
+                          }
+                        ]
+                      }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição inválida",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Parâmetro inválido ou ausente",
+                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/cbs-ibs"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "422", description = "Erro de validação nos parâmetros",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Validation Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/sigla-dfe-nao-reconhecida",
+                      "title": "Sigla DFe não reconhecida",
+                      "status": 422,
+                      "detail": "Sigla DFe inválida: NFEJ",
+                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/cbs-ibs",
+                      "timestamp": 1760729074.1335235
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-de-sistema-nao-previsto",
+                      "title": "Erro de sistema não previsto",
+                      "status": 500,
+                      "detail": "Falha ao acessar o banco de dados",
+                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/cbs-ibs",
+                      "timestamp": 1760730286.2395124
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<SituacaoClassificacaoAninhadoOutput>> consultarCstsComClassificacoesCbsIbs(
+        @Parameter(description = "Sigla do tipo de Documento Fiscal Eletrônico (opcional); quando omitida, retorna todas as situações sem filtro de DFe", example = "NFE") String siglaDfe,
+        @Parameter(description = "Data do fato gerador (yyyy-MM-dd)", example = "2026-01-01", required = true) LocalDate data);
+
+    @Operation(summary = "Situações Tributárias (CSTs) com Classificações Tributárias - IS",
+               description = "Obtém a lista de situações tributárias (CSTs) com suas classificações tributárias aplicáveis para o Imposto Seletivo (IS) em uma data informada. "
+                   + "O parâmetro siglaDfe é opcional; quando informado e o Imposto Seletivo não for aplicável ao tipo de DFe, retorna lista vazia.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = SituacaoClassificacaoAninhadoOutput.class),
+                examples = @ExampleObject(
+                    name = "CSTs IS with Classifications Example",
+                    value = """
+                    [
+                      {
+                        "codigo": "000",
+                        "descricao": "Tributado com Imposto Seletivo",
+                        "classificacoesTributarias": [
+                          {
+                            "codigo": "000001",
+                            "descricao": "Primeiro fornecimento a qualquer título de bem"
+                          }
+                        ]
+                      },
+                      {
+                        "codigo": "100",
+                        "descricao": "Imunidade",
+                        "classificacoesTributarias": [
+                          {
+                            "codigo": "100001",
+                            "descricao": "Exportação"
+                          }
+                        ]
+                      }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição inválida",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Parâmetro inválido ou ausente",
+                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/is"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "422", description = "Erro de validação nos parâmetros",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Validation Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/sigla-dfe-nao-reconhecida",
+                      "title": "Sigla DFe não reconhecida",
+                      "status": 422,
+                      "detail": "Sigla DFe inválida: NFEJ",
+                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/is",
+                      "timestamp": 1760729074.1335235
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-de-sistema-nao-previsto",
+                      "title": "Erro de sistema não previsto",
+                      "status": 500,
+                      "detail": "Falha ao acessar o banco de dados",
+                      "instance": "/api/calculadora/dados-abertos/situacoes-tributarias/is",
+                      "timestamp": 1760730286.2395124
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<SituacaoClassificacaoAninhadoOutput>> consultarCstsComClassificacoesIs(
+        @Parameter(description = "Sigla do tipo de Documento Fiscal Eletrônico (opcional); quando omitida, retorna todas as situações sem filtro de DFe", example = "NFE") String siglaDfe,
+        @Parameter(description = "Data do fato gerador (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data);
+
     @Operation(summary = "Versão do Aplicativo e do Banco de Dados", description = "Obtém a versão do aplicativo e do banco de dados")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
@@ -1571,15 +1953,15 @@ public interface DadosAbertosControllerOpenApi {
                     name = "Transferências CBS Example",
                     value = """
                     [
-                      {
-                        "valor": 0.15,
-                        "inicioVigencia": "2026-01-01",
-                      },
-                      {
-                        "valor": 0.10,
-                        "inicioVigencia": "2025-01-01",
-                        "fimVigencia": "2025-12-31"
-                      }
+                        {
+                            "valor": 0.15,
+                            "inicioVigencia": "2026-01-01"
+                        },
+                        {
+                            "valor": 0.10,
+                            "inicioVigencia": "2025-01-01",
+                            "fimVigencia": "2025-12-31"
+                        }
                     ]
                     """
                 )
@@ -1776,4 +2158,240 @@ public interface DadosAbertosControllerOpenApi {
         @Parameter(description = "Data de ocorrência do fato gerador", required = true, example = "2026-01-01")
         @RequestParam LocalDate dataOcorrenciaFatoGerador
     );
+
+    @Operation(
+    summary = "Nomenclatura Aplicável",
+    description = "Determina qual nomenclatura (NCM, NBS, MISTO,SEM, EXCECAO_NCM ou EXCECAO_NBS) é aplicável para uma combinação de tipo de documento fiscal eletrônico, classificação tributária e data. "
+        + "Devolve também os sinais de obrigatoriedade: obrigatorio (true para NCM, NBS, MISTO, EXCECAO_NCM e EXCECAO_NBS; false para SEM) e, "
+        + "para desambiguar o resultado SEM, ncmOpcional (true quando SEM e o DFe é NF-e/NFC-e) e nbsOpcional (true quando SEM e o DFe é NFS-e)"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso",
+            content = @Content(mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = NomenclaturaDadosAbertosOutput.class),
+                examples = {
+                    @ExampleObject(name = "NCM Aplicável", value = """
+                        {"siglaDfe":"NFe","cClassTrib":"000001","data":"2026-01-01","nomenclatura":"NCM","obrigatorio":true,"ncmOpcional":false,"nbsOpcional":false}
+                    """),
+                    @ExampleObject(name = "NBS Aplicável", value = """
+                        {"siglaDfe":"NFSe","cClassTrib":"000001","data":"2026-01-01","nomenclatura":"NBS","obrigatorio":true,"ncmOpcional":false,"nbsOpcional":false}
+                    """),
+                    @ExampleObject(name = "Nenhuma Aplicável (NCM opcional)", value = """
+                        {"siglaDfe":"NFe","cClassTrib":"200001","data":"2026-01-01","nomenclatura":"SEM","obrigatorio":false,"ncmOpcional":true,"nbsOpcional":false}
+                    """),
+                    @ExampleObject(name = "Nenhuma Aplicável", value = """
+                        {"siglaDfe":"BPe","cClassTrib":"000001","data":"2026-01-01","nomenclatura":"SEM","obrigatorio":false,"ncmOpcional":false,"nbsOpcional":false}
+                    """)
+                }
+            )),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                        "type": "about:blank",
+                        "title": "Bad Request",
+                        "status": 400,
+                        "detail": "Required parameter 'data' is not present.",
+                        "instance": "/api/calculadora/dados-abertos/nomenclatura/NFe/000001"
+                    }
+                    """
+                ))),
+        @ApiResponse(responseCode = "404", description = "Classificação tributária ou siglaDfe não encontrada",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Not Found Example",
+                    value = """
+                    {
+                        "type": "https://url-ambiente/errors/classificacao-tributaria-nao-encontrada",
+                        "title": "Classificação Tributária Não Encontrada",
+                        "status": 404,
+                        "detail": "Classificação tributária não encontrada para código 999999 e data 2026-01-01 (CBS/IBS)",
+                        "instance": "/api/calculadora/dados-abertos/nomenclatura/NFe/999999"
+                    }
+                    """
+                ))),
+        @ApiResponse(responseCode = "422", description = "Erro de validação nos parâmetros",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Validation Error Example",
+                    value = """
+                    {
+                        "type": "http://url-ambiente/errors/sigla-dfe-nao-reconhecida",
+                        "title": "Sigla DFe não reconhecida",
+                        "status": 422,
+                        "detail": "Sigla DFe inválida: NFEJ",
+                        "instance": "/api/calculadora/dados-abertos/nomenclatura/NFEJ/000001"
+                    }
+                    """
+                ))),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                        "type": "http://url-ambiente/errors/erro-de-sistema-nao-previsto",
+                        "title": "Erro de sistema não previsto",
+                        "status": 500,
+                        "detail": "Falha ao acessar o banco de dados",
+                        "instance": "/api/calculadora/dados-abertos/nomenclatura/NFe/000001"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<NomenclaturaDadosAbertosOutput> consultarNomenclatura(
+        @Parameter(description = "Sigla do tipo de Documento Fiscal Eletrônico", example = "NFe", required = true) String siglaDfe,
+        @Parameter(description = "Código da classificação tributária", example = "000001", required = true) String cClassTrib,
+        @Parameter(description = "Data do fato gerador (yyyy-MM-dd)", example = "2026-01-01", required = true) LocalDate data);
+
+    @Operation(summary = "Tipos de DFe agrupados",
+        description = "Obtém os tipos de Documento Fiscal Eletrônico (DFe) vigentes, agrupados pela sua categoria, "
+            + "para a seleção do tipo de documento. O campo codigo de cada tipo é a sigla usada como siglaDfe nos demais endpoints")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+            @Content(
+                mediaType = APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = GrupoDfeDadosAbertosOutput.class),
+                examples = @ExampleObject(
+                    name = "Grupos DFe Example",
+                    value = """
+                    [
+                      {
+                        "id": "1",
+                        "titulo": "MERCADORIAS",
+                        "ordem": 1,
+                        "tipos": [
+                          { "codigo": "NFE", "titulo": "Nota Fiscal Eletrônica", "modelo": "55", "ordem": 1 },
+                          { "codigo": "NFCE", "titulo": "Nota Fiscal de Consumidor Eletrônica", "modelo": "65", "ordem": 2 }
+                        ]
+                      }
+                    ]
+                    """
+                )
+            )
+        }),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Parâmetro inválido ou ausente.",
+                      "instance": "/api/calculadora/dados-abertos/dfe/grupos"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/dfe/grupos"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<GrupoDfeDadosAbertosOutput>> consultarTiposDfeAgrupados(
+        @Parameter(description = "Data de vigência (yyyy-MM-dd); ausente usa a data atual", example = "2026-01-01") LocalDate data);
+
+    @Operation(
+        summary = "Atores agrupados",
+        description = "Obtém a lista de atores vigentes agrupados, com filtro opcional por papel."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso",
+            headers = @Header(name = "Cache-Control", description = "public, max-age=3600"),
+            content = {
+                @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = GrupoAtorDadosAbertosOutput.class),
+                    examples = @ExampleObject(
+                        name = "Atores Agrupados Example",
+                        value = """
+                        [
+                          {
+                            "id": 1,
+                            "descricao": "Regime regular / contribuinte padrão (arts. 21 ss.)",
+                            "ordem": 1,
+                            "atores": [
+                              { "id": 22, "descricao": "Contribuinte sujeito ao regime regular do IBS e da CBS", "ordem": 1 }
+                            ]
+                          },
+                          {
+                            "id": 7,
+                            "descricao": "Serviços financeiros, seguros, FGTS e consórcios (arts. 181-233)",
+                            "ordem": 7,
+                            "atores": [
+                              { "id": 4, "descricao": "Agente financeiro do FGTS (exceto CEF)", "ordem": 1 },
+                              { "id": 5, "descricao": "Estabelecimento bancário (exceto CEF)", "ordem": 2 }
+                            ]
+                          }
+                        ]
+                        """
+                    )
+                )
+            }
+        ),
+        @ApiResponse(responseCode = "400", description = "Requisição com problema",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Bad Request Example",
+                    value = """
+                    {
+                      "type": "about:blank",
+                      "title": "Bad Request",
+                      "status": 400,
+                      "detail": "Required parameter 'data' is not present.",
+                      "instance": "/api/calculadora/dados-abertos/ator/grupos"
+                    }
+                    """
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "500", description = "Erro interno na API",
+            content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                schema = @Schema(implementation = ProblemDetail.class),
+                examples = @ExampleObject(
+                    name = "Internal Server Error Example",
+                    value = """
+                    {
+                      "type": "http://url-ambiente/errors/erro-interno",
+                      "title": "Erro interno na API",
+                      "status": 500,
+                      "detail": "Falha ao processar a requisição.",
+                      "instance": "/api/calculadora/dados-abertos/ator/grupos"
+                    }
+                    """
+                )
+            )
+        )
+    })
+    ResponseEntity<List<GrupoAtorDadosAbertosOutput>> consultarAtoresAgrupados(
+        @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data,
+        @Parameter(description = "Papel do ator (opcional)", example = "FORNECEDOR",
+            schema = @Schema(implementation = PapelAtorEnum.class)) PapelAtorEnum papel);
+
 }

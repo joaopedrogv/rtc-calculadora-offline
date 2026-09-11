@@ -4,6 +4,7 @@
 package br.gov.serpro.rtc.domain.service;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,11 @@ public class AvisoDadosSimuladosService {
 
     public TipoWarningDadosSimulados getWarningDadosSimulados(OperacaoInput operacao) {
         LocalDate dataFatoGerador = operacao.getFatoGeradorAplicavel();
+        
+        final var dataApos2026 = dataFatoGerador.isAfter(LocalDate.of(2026, Month.DECEMBER, 31));
+		if (dataApos2026) {
+            return TipoWarningDadosSimulados.CASO_CALCULOS_SIMULADOS;
+        } 
         
         boolean temComprasGovernamentais = false;
         boolean temImpostoSeletivo = false;

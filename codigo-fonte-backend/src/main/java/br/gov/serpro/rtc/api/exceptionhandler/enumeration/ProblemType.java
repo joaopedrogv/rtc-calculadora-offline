@@ -13,14 +13,22 @@ import br.gov.serpro.rtc.api.exceptionhandler.dto.CodigoErro;
 import br.gov.serpro.rtc.api.util.HttpUtils;
 import br.gov.serpro.rtc.domain.model.enumeration.EstadoItemEnum;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaAdRemNaoEncontradaException;
+import br.gov.serpro.rtc.domain.service.exception.AliquotaImpostoSeletivoNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaNaoEncontradaException;
+import br.gov.serpro.rtc.domain.service.exception.AliquotasNominaisInformadasIndevidamenteException;
+import br.gov.serpro.rtc.domain.service.exception.AliquotasNominaisNaoInformadasException;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaNegativaException;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaPadraoNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaReferenciaNaoEncontradaException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoComponentesInconsistenteException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoInconsistenteException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoMenorBaseCalculoImpostoSeletivoException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import br.gov.serpro.rtc.domain.service.exception.CaptchaException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoVinculadaSituacaoTributariaException;
+import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoVinculadaTipoDfeException;
 import br.gov.serpro.rtc.domain.service.exception.DataFatoGeradorNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroAvaliadorExpressaoAritmeticaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroFaltaImplementacaoException;
@@ -30,6 +38,7 @@ import br.gov.serpro.rtc.domain.service.exception.ErroXmlException;
 import br.gov.serpro.rtc.domain.service.exception.FormaAplicacaoNaoDefinidaException;
 import br.gov.serpro.rtc.domain.service.exception.FundamentacaoClassificacaoNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoInformadoIndevidamenteException;
+import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoNaoAdmitidoTipoDfeException;
 import br.gov.serpro.rtc.domain.service.exception.ImpostoSeletivoNaoInformadoException;
 import br.gov.serpro.rtc.domain.service.exception.IncompatibilidadeSuspensaoException;
 import br.gov.serpro.rtc.domain.service.exception.MunicipioNaoEncontradoException;
@@ -43,8 +52,12 @@ import br.gov.serpro.rtc.domain.service.exception.NcmNaoVinculadaException;
 import br.gov.serpro.rtc.domain.service.exception.NcmNbsSimultaneasException;
 import br.gov.serpro.rtc.domain.service.exception.NegocioException;
 import br.gov.serpro.rtc.domain.service.exception.NomenclaturaException;
+import br.gov.serpro.rtc.domain.service.exception.NomenclaturaIncompativelTipoDfeException;
+import br.gov.serpro.rtc.domain.service.exception.NomenclaturaNaoPermitidaTipoDfeException;
+import br.gov.serpro.rtc.domain.service.exception.NomenclaturaObrigatoriaNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.PercentualReducaoNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.SiglaDFeNaoEncontradaException;
+import br.gov.serpro.rtc.domain.service.exception.TipoDfeNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.SituacaoTributariaNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.TipoAliquotaDesconhecidoException;
 import br.gov.serpro.rtc.domain.service.exception.TratamentoClassificacaoNaoEncontradoException;
@@ -182,6 +195,73 @@ public enum ProblemType {
             new CodigoErro("REG-023", null, EstadoItemEnum.INCONSISTENCIA_ENTRADA),
             "Erro de validação que não se enquadra em nenhuma categoria específica."),
 
+    BASE_CALCULO_NAO_INFORMADA(BaseCalculoNaoInformadaException.class,
+            "Base de cálculo não informada", "base-calculo-nao-informada",
+            new CodigoErro("REG-025", "baseCalculo", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A base de cálculo de CBS e IBS é obrigatória quando o grupo do Imposto Seletivo não é informado."),
+
+    BASE_CALCULO_INCONSISTENTE(BaseCalculoInconsistenteException.class,
+            "Base de cálculo inconsistente", "base-calculo-inconsistente",
+            new CodigoErro("REG-026", "baseCalculo", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A base de cálculo de CBS e IBS informada difere da soma da base de cálculo do Imposto Seletivo com o Imposto Seletivo informado."),
+
+    BASE_CALCULO_MENOR_BASE_CALCULO_IMPOSTO_SELETIVO(BaseCalculoMenorBaseCalculoImpostoSeletivoException.class,
+            "Base de cálculo menor que a base de cálculo do Imposto Seletivo",
+            "base-calculo-menor-base-calculo-imposto-seletivo",
+            new CodigoErro("REG-027", "baseCalculo", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A base de cálculo de CBS e IBS informada é menor que a base de cálculo do Imposto Seletivo."),
+
+    TIPO_DOCUMENTO_FISCAL_NAO_ENCONTRADO(TipoDfeNaoEncontradoException.class,
+            "Tipo de documento fiscal não encontrado", "tipo-documento-fiscal-nao-encontrado",
+            new CodigoErro("REG-028", "tpDoc", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "O tipo de documento fiscal (tpDoc) informado na operação não existe ou está fora de vigência na data do fato gerador."),
+
+    CLASSIFICACAO_TRIBUTARIA_NAO_VINCULADA_TIPO_DOCUMENTO(ClassificacaoTributariaNaoVinculadaTipoDfeException.class,
+            "Classificação tributária não vinculada ao tipo de documento",
+            "classificacao-tributaria-nao-vinculada-tipo-documento",
+            new CodigoErro("REG-029", "cClassTrib", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A classificação tributária informada não possui vínculo vigente com o tipo de documento fiscal (tpDoc) da operação."),
+
+    NOMENCLATURA_INCOMPATIVEL_TIPO_DOCUMENTO(NomenclaturaIncompativelTipoDfeException.class,
+            "Nomenclatura incompatível com o tipo de documento", "nomenclatura-incompativel-tipo-documento",
+            new CodigoErro("REG-030", null, EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A nomenclatura informada (NCM ou NBS) não é aceita para a classificação tributária no tipo de documento fiscal (tpDoc) da operação."),
+
+    NOMENCLATURA_NAO_PERMITIDA_TIPO_DOCUMENTO(NomenclaturaNaoPermitidaTipoDfeException.class,
+            "Nomenclatura não permitida para o tipo de documento", "nomenclatura-nao-permitida-tipo-documento",
+            new CodigoErro("REG-031", null, EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "O tipo de documento fiscal (tpDoc) da operação não admite o preenchimento de NCM ou NBS."),
+
+    IMPOSTO_SELETIVO_NAO_ADMITIDO_TIPO_DOCUMENTO(ImpostoSeletivoNaoAdmitidoTipoDfeException.class,
+            "Imposto Seletivo não admitido pelo tipo de documento", "imposto-seletivo-nao-admitido-tipo-documento",
+            new CodigoErro("REG-032", "impostoSeletivo", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "O NCM/NBS informado é tributado pelo Imposto Seletivo, mas o tipo de documento fiscal (tpDoc) da operação não admite Imposto Seletivo."),
+
+    NOMENCLATURA_OBRIGATORIA_NAO_INFORMADA(NomenclaturaObrigatoriaNaoInformadaException.class,
+            "Nomenclatura obrigatória não informada", "nomenclatura-obrigatoria-nao-informada",
+            new CodigoErro("REG-033", null, EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A classificação tributária possui anexo com NCM e NBS aplicáveis e exige o preenchimento de um deles, completo, para o tipo de documento fiscal (tpDoc) da operação."),
+
+    BASE_CALCULO_COMPONENTES_INCONSISTENTE(BaseCalculoComponentesInconsistenteException.class,
+            "Base de cálculo inconsistente", "base-calculo-inconsistente",
+            new CodigoErro("REG-034", "baseCalculo", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A base de cálculo declarada no item diverge da base calculada a partir dos componentes informados"),
+
+    ALIQUOTA_IMPOSTO_SELETIVO_NAO_INFORMADA(AliquotaImpostoSeletivoNaoInformadaException.class,
+            "Alíquota do Imposto Seletivo não informada", "aliquota-imposto-seletivo-nao-informada",
+            new CodigoErro("REG-035", "aliquotasNominais/impostoSeletivo", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "A NCM/NBS possui incidência do Imposto Seletivo, mas a alíquota ainda não foi definida em lei e não foi informada pelo usuário."),
+
+    ALIQUOTAS_NOMINAIS_INFORMADAS_INDEVIDAMENTE(AliquotasNominaisInformadasIndevidamenteException.class,
+            "Alíquotas nominais informadas indevidamente", "aliquotas-nominais-informadas-indevidamente",
+            new CodigoErro("REG-036", "aliquotasNominais", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "As alíquotas nominais não podem ser informadas para fato gerador anterior a 01/01/2027, pois a calculadora resolve as alíquotas vigentes."),
+
+    ALIQUOTAS_NOMINAIS_NAO_INFORMADAS(AliquotasNominaisNaoInformadasException.class,
+            "Alíquotas nominais não informadas", "aliquotas-nominais-nao-informadas",
+            new CodigoErro("REG-037", "aliquotasNominais", EstadoItemEnum.INCONSISTENCIA_ENTRADA),
+            "As alíquotas nominais (cbs, ibsEstadual e ibsMunicipal) devem ser informadas para fato gerador a partir de 01/01/2027."),
+
     // === CAL ===
 
     ALIQUOTA_NAO_ENCONTRADA(AliquotaNaoEncontradaException.class,
@@ -278,15 +358,11 @@ public enum ProblemType {
     private final CodigoErro codigoErro;
     private final String descricao;
 
-    ProblemType(Class<? extends Exception> classeErro, String titulo, String path) {
+    private ProblemType(Class<? extends Exception> classeErro, String titulo, String path) {
         this(classeErro, titulo, path, null, null);
     }
 
-    ProblemType(Class<? extends Exception> classeErro, String titulo, String path, CodigoErro codigoErro) {
-        this(classeErro, titulo, path, codigoErro, null);
-    }
-
-    ProblemType(Class<? extends Exception> classeErro, String titulo, String path, CodigoErro codigoErro, String descricao) {
+    private ProblemType(Class<? extends Exception> classeErro, String titulo, String path, CodigoErro codigoErro, String descricao) {
         this.classeErro = classeErro;
         this.titulo = titulo;
         this.path = path;

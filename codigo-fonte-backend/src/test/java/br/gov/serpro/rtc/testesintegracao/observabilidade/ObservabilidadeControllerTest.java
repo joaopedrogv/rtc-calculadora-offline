@@ -54,7 +54,9 @@ class ObservabilidadeControllerTest {
             .andExpect(jsonPath("$.objetos[4].nObj").value(5))
             .andExpect(jsonPath("$.objetos[4].estadoItem").value("CALCULADO"))
 
+            // Item 6 informa aliquotasNominais (obrigatorias a partir de 2027 para
+            // CST que exige o grupo IBS/CBS): o calculo passa a ser uma simulacao.
             .andExpect(jsonPath("$.objetos[5].nObj").value(6))
-            .andExpect(jsonPath("$.objetos[5].estadoItem").value("CALCULADO"));
+            .andExpect(jsonPath("$.objetos[5].estadoItem").value("CALCULO_SIMULADO"));
     }
 }

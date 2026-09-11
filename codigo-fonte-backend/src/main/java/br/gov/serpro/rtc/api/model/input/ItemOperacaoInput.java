@@ -6,6 +6,7 @@ package br.gov.serpro.rtc.api.model.input;
 import java.math.BigDecimal;
 
 import br.gov.serpro.rtc.api.model.SerializationVisibility;
+import br.gov.serpro.rtc.api.model.input.basecalculo.ComponentesBaseCalculoInput;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
@@ -59,10 +60,13 @@ public final class ItemOperacaoInput implements SerializationVisibility {
     @Schema(name = "cClassTrib", description = "Código de classificação tributária", example = "000001")
     private String cClassTrib;
 
-    // TODO Como validar se a base de cálculo deveria ter sido informada e não foi? ClassificacaoTributaria.inGrupoIbsCbs = true para o CST associado ao item? Default Zero?
+    // Obrigatoriedade condicional (validada em service):
+    // - sem impostoSeletivo e sem gComponentesBC → obrigatória
+    // - com impostoSeletivo, sem gComponentesBC → opcional (derivada de BC(IS) + IS)
+    // - com gComponentesBC → opcional (calculada automaticamente ou validada cruzada)
     @PositiveOrZero
     @Digits(integer = 13, fraction = 2)
-    @Schema(name = "baseCalculo", description = "Base de cálculo do imposto", example = "200.00")
+    @Schema(name = "baseCalculo", description = "Base de cálculo de CBS e IBS. Obrigatória quando impostoSeletivo e gComponentesBC não são informados; opcional com impostoSeletivo (derivada) ou com gComponentesBC (calculada automaticamente)", example = "200.00")
     private BigDecimal baseCalculo;
 
     @Digits(integer = 11, fraction = 4)
@@ -80,4 +84,11 @@ public final class ItemOperacaoInput implements SerializationVisibility {
     @Schema(name = "tributacaoRegular", description = "Informações sobre tributação regular")
     private TributacaoRegularInput tributacaoRegular;
 
+    @Valid
+    @Schema(name = "gComponentesBC", description = "Grupo de componentes para cálculo/validação da Base de Cálculo. Quando informado, permite o cálculo automático da BC ou a validação cruzada com a BC declarada")
+    private ComponentesBaseCalculoInput gComponentesBC;
+
+	@Valid
+	@Schema(name = "aliquotasNominais", description = "Alíquotas nominais aplicáveis à operação. Obrigatório para operações a partir de 01/01/2027 e proibido antes dessa data")
+	private AliquotasNominaisInput aliquotasNominais;
 }

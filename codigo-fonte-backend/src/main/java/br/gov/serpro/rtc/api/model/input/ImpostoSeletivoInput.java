@@ -48,7 +48,7 @@ public final class ImpostoSeletivoInput implements SerializationVisibility {
     @NotNull
     @PositiveOrZero
     @Digits(integer = 13, fraction = 2)
-    @Schema(name = "baseCalculo", description = "Base de cálculo do imposto", example = "200.00")
+    @Schema(name = "baseCalculo", description = "Base de cálculo do Imposto Seletivo. Obrigatória quando o grupo do Imposto Seletivo é informado; serve de referência para a base de cálculo de CBS e IBS", example = "188.00")
     private BigDecimal baseCalculo;
 
     @PositiveOrZero
@@ -59,10 +59,9 @@ public final class ImpostoSeletivoInput implements SerializationVisibility {
     @Schema(name = "unidade", description = "Unidade de medida", example = "LT")
     private String unidade;
 
-    @NotNull
     @PositiveOrZero
     @Digits(integer = 13, fraction = 2)
-    @Schema(name = "impostoInformado", description = "Imposto Seletivo informado pelo contribuinte", example = "12.00")
+    @Schema(name = "impostoInformado", description = "Imposto Seletivo informado pelo contribuinte. Opcional; quando presente junto com a base de cálculo de CBS e IBS, deve satisfazer baseCalculo (CBS/IBS) = baseCalculo (IS) + impostoInformado. Quando ausente, é tratado como zero", example = "12.00")
     private BigDecimal impostoInformado;
 
     @JsonIgnore

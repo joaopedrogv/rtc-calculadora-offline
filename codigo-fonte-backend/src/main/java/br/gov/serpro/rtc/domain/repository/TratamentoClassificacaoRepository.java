@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.dto.TratamentoClassificacaoDTO;
@@ -87,7 +88,8 @@ public interface TratamentoClassificacaoRepository extends JpaRepository<Tratame
                 pr_ibsmun.PERE_VALOR AS PERCENTUAL_REDUCAO_IBSMUN,
                 -- Dados novos da situação tributária
                 st.SITR_IND_GDIF,
-                ct.CLTR_DATA_ATUALIZACAO
+                ct.CLTR_DATA_ATUALIZACAO,
+                ct.CLTR_TPRBSN
             FROM TRATAMENTO_CLASSIFICACAO tc
             JOIN CLASSIFICACAO_TRIBUTARIA ct ON tc.TRCL_CLTR_ID = ct.CLTR_ID
             JOIN SITUACAO_TRIBUTARIA st ON st.SITR_ID = ct.CLTR_SITR_ID
@@ -108,9 +110,12 @@ public interface TratamentoClassificacaoRepository extends JpaRepository<Tratame
               AND :data BETWEEN tt.TRTR_INICIO_VIGENCIA AND COALESCE(tt.TRTR_FIM_VIGENCIA, :data)
               AND :data BETWEEN tst.TRST_INICIO_VIGENCIA AND COALESCE(tst.TRST_FIM_VIGENCIA, :data)
               AND tst.TRST_TBTO_ID == 2
+              AND (:codigo IS NULL OR ct.CLTR_CD = :codigo)
             ORDER BY ct.CLTR_CD
             """, nativeQuery = true)
-    List<Object[]> consultarTratamentoClassificacaoCbsIbs(LocalDate data);
+    List<Object[]> consultarTratamentoClassificacaoCbsIbs(
+        @Param("codigo") String codigo,
+        @Param("data") LocalDate data);
     
     @Cacheable(cacheNames = "TratamentoClassificacaoRepository.consultarValidadeDfeClassificacaoTributaria")
     @Query(value = """
@@ -138,6 +143,7 @@ public interface TratamentoClassificacaoRepository extends JpaRepository<Tratame
 
     @Query(value = """
             SELECT
+                ct.CLTR_ID,
                 ct.CLTR_CD,
                 ct.CLTR_DESCRICAO,
                 ct.CLTR_TIPO_ALIQUOTA,
@@ -146,6 +152,8 @@ public interface TratamentoClassificacaoRepository extends JpaRepository<Tratame
                 tt.TRTR_IN_INCOMPATIVEL_COM_SUSPENSAO,
                 tt.TRTR_IN_EXIGE_GRUPO_DESONERACAO,
                 st.SITR_IND_GRED,
+                tt.TRTR_IN_POSSUI_PERCENTUAL_REDUCAO,
+                st.SITR_IND_GDIF,
                 ct.CLTR_DATA_ATUALIZACAO
             FROM TRATAMENTO_CLASSIFICACAO tc
             JOIN CLASSIFICACAO_TRIBUTARIA ct ON tc.TRCL_CLTR_ID = ct.CLTR_ID
@@ -158,9 +166,12 @@ public interface TratamentoClassificacaoRepository extends JpaRepository<Tratame
               AND :data BETWEEN tst.TRST_INICIO_VIGENCIA AND COALESCE(tst.TRST_FIM_VIGENCIA, :data)
               AND :data BETWEEN st.SITR_INICIO_VIGENCIA AND COALESCE(st.SITR_FIM_VIGENCIA, :data)
               AND tst.TRST_TBTO_ID == 1
+              AND (:codigo IS NULL OR ct.CLTR_CD = :codigo)
             ORDER BY ct.CLTR_CD
             """, nativeQuery = true)
-    List<Object[]> consultarTratamentoClassificacaoImpostoSeletivo(LocalDate data);
+    List<Object[]> consultarTratamentoClassificacaoImpostoSeletivo(
+        @Param("codigo") String codigo,
+        @Param("data") LocalDate data);
 
     @Query(value = """
             SELECT

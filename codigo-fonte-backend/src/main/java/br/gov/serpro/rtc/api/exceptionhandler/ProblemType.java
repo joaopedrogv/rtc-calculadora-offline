@@ -11,7 +11,13 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import br.gov.serpro.rtc.api.util.HttpUtils;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaAdRemNaoEncontradaException;
+import br.gov.serpro.rtc.domain.service.exception.AliquotaImpostoSeletivoNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.AliquotaReferenciaNaoEncontradaException;
+import br.gov.serpro.rtc.domain.service.exception.AliquotasNominaisInformadasIndevidamenteException;
+import br.gov.serpro.rtc.domain.service.exception.AliquotasNominaisNaoInformadasException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoInconsistenteException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoMenorBaseCalculoImpostoSeletivoException;
+import br.gov.serpro.rtc.domain.service.exception.BaseCalculoNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.CampoInvalidoException;
 import br.gov.serpro.rtc.domain.service.exception.CaptchaException;
 import br.gov.serpro.rtc.domain.service.exception.ClassificacaoTributariaNaoEncontradaException;
@@ -80,6 +86,25 @@ public enum ProblemType {
 
     IMPOSTO_SELETIVO_INFORMADO_INDEVIDAMENTE(ImpostoSeletivoInformadoIndevidamenteException.class,
             "Dados do Imposto Seletivo informados indevidamente", "dados-imposto-seletivo-informados-indevidamente"),
+
+    ALIQUOTA_IMPOSTO_SELETIVO_NAO_INFORMADA(AliquotaImpostoSeletivoNaoInformadaException.class,
+            "Alíquota do Imposto Seletivo não informada", "aliquota-imposto-seletivo-nao-informada"),
+
+    ALIQUOTAS_NOMINAIS_INFORMADAS_INDEVIDAMENTE(AliquotasNominaisInformadasIndevidamenteException.class,
+            "Alíquotas nominais informadas indevidamente", "aliquotas-nominais-informadas-indevidamente"),
+
+    ALIQUOTAS_NOMINAIS_NAO_INFORMADAS(AliquotasNominaisNaoInformadasException.class,
+            "Alíquotas nominais não informadas", "aliquotas-nominais-nao-informadas"),
+
+    BASE_CALCULO_NAO_INFORMADA(BaseCalculoNaoInformadaException.class,
+            "Base de cálculo não informada", "base-calculo-nao-informada"),
+
+    BASE_CALCULO_INCONSISTENTE(BaseCalculoInconsistenteException.class,
+            "Base de cálculo inconsistente", "base-calculo-inconsistente"),
+
+    BASE_CALCULO_MENOR_BASE_CALCULO_IMPOSTO_SELETIVO(BaseCalculoMenorBaseCalculoImpostoSeletivoException.class,
+            "Base de cálculo menor que a base de cálculo do Imposto Seletivo",
+            "base-calculo-menor-base-calculo-imposto-seletivo"),
 
     ERRO_NOMENCLATURA(NomenclaturaException.class, "Erro de nomenclatura", "erro-nomenclatura"),
 

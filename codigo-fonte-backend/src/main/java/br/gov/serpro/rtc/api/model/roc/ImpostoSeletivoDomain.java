@@ -31,7 +31,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @JsonInclude(NON_NULL)
-@JsonPropertyOrder({ "CSTIS", "cClassTribIS", "vBCIS", "pIS", "pISEspec", "uTrib", "qTrib", "vIS", "memoriaCalculo" })
+@JsonPropertyOrder({ "CSTIS", "cClassTribIS", "vBCIS", "pIS", "pISEspec", "adRemIS", "uTrib", "qTrib", "vIS", "memoriaCalculo" })
 public class ImpostoSeletivoDomain implements SerializationVisibility  {
 
     @JsonSerialize(using = StringTCSTSerializer.class)
@@ -50,9 +50,14 @@ public class ImpostoSeletivoDomain implements SerializationVisibility  {
     @Schema(description = "Alíquota do Imposto Seletivo")
     private BigDecimal pIS;
     
+    @Deprecated
+    @JsonSerialize(using = BigDecimalTDec0302_04Serializer.class)
+    @Schema(description = "Alíquota específica por unidade de medida apropriada - Depreciado (a ser removido na próxima versão), utilizar adRemIS")
+    private BigDecimal pISEspec;
+    
     @JsonSerialize(using = BigDecimalTDec0302_04Serializer.class)
     @Schema(description = "Alíquota específica por unidade de medida apropriada")
-    private BigDecimal pISEspec;
+    private BigDecimal adRemIS;
     
     @JsonSerialize(using = StringUTribSerializer.class)
     @Schema(description = "Unidade de Medida Tributável")

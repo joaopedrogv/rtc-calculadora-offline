@@ -41,7 +41,7 @@ class CompraGovServiceTest {
         assertThat(compraGov).isNotNull();
         assertThat(compraGov.getTpEnteGov()).isNotNull();
         assertThat(compraGov.getTpOperGov()).isNotNull();
-        isEqualByComparingTo(compraGov.getPRedutor(), "50.00");
+        isEqualByComparingTo(compraGov.getPRedutor(), "0.00");
 
         // objetos[0]
         final var objetos = roc.getObjetos();
@@ -88,12 +88,12 @@ class CompraGovServiceTest {
 
         // gTribRegular
         final var reg = g.getGTribRegular();
-        isEqualByComparingTo(reg.getPAliqEfetRegIBSUF(), "0.54");
-        isEqualByComparingTo(reg.getVTribRegIBSUF(), "1.35");
+        isEqualByComparingTo(reg.getPAliqEfetRegIBSUF(), "1.08");
+        isEqualByComparingTo(reg.getVTribRegIBSUF(), "2.69");
         isEqualByComparingTo(reg.getPAliqEfetRegIBSMun(), "0.00");
         isEqualByComparingTo(reg.getVTribRegIBSMun(), "0.00");
-        isEqualByComparingTo(reg.getPAliqEfetRegCBS(), "1.53");
-        isEqualByComparingTo(reg.getVTribRegCBS(), "3.81");
+        isEqualByComparingTo(reg.getPAliqEfetRegCBS(), "3.06");
+        isEqualByComparingTo(reg.getVTribRegCBS(), "7.63");
 
         // gTribCompraGov
         final var tcg = g.getGTribCompraGov();

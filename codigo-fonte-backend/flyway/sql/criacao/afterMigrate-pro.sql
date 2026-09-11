@@ -4,6 +4,97 @@
 -- Gerado em: 2025-09-24
 -- =====================================================
 
+-- ============================================================
+-- Objetivo : Permitir NULL em AARE_VALOR e AADV_VALOR e
+--            zerar o valor dos registros do Tributo TBTO_ID=1 (IS)
+-- SQLite não suporta ALTER COLUMN: as tabelas são recriadas
+-- sem o NOT NULL nas colunas VALOR.
+-- ============================================================
+
+-- ============================================================
+-- ALIQUOTA_AD_REM
+-- Remove NOT NULL de AARE_VALOR
+-- ============================================================
+
+PRAGMA foreign_keys = OFF;
+
+CREATE TABLE ALIQUOTA_AD_REM_NEW (
+    AARE_ID              INTEGER NOT NULL,
+    AARE_VALOR           REAL,                          -- era NOT NULL
+    AARE_UNMD_ID         INTEGER NOT NULL,
+    AARE_TBTO_ID         INTEGER NOT NULL,
+    AARE_INICIO_VIGENCIA TEXT    NOT NULL,
+    AARE_FIM_VIGENCIA    TEXT    DEFAULT NULL
+                                 CHECK (AARE_FIM_VIGENCIA IS NULL
+                                     OR AARE_FIM_VIGENCIA >= AARE_INICIO_VIGENCIA),
+    PRIMARY KEY (AARE_ID),
+    FOREIGN KEY (AARE_TBTO_ID) REFERENCES TRIBUTO(TBTO_ID),
+    FOREIGN KEY (AARE_UNMD_ID) REFERENCES UNIDADE_MEDIDA(UNMD_ID)
+);
+
+INSERT INTO ALIQUOTA_AD_REM_NEW
+SELECT * FROM ALIQUOTA_AD_REM;
+
+DROP TABLE ALIQUOTA_AD_REM;
+
+ALTER TABLE ALIQUOTA_AD_REM_NEW RENAME TO ALIQUOTA_AD_REM;
+
+CREATE INDEX idx_aliquota_ad_rem_tbto_id ON ALIQUOTA_AD_REM(AARE_TBTO_ID);
+CREATE INDEX idx_aliquota_ad_rem_unmd_id ON ALIQUOTA_AD_REM(AARE_UNMD_ID);
+CREATE INDEX idx_aliquota_ad_rem_inicio_vigencia ON ALIQUOTA_AD_REM(AARE_INICIO_VIGENCIA);
+CREATE INDEX idx_aliquota_ad_rem_fim_vigencia ON ALIQUOTA_AD_REM(AARE_FIM_VIGENCIA);
+CREATE INDEX idx_aliquota_ad_rem_vigencia ON ALIQUOTA_AD_REM (AARE_INICIO_VIGENCIA, AARE_FIM_VIGENCIA);
+
+-- ============================================================
+-- ALIQUOTA_AD_VALOREM
+-- Remove NOT NULL de AADV_VALOR
+-- ============================================================
+
+CREATE TABLE ALIQUOTA_AD_VALOREM_NEW (
+    AADV_ID              INTEGER NOT NULL,
+    AADV_VALOR           REAL,                          -- era NOT NULL
+    AADV_TBTO_ID         INTEGER NOT NULL,
+    AADV_INICIO_VIGENCIA TEXT    NOT NULL,
+    AADV_FIM_VIGENCIA    TEXT    DEFAULT NULL
+                                 CHECK (AADV_FIM_VIGENCIA IS NULL
+                                     OR AADV_FIM_VIGENCIA >= AADV_INICIO_VIGENCIA),
+    AADV_CLTR_ID         INTEGER REFERENCES CLASSIFICACAO_TRIBUTARIA(CLTR_ID),
+    PRIMARY KEY (AADV_ID),
+    FOREIGN KEY (AADV_TBTO_ID) REFERENCES TRIBUTO(TBTO_ID)
+);
+
+INSERT INTO ALIQUOTA_AD_VALOREM_NEW
+SELECT * FROM ALIQUOTA_AD_VALOREM;
+
+DROP TABLE ALIQUOTA_AD_VALOREM;
+
+ALTER TABLE ALIQUOTA_AD_VALOREM_NEW RENAME TO ALIQUOTA_AD_VALOREM;
+
+CREATE INDEX idx_aliquota_ad_valorem_tbto_id ON ALIQUOTA_AD_VALOREM(AADV_TBTO_ID);
+CREATE INDEX idx_aliquota_ad_valorem_inicio_vigencia ON ALIQUOTA_AD_VALOREM(AADV_INICIO_VIGENCIA);
+CREATE INDEX idx_aliquota_ad_valorem_fim_vigencia ON ALIQUOTA_AD_VALOREM(AADV_FIM_VIGENCIA);
+CREATE INDEX idx_aliquota_ad_valorem_vigencia ON ALIQUOTA_AD_VALOREM (AADV_INICIO_VIGENCIA, AADV_FIM_VIGENCIA);
+
+-- ============================================================
+-- UPDATEs: zera VALOR para NULL onde TBTO_ID = 1 (IS)
+-- ============================================================
+
+-- ALIQUOTA_AD_REM  (2 registro(s) com AARE_TBTO_ID = 1)
+UPDATE ALIQUOTA_AD_REM
+SET    AARE_VALOR = NULL
+WHERE  AARE_TBTO_ID = 1;
+
+-- ALIQUOTA_AD_VALOREM  (registros com AADV_TBTO_ID = 1)
+UPDATE ALIQUOTA_AD_VALOREM
+SET    AADV_VALOR = NULL
+WHERE  AADV_TBTO_ID = 1;
+
+PRAGMA foreign_keys = ON;
+
+--
+-- Fim ajustes
+--
+
 CREATE INDEX IF NOT EXISTS idx_ajuste_vigencia ON AJUSTE (AJST_INICIO_VIGENCIA, AJST_FIM_VIGENCIA);
 CREATE INDEX IF NOT EXISTS idx_aliquota_ad_rem_vigencia ON ALIQUOTA_AD_REM (AARE_INICIO_VIGENCIA, AARE_FIM_VIGENCIA);
 CREATE INDEX IF NOT EXISTS idx_aliquota_ad_rem_produto_vigencia ON ALIQUOTA_AD_REM_PRODUTO (AARP_INICIO_VIGENCIA, AARP_FIM_VIGENCIA);

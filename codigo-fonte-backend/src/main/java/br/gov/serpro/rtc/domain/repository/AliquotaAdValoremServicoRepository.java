@@ -6,12 +6,15 @@ package br.gov.serpro.rtc.domain.repository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import br.gov.serpro.rtc.domain.model.dto.AliquotaAdValoremDTO;
 import br.gov.serpro.rtc.domain.model.entity.AliquotaAdValoremServico;
+import br.gov.serpro.rtc.domain.model.enumeration.TributoEnum;
 
 /**
  * Repositório Spring Data JPA para acesso a {@link AliquotaAdValoremServico},
@@ -22,7 +25,7 @@ import br.gov.serpro.rtc.domain.model.entity.AliquotaAdValoremServico;
 public interface AliquotaAdValoremServicoRepository extends JpaRepository<AliquotaAdValoremServico, Long> {
 
     @Query("""
-            SELECT a.aliquotaAdValorem.valor
+            SELECT new br.gov.serpro.rtc.domain.model.dto.AliquotaAdValoremDTO(a.aliquotaAdValorem.valor)
             FROM AliquotaAdValoremServico a
             WHERE EXISTS (
                 SELECT 1
@@ -50,17 +53,47 @@ public interface AliquotaAdValoremServicoRepository extends JpaRepository<Aliquo
             ORDER BY LENGTH(a.nbs.codigo) DESC
             """)
     // TODO verificar se existe uma forma de simplificar a consulta
-    BigDecimal buscarAliquotaAdValorem(
+    AliquotaAdValoremDTO buscarAliquotaAdValoremDto(
             @Param("nbs") String nbs,
             @Param("idTributo") Long idTributo,
             @Param("idClassificacaoTributaria") Long idClassificacaoTributaria,
             @Param("data") LocalDate data);
 
+    @Query("""
+            SELECT count(1) > 0
+            FROM AliquotaAdValoremServico a
+            WHERE EXISTS (
+                SELECT 1
+                FROM Nbs n
+                WHERE n.codigo = :nbs
+            )
+            AND a.nbs.codigo = SUBSTRING(:nbs, 1, LENGTH(a.nbs.codigo))
+            AND a.aliquotaAdValorem.tributo.id = :#{#tributo.codigo}
+            AND :data BETWEEN a.inicioVigencia AND COALESCE(a.fimVigencia, :data)
+            AND NOT EXISTS (
+                SELECT 1
+                FROM ExcecaoAdValoremServico e
+                WHERE e.nbs.codigo = SUBSTRING(:nbs, 1, LENGTH(e.nbs.codigo))
+                AND e.aliquotaAdValoremServico.id = a.id
+                AND :data BETWEEN e.inicioVigencia AND COALESCE(e.fimVigencia, :data)
+            )
+            AND NOT EXISTS (
+                SELECT 1
+                FROM ExcecaoAdValoremServico e
+                WHERE e.nbs.codigo = SUBSTRING(a.nbs.codigo, 1, LENGTH(e.nbs.codigo))
+                AND e.aliquotaAdValoremServico.id = a.id
+                AND :data BETWEEN e.inicioVigencia AND COALESCE(e.fimVigencia, :data)
+            )
+            """)
+    @Cacheable(cacheNames = "AliquotaAdValoremServicoRepository.existeNbsAdValorem")
+    boolean existeNbsAdValorem(@Param("nbs") String nbs, @Param("tributo") TributoEnum tributo,
+            @Param("data") LocalDate data);
+
     @Query(value = """
-            SELECT aadv.AADV_VALOR 
-            FROM ALIQUOTA_AD_VALOREM aadv 
-            WHERE aadv.AADV_TBTO_ID = :idTributo 
-            AND aadv.AADV_CLTR_ID = :idClassificacaoTributaria 
+            SELECT aadv.AADV_VALOR
+            FROM ALIQUOTA_AD_VALOREM aadv
+            WHERE aadv.AADV_TBTO_ID = :idTributo
+            AND aadv.AADV_CLTR_ID = :idClassificacaoTributaria
             AND :data BETWEEN aadv.AADV_INICIO_VIGENCIA AND COALESCE(aadv.AADV_FIM_VIGENCIA, :data)
             """, nativeQuery = true)
     BigDecimal buscarAliquotaAdValoremPorClassificacaoTributaria(

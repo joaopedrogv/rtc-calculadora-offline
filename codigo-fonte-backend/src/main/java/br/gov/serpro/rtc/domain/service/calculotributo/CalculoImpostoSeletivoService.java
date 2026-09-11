@@ -205,7 +205,8 @@ public class CalculoImpostoSeletivoService {
                 .uTrib(unidade)
                 .vIS(resultadoTributoDevido)
                 .pIS(valorAliquotaAdValorem != null ? valorAliquotaAdValorem.movePointRight(2) : valorAliquotaAdValorem) // para nao enviar a aliquota ad valorem dividida por 100
-                .pISEspec(valorAliquotaAdRem)
+                .pISEspec(valorAliquotaAdRem) // depreciado, mas mantido temporariamente para compatibilidade com clientes antigos
+                .adRemIS(valorAliquotaAdRem) // novo atributo para enviar a aliquota ad rem, substituindo o pISEspec que está depreciado
                 .vBCIS(resultadoBaseCalculo)
                 .memoriaCalculo(memoriaCalculo)
                 .build();

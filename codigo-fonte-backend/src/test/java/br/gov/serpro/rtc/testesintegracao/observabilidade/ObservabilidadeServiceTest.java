@@ -53,7 +53,9 @@ class ObservabilidadeServiceTest {
         assertThat(objetos.get(4).getNObj()).isEqualTo(5);
         assertThat(objetos.get(4).getEstadoItem()).hasToString("CALCULADO");
 
+        // Item 6 informa aliquotasNominais (obrigatorias a partir de 2027 para
+        // CST que exige o grupo IBS/CBS): o calculo passa a ser uma simulacao.
         assertThat(objetos.get(5).getNObj()).isEqualTo(6);
-        assertThat(objetos.get(5).getEstadoItem()).hasToString("CALCULADO");
+        assertThat(objetos.get(5).getEstadoItem()).hasToString("CALCULO_SIMULADO");
     }
 }

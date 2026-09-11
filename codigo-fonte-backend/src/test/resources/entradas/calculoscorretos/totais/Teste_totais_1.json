@@ -12,7 +12,12 @@
       "cClassTrib": "000001",
       "baseCalculo": 200,
       "quantidade": 1,
-      "unidade": "LT"
+      "unidade": "LT",
+      "aliquotasNominais": {
+        "cbs": 8.4,
+        "ibsEstadual": 0.05,
+        "ibsMunicipal": 0.05
+      }
     },
     {
       "numero": 2,
@@ -29,6 +34,15 @@
         "unidade": "LT",
         "impostoInformado": 0,
         "cClassTrib": "000000"
+      },
+      "aliquotasNominais": {
+        "cbs": 8.4,
+        "ibsEstadual": 0.05,
+        "ibsMunicipal": 0.05,
+        "impostoSeletivo": {
+          "adValorem": 13,
+          "adRem": 21.3
+        }
       }
     },
     {
@@ -38,7 +52,12 @@
       "cClassTrib": "510002",
       "baseCalculo": 200,
       "quantidade": 1,
-      "unidade": "LT"
+      "unidade": "LT",
+      "aliquotasNominais": {
+        "cbs": 8.4,
+        "ibsEstadual": 0.05,
+        "ibsMunicipal": 0.05
+      }
     },
     {
       "numero": 4,

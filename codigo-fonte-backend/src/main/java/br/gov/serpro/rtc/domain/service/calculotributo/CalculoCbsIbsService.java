@@ -151,10 +151,14 @@ public class CalculoCbsIbsService {
         BigDecimal valorAjuste = null;
         BigDecimal valorRedutor = null;
 
+        // A base de cálculo informada já chega validada (ou derivada) como
+        // BC IS + IS informado quando há grupo de Imposto Seletivo; assim, a expressão
+        // baseCalculoInformada - impostoSeletivoInformado + impostoSeletivoCalculado
+        // resolve-se para BC IS + impostoSeletivoCalculado. IS informado ausente vale zero.
         BigDecimal baseCalculoInformada = item.getBaseCalculo();
         BigDecimal quantidade = item.getQuantidade();
         BigDecimal impostoSeletivoInformado = null;
-        if (item.getImpostoSeletivo() != null && impostoSeletivoCalculado.compareTo(ZERO) != 0) {
+        if (item.getImpostoSeletivo() != null) {
             impostoSeletivoInformado = item.getImpostoSeletivo().getValorImpostoSeletivoInformado();
         }
 
@@ -197,15 +201,28 @@ public class CalculoCbsIbsService {
             tipoAliquota = classificacaoTributaria.tipoAliquota();
         }
 
+        BigDecimal aliquotaInformada = obterAliquotaNominal(tributo, item);
+
+        boolean aliquotaInformadaAplicada = false;
         boolean aliquotaDivididaPorCem = false;
         switch (tipoAliquota) {
             case "Padrão":
-                valorAliquota = buscarAliquotaPadrao(idTributo, codigoUf, codigoMunicipio, data);
+                if (aliquotaInformada != null) {
+                    valorAliquota = dividirPorCem(aliquotaInformada);
+                    aliquotaInformadaAplicada = true;
+                } else {
+                    valorAliquota = buscarAliquotaPadrao(idTributo, codigoUf, codigoMunicipio, data);
+                }
                 aliquotaDivididaPorCem = true;
                 break;
 
             case "Uniforme nacional (referência)":
-                valorAliquota = buscarAliquotaReferencia(idTributo, data);
+                if (aliquotaInformada != null) {
+                    valorAliquota = dividirPorCem(aliquotaInformada);
+                    aliquotaInformadaAplicada = true;
+                } else {
+                    valorAliquota = buscarAliquotaReferencia(idTributo, data);
+                }
                 aliquotaDivididaPorCem = true;
                 break;
 
@@ -222,19 +239,36 @@ public class CalculoCbsIbsService {
                     variacaoPontoPercentual = VARIACAO_EAC;
 
                 } else {
-                    valorAliquota = buscarAliquotaUniformeSetorial(item.getNbs(), idTributo, classificacaoTributaria.id(), data);
+                    if (aliquotaInformada != null) {
+                        valorAliquota = dividirPorCem(aliquotaInformada);
+                        aliquotaInformadaAplicada = true;
+                    } else {
+                        valorAliquota = buscarAliquotaUniformeSetorial(item.getNbs(), idTributo,
+                                classificacaoTributaria.id(), data);
+                    }
                     aliquotaDivididaPorCem = true;
                 }
                 break;
 
             case "Fixa":
-                valorAliquota = buscarAliquotaFixa(idTributo, classificacaoTributaria.id(), data);
+                if (aliquotaInformada != null) {
+                    valorAliquota = dividirPorCem(aliquotaInformada);
+                    aliquotaInformadaAplicada = true;
+                } else {
+                    valorAliquota = buscarAliquotaFixa(idTributo, classificacaoTributaria.id(), data);
+                }
                 aliquotaDivididaPorCem = true;
                 break;
 
             case "Sem alíquota":
-                // fixar o valor 0 no tratamento tributário, por enquanto
-                valorAliquota = ZERO;
+                if (aliquotaInformada != null) {
+                    valorAliquota = dividirPorCem(aliquotaInformada);
+                    aliquotaInformadaAplicada = true;
+                    aliquotaDivididaPorCem = true;
+                } else {
+                    // fixar o valor 0 no tratamento tributário, por enquanto
+                    valorAliquota = ZERO;
+                }
                 break;
 
             case "Alíquotas Combinadas (Ad Valorem e Ad Rem)":
@@ -245,7 +279,11 @@ public class CalculoCbsIbsService {
                 throw new TipoAliquotaDesconhecidoException(tipoAliquota, cClassTrib, cst);
         }
 
-        if (isNotBlank(expressaoAliquota)) {
+        if (aliquotaInformadaAplicada && !expressaoUsaAliquota(expressaoAliquota)) {
+            // A alíquota nominal informada prevalece sobre uma expressão fixa
+            // persistida, como "0" ou "2.08/100".
+            resultadoAliquota = valorAliquota;
+        } else if (isNotBlank(expressaoAliquota)) {
             var variaveis0 = ofEntries(
                     entry(ALIQUOTA, valorAliquota),
                     entry(QUANTIDADE, quantidade),
@@ -513,6 +551,23 @@ public class CalculoCbsIbsService {
             throw new ErroGenericoValidacaoException("Alíquota fixa não encontrada em " + data);
         }
         return dividirPorCem(aliquotaFixa);
+    }
+
+    private BigDecimal obterAliquotaNominal(TributoEnum tributo, ItemOperacaoInput item) {
+        if (item.getAliquotasNominais() == null) {
+            return null;
+        }
+        return switch (tributo) {
+            case CBS -> item.getAliquotasNominais().getCbs();
+            case IBS_ESTADUAL -> item.getAliquotasNominais().getIbsEstadual();
+            case IBS_MUNICIPAL -> item.getAliquotasNominais().getIbsMunicipal();
+            default -> null;
+        };
+    }
+
+    private static boolean expressaoUsaAliquota(String expressaoAliquota) {
+        return isNotBlank(expressaoAliquota)
+                && expressaoAliquota.matches(".*\\baliquota\\b.*");
     }
 
     private static ReducaoAliquotaDomain obterGrupoReducao(ClassificacaoTributariaCalculoDTO classificacaoTributaria, BigDecimal aliquotaEfetiva, BigDecimal percentualReducao, boolean aliquotaDivididaPorCem) {

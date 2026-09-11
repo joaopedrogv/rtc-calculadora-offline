@@ -24,6 +24,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gov.serpro.rtc.api.model.input.OperacaoInput;
 import br.gov.serpro.rtc.domain.service.CalculadoraService;
+import br.gov.serpro.rtc.domain.service.ObservabilidadeService;
+import br.gov.serpro.rtc.domain.service.collector.ErrosCalculoException;
 import br.gov.serpro.rtc.domain.service.exception.ErroFaltaImplementacaoException;
 
 @SpringBootTest
@@ -40,6 +42,9 @@ class Teste_validacao_22_ErroFaltaImplementacaoException {
 
     @Autowired
     private CalculadoraService calculadoraService;
+
+    @Autowired
+    private ObservabilidadeService observabilidadeService;
     
     private OperacaoInput operacao; 
 
@@ -57,6 +62,20 @@ class Teste_validacao_22_ErroFaltaImplementacaoException {
     }
 
     @Test
+    void teste_service_CalcularTributos_NFeAbi() {
+        operacao.setTpDoc(77);
+        assertThatThrownBy(() -> calculadoraService.calcularTributos(operacao))
+                .isExactlyInstanceOf(ErroFaltaImplementacaoException.class);
+    }
+
+    @Test
+    void teste_service_CalcularTributos_Dere() {
+        operacao.setTpDoc(94);
+        assertThatThrownBy(() -> calculadoraService.calcularTributos(operacao))
+                .isExactlyInstanceOf(ErroFaltaImplementacaoException.class);
+    }
+
+    @Test
     void teste_controller_CalcularTributos() throws Exception {
         final String jsonContent = objectMapper.writeValueAsString(operacao);
         mockMvc.perform(post("/calculadora/regime-geral")
@@ -64,6 +83,35 @@ class Teste_validacao_22_ErroFaltaImplementacaoException {
                 .content(jsonContent))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.title").value("Classificação tributária em desenvolvimento"));
+    }
+
+    @Test
+    void teste_controller_CalcularTributos_NFeAbi() throws Exception {
+        operacao.setTpDoc(77);
+        final String jsonContent = objectMapper.writeValueAsString(operacao);
+        mockMvc.perform(post("/calculadora/regime-geral")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonContent))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.title").value("Classificação tributária em desenvolvimento"));
+    }
+
+    @Test
+    void teste_observabilidade_CalcularTributos_NFeAbi() {
+        operacao.setTpDoc(77);
+        assertThatThrownBy(() -> observabilidadeService.processarOperacao(operacao, "http://localhost:8080"))
+                .isExactlyInstanceOf(ErrosCalculoException.class);
+    }
+
+    @Test
+    void teste_controllerObservabilidade_CalcularTributos_NFeAbi() throws Exception {
+        operacao.setTpDoc(77);
+        final String jsonContent = objectMapper.writeValueAsString(operacao);
+        mockMvc.perform(post("/calculadora/observabilidade/regime-geral")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonContent))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.errors[0].code").value("CAL-007"));
     }
 
 }
