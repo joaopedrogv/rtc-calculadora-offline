@@ -56,6 +56,7 @@ import br.gov.serpro.rtc.domain.service.exception.NomenclaturaIncompativelTipoDf
 import br.gov.serpro.rtc.domain.service.exception.NomenclaturaNaoPermitidaTipoDfeException;
 import br.gov.serpro.rtc.domain.service.exception.NomenclaturaObrigatoriaNaoInformadaException;
 import br.gov.serpro.rtc.domain.service.exception.PercentualReducaoNaoEncontradoException;
+import br.gov.serpro.rtc.domain.service.exception.PlataformaDownloadNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.SiglaDFeNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.TipoDfeNaoEncontradoException;
 import br.gov.serpro.rtc.domain.service.exception.SituacaoTributariaNaoEncontradaException;
@@ -348,6 +349,9 @@ public enum ProblemType {
 
     SIGLA_DFE_NAO_ENCONTRADA(SiglaDFeNaoEncontradaException.class,
             "Sigla DFe não reconhecida", "sigla-dfe-nao-reconhecida"),
+
+    PLATAFORMA_DOWNLOAD_NAO_ENCONTRADA(PlataformaDownloadNaoEncontradaException.class,
+            "Plataforma de download não encontrada", "plataforma-download-nao-encontrada"),
 
     ERRO_SISTEMA(Exception.class,
             "Erro de sistema não previsto", "erro-de-sistema-nao-previsto");

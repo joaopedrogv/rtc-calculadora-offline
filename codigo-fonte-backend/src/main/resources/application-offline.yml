@@ -3,14 +3,14 @@ info:
     version: '@project.version@'
 
 application:
-  module: ${MODULE_NAME:api-regime-geral}
+  module: api-regime-geral
   db:
     filename: calculadora-pro.db
   ibs:
     enabled: true
   memoriacalculo:
     enabled: true
-
+    
 spring:
   application:
     name: api-regime-geral
@@ -20,7 +20,7 @@ spring:
   datasource:
     url: jdbc:sqlite:file:./calculadora/db/${application.db.filename}?mode=ro&date_class=TEXT&date_string_format=yyyy-MM-dd
     username: sa
-    password:
+    password: 
     driverClassName: org.sqlite.JDBC
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
@@ -53,7 +53,7 @@ spring:
   http:
     codecs:
       max-in-memory-size: 500KB
-
+        
 logging:
   level:
     root: INFO
@@ -73,25 +73,26 @@ logging:
         type: INFO
     com:
       zaxxer:
-        hikari:
+        hikari: 
           HikariConfig: INFO
     br:
       gov:
         serpro:
           rtc: INFO
-
+          
 server:
   port: 8080
   servlet:
     context-path: /api
   tomcat:
+    use-relative-redirects: true
     threads:
       max: 250
   compression:
     enabled: true
     mime-types: application/json
     min-response-size: 1024
-
+    
 springdoc:
   version: '@springdoc.version@'
   api-docs:
@@ -135,6 +136,10 @@ cache:
       expireAfterAccess: "P1D"
       initialCapacity: 200
       maximumSize: 200
+    - name: ClassificacaoTributariaRepository.listarCodigosClassificacoesServicoSemVinculoNbs
+      expireAfterAccess: "P1D"
+      initialCapacity: 50
+      maximumSize: 50
     - name: FundamentacaoClassificacaoRepository.buscar
       expireAfterAccess: "P1D"
       initialCapacity: 400 # ~600KB
@@ -159,6 +164,18 @@ cache:
       expireAfterAccess: "P1D"
       initialCapacity: 400 # ~45KB
       maximumSize: 400
+    - name: NbsAplicavelRepository.listarNbsAplicaveisPorClassificacao
+      expireAfterAccess: "P1D"
+      initialCapacity: 50
+      maximumSize: 50
+    - name: NbsAplicavelRepository.listarCodigosClassificacoesVinculadasPorNbs
+      expireAfterAccess: "P1D"
+      initialCapacity: 50
+      maximumSize: 50
+    - name: NbsAplicavelRepository.existeVinculoParaClassificacao
+      expireAfterAccess: "P1D"
+      initialCapacity: 50
+      maximumSize: 50
     - name: NbsRepository.existeNbs
       expireAfterAccess: "P1D"
       initialCapacity: 1_800 # ~220KB
@@ -239,7 +256,23 @@ cache:
       expireAfterAccess: "P30D"
       initialCapacity: 30
       maximumSize: 30
-
+    - name: RedutorCompraGovernamentalRepository.buscarValorRedutor
+      expireAfterAccess: "P1D"
+      initialCapacity: 50
+      maximumSize: 50
+    - name: RedutorCompraGovernamentalRepository.buscarTodos
+      expireAfterAccess: "P1D"
+      initialCapacity: 1
+      maximumSize: 1
+    - name: TransferenciaCBSRepository.getPercentualTransferencia
+      expireAfterAccess: "P1D"
+      initialCapacity: 50
+      maximumSize: 50
+    - name: TransferenciaCBSRepository.buscarTodos
+      expireAfterAccess: "P1D"
+      initialCapacity: 1
+      maximumSize: 1
+          
 management:
   server:
     port: 9101
@@ -252,4 +285,4 @@ management:
         prometheus: "metrics"
 
 versao:
-  url: ${VERSAO_OFFLINE_URL:https://consumo.tributos.gov.br/servico/calcular-tributos-consumo/api/calculadora/dados-abertos/versao}
+  url: ${VERSAO_OFFLINE_URL:https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/versao}

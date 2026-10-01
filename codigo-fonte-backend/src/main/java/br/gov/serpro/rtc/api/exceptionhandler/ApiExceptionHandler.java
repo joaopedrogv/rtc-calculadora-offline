@@ -26,6 +26,7 @@ import br.gov.serpro.rtc.domain.service.exception.CaptchaException;
 import br.gov.serpro.rtc.domain.service.exception.EntidadeNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ErroInternoSistemaException;
 import br.gov.serpro.rtc.domain.service.exception.EstruturaInconsistenteException;
+import br.gov.serpro.rtc.domain.service.exception.PlataformaDownloadNaoEncontradaException;
 import br.gov.serpro.rtc.domain.service.exception.ValidacaoException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -125,6 +126,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntidadeNaoEncontradaException.class)
     public ResponseEntity<Object> handleEntidadeNaoEncontradaException(EntidadeNaoEncontradaException ex,
             WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ProblemDetail problemDetail = createProblem(ex, status);
+        return handleExceptionInternal(ex, problemDetail, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(PlataformaDownloadNaoEncontradaException.class)
+    public ResponseEntity<Object> handlePlataformaDownloadNaoEncontradaException(
+            PlataformaDownloadNaoEncontradaException ex, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         ProblemDetail problemDetail = createProblem(ex, status);
         return handleExceptionInternal(ex, problemDetail, new HttpHeaders(), status, request);
