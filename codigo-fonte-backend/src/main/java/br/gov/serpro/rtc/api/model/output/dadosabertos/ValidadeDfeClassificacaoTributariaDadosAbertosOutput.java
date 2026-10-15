@@ -39,5 +39,8 @@ public class ValidadeDfeClassificacaoTributariaDadosAbertosOutput implements Ser
 
     @Schema(name = "possibilidadeCreditoPresumido", description = "Indica se há possibilidade de crédito presumido na operação", example = "false")
     private boolean possibilidadeCreditoPresumido;
+    
+    @Schema(name = "exigeGrupoIbsCbs", description = "Indica se deve ser preenchido o grupo de informações padrão do IBS e da CBS no documento fiscal", example = "false")
+    private boolean exigeGrupoIbsCbs;
 
 }

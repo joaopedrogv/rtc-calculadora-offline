@@ -9,24 +9,27 @@ import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.gov.serpro.rtc.api.model.output.dadosabertos.AliquotaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoDfeDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoAtorDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoDfeDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmVigenciaOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NomenclaturaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAbertosOutput;
@@ -43,6 +46,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 /**
@@ -519,6 +523,94 @@ public interface DadosAbertosControllerOpenApi {
         @Parameter(description = "Código NCM sem formatação", example = "24021000", required = true) String ncm,
         @Parameter(description = "Data no padrão ISO 8601 (yyyy-MM-dd)", example = "2027-01-01", required = true) LocalDate data);
 
+    @Operation(
+            summary = "Consulta de NCMs Vigentes por Data",
+            description = "Retorna todos os NCMs (Nomenclatura Comum do Mercosul) vigentes na data informada que possuam código com exatamente 8 dígitos (NCM completo)."
+        )
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = {
+                @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = NcmVigenciaOutput.class),
+                    examples = {
+                        @ExampleObject(
+                            name = "NCMs Vigentes - Exemplo com dados",
+                            value = """
+                            [
+                              {
+                                "ncm": "01012100",
+                                "descricao": "Cavalos reprodutores de raça pura"
+                              },
+                              {
+                                "ncm": "01012900",
+                                "descricao": "Outros cavalos vivos"
+                              },
+                              {
+                                "ncm": "01013000",
+                                "descricao": "Asnos, mulas e bardotos, vivos"
+                              },
+                              {
+                                "ncm": "22030000",
+                                "descricao": "Bebidas não alcoólicas, exceto sucos e bebidas à base de leite"
+                              }
+                            ]
+                            """,
+                            description = "Lista de NCMs com 8 dígitos vigentes na data informada"
+                        ),
+                        @ExampleObject(
+                            name = "NCMs Vigentes - Lista vazia",
+                            value = "[]",
+                            description = "Sem erros quando nenhum NCM está vigente na data"
+                        )
+                    }
+                )
+            }),
+            @ApiResponse(responseCode = "400", description = "Parâmetro 'data' inválido ou ausente",
+                content = @Content(
+                    mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                    schema = @Schema(implementation = ProblemDetail.class),
+                    examples = {
+                        @ExampleObject(
+                            name = "Data ausente",
+                            value = """
+                            {
+                              "type": "about:blank",
+                              "title": "Bad Request",
+                              "status": 400,
+                              "detail": "Required parameter 'data' is not present.",
+                              "instance": "/calculadora/dados-abertos/ncm/vigentes"
+                            }
+                            """
+                        ),
+                        @ExampleObject(
+                            name = "Data inválida",
+                            value = """
+                            {
+                              "type": "about:blank",
+                              "title": "Tipo de argumento inválido",
+                              "status": 400,
+                              "detail": "Parâmetro inválido [data: 2026-99-99]",
+                              "instance": "/calculadora/dados-abertos/ncm/vigentes?data=2026-99-99"
+                            }
+                            """
+                        )
+                    }
+                )
+            ),
+            @ApiResponse(responseCode = "500", description = "Erro interno na API",
+                content = @Content(
+                    mediaType = APPLICATION_PROBLEM_JSON_VALUE,
+                    schema = @Schema(implementation = ProblemDetail.class)
+                )
+            )
+        })
+        ResponseEntity<List<NcmVigenciaOutput>> consultarNcmsVigentes(
+            @Parameter(description = "Data de referência no padrão ISO 8601 (yyyy-MM-dd) para validar vigência", example = "2026-01-01", required = true)
+            @NotNull(message = "O campo data é obrigatório")
+            @DateTimeFormat(iso = ISO.DATE)
+            LocalDate data
+        );
+    
     @Operation(summary = "Nomenclatura Brasileira de Serviços (NBS)", description = "Obtém informações sobre a NBS em relação ao Imposto Seletivo")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", headers = @Header(name = "x-warning-dados-simulados", description = "Indica que os dados são simulados. Valores possíveis: 1 (alíquotas do Imposto Seletivo ainda não definidas em lei).", schema = @Schema(type = "boolean", example = "true")), content = {
@@ -1868,7 +1960,8 @@ public interface DadosAbertosControllerOpenApi {
                     name = "Versão Example",
                     value = """
                     {
-                        "versaoApp": "0.0.0-SNAPSHOT",
+                        "versaoApp": "SNAPSHOT-b7bb06d6",
+                        "descricaoVersaoApp": "demanda5430315Cofis42615ValidadeNcm-SNAPSHOT-b7bb06d6",
                         "versaoDb": "v0011",
                         "descricaoVersaoDb": "Nova carga de classificação tributária e novos campos em CLASSIFICACAO_TRIBUTARIA e SITUACAO_TRIBUTARIA.",
                         "dataVersaoDb": "2025-10-16",

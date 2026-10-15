@@ -1,9 +1,15 @@
 package br.gov.serpro.rtc.testesintegracao.dadosabertos.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource(locations = "classpath:application-testes.yml")
+@TestPropertySource(locations = "classpath:application-testes.yml",
+        properties = "info.app.version=feature-calculo-SNAPSHOT-b7bb06d6")
 @ActiveProfiles("testes")
 class DadosAbertosControllerTest {
 
@@ -197,6 +204,16 @@ class DadosAbertosControllerTest {
                 .param("data", DATA))
             .andExpect(status().isOk());
     }
+    
+    @ParameterizedTest(name = "cClassTrib = {0}, exigeGrupoIbsCbs = {1}")
+	@MethodSource("consultarValidadeDfeClassificacaoTributaria_exigeGrupoIbsCbs")
+    void quando_consultarValidadeDfeClassificacaoTributariaExigirGrupoIbcCbs(String cClassTrib, boolean resultado) throws Exception {
+        mockMvc.perform(get("/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs/"
+                + SIGLA_DFE + "/" + cClassTrib)
+                .param("data", DATA))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.exigeGrupoIbsCbs").value(resultado));
+	}
 
     @Test
     void consultarClassificacaoTributariaCbsIbsPorCodigoComSucesso() throws Exception {
@@ -259,7 +276,9 @@ class DadosAbertosControllerTest {
     @Test
     void consultarVersao() throws Exception {
         mockMvc.perform(get("/calculadora/dados-abertos/versao"))
-            .andExpect(status().isOk());
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.versaoApp").value("SNAPSHOT-b7bb06d6"))
+            .andExpect(jsonPath("$.descricaoVersaoApp").value("feature-calculo-SNAPSHOT-b7bb06d6"));
     }
 
     @Test
@@ -279,6 +298,27 @@ class DadosAbertosControllerTest {
         mockMvc.perform(get("/calculadora/dados-abertos/transferencias-ibs"))
             .andExpect(status().isOk());
     }
+    
+	private static Stream<Arguments> consultarValidadeDfeClassificacaoTributaria_exigeGrupoIbsCbs() {
+		return Stream.of(
+				Arguments.of("000001", true),
+				Arguments.of("010001", true),
+				Arguments.of("011001", true),
+				Arguments.of("200001", true),
+				Arguments.of("221001", true),
+				Arguments.of("222001", true),
+				Arguments.of("400001", false),
+				Arguments.of("410001", false),
+				Arguments.of("510001", true),
+				Arguments.of("515001", true),
+				Arguments.of("550001", true),
+				Arguments.of("620001", false),
+				Arguments.of("800001", false),
+				Arguments.of("810001", false),
+				Arguments.of("811001", false),
+				Arguments.of("820001", false),
+				Arguments.of("830001", true));
+	}
 
     @Test
     void consultarNomenclatura() throws Exception {
@@ -294,4 +334,5 @@ class DadosAbertosControllerTest {
                 .param("data", DATA))
             .andExpect(status().isOk());
     }
+
 }

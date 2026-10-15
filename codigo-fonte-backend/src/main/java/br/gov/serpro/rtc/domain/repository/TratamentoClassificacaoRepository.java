@@ -10,7 +10,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import br.gov.serpro.rtc.domain.model.dto.TratamentoClassificacaoDTO;
 import br.gov.serpro.rtc.domain.model.entity.TratamentoClassificacao;
@@ -21,7 +20,6 @@ import br.gov.serpro.rtc.domain.model.entity.TratamentoClassificacao;
  * regras de tributação, situações tributárias, validações para DF-e e
  * relatórios usados pela calculadora.
  */
-@Repository
 public interface TratamentoClassificacaoRepository extends JpaRepository<TratamentoClassificacao, Long> {
 
     /*
@@ -120,11 +118,12 @@ public interface TratamentoClassificacaoRepository extends JpaRepository<Tratame
     @Cacheable(cacheNames = "TratamentoClassificacaoRepository.consultarValidadeDfeClassificacaoTributaria")
     @Query(value = """
         SELECT
-            ct.CLTR_ID, -------------------------- [0] idClassificacaoTributaria
-            ct.CLTR_NOMENCLATURA, ---------------- [1] nomenclatura
-            tt.TRTR_IN_EXIGE_GRUPO_DESONERACAO, -- [2] exigeGrupoTributacaoRegular
-            st.SITR_IND_GDIF, -------------------- [3] permiteDiferimento
-            ct.CLTR_IND_GCREDPRESOPER ------------ [4] possibilidadeCreditoPresumido
+            ct.CLTR_ID, ----------------------------- [0] idClassificacaoTributaria
+            ct.CLTR_NOMENCLATURA, ------------------- [1] nomenclatura
+            tt.TRTR_IN_EXIGE_GRUPO_DESONERACAO, ----- [2] exigeGrupoTributacaoRegular
+            st.SITR_IND_GDIF, ----------------------- [3] permiteDiferimento
+            ct.CLTR_IND_GCREDPRESOPER, -------------- [4] possibilidadeCreditoPresumido
+            st.SITR_IND_GIBSCBS --------------------- [5] exigeGrupoIbsCbs
         FROM TRATAMENTO_CLASSIFICACAO tc
         INNER JOIN CLASSIFICACAO_TRIBUTARIA ct ON tc.TRCL_CLTR_ID = ct.CLTR_ID
             AND :data BETWEEN ct.CLTR_INICIO_VIGENCIA AND COALESCE(ct.CLTR_FIM_VIGENCIA, :data)

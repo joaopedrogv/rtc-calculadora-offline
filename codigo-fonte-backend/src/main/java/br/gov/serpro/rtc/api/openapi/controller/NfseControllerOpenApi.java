@@ -15,10 +15,10 @@ import org.springframework.http.ResponseEntity;
 import br.gov.serpro.rtc.api.model.input.nfse.NfseBaseCalculoInput;
 import br.gov.serpro.rtc.api.model.input.nfse.NfseValidacaoIndicadorOperacaoInput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseBaseCalculoOutput;
-import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseCodigoDescricaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseIndicadorOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseLocalOperacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseValidacaoIndicadorOperacaoOutput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,12 +34,21 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-
 /**
- * Contrato OpenAPI dos endpoints de NFS-e para cálculo de base, validação de
- * indicador de operação e consultas auxiliares.
+ * Contrato OpenAPI dos endpoints de NFS-e.
+ * <p>
+ * Centraliza todas as anotações Swagger/OpenAPI para os endpoints, mantendo a implementação limpa.
+ * <p>
+ * Operações:
+ * <ul>
+ *   <li>Cálculo de base de cálculo (com validações de período).</li>
+ *   <li>Validação de indicador de operação.</li>
+ *   <li>Consultas de dados mestres: local de operação, indicadores, classificações, locais.</li>
+ * </ul>
+ * <p>
+ * Padrão de erro: {@link ProblemDetail} (RFC 7807) com campos {@code type, title, status, detail, instance}.
  */
-@Tag(name = "NFS-e - VERSÃO BETA", description = "Serviço para cálculo de Base de Cálculo de NFS-e")
+@Tag(name = "NFS-e - VERSÃO BETA", description = "Operações auxiliares: cálculo de base, validação e consultas de dados mestres de NFS-e")
 public interface NfseControllerOpenApi {
 
     @Operation(summary = "Base de Cálculo NFS-e", description = "Afere a Base de Cálculo de uma NFS-e no período de transição. "

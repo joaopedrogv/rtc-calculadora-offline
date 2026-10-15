@@ -28,4 +28,19 @@ public class VersaoAplicacaoService {
         return headers;
     }
 
+    public String getVersaoAplicacaoDadosAbertos() {
+        if (versaoAplicacao == null) {
+            return null;
+        }
+        int snapshotIndex = versaoAplicacao.indexOf("-SNAPSHOT-");
+        if (snapshotIndex >= 0 && snapshotIndex + "-SNAPSHOT-".length() < versaoAplicacao.length()) {
+            return versaoAplicacao.substring(snapshotIndex + 1);
+        }
+        return versaoAplicacao;
+    }
+
+    public String getDescricaoVersaoAplicacao() {
+        return versaoAplicacao;
+    }
+
 }

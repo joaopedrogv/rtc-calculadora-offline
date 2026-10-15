@@ -9,7 +9,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -21,27 +20,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.gov.serpro.rtc.api.model.output.dadosabertos.AliquotaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoDfeDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoAtorDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoDfeDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmVigenciaOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NomenclaturaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ValidadeDfeClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.VersaoOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.openapi.controller.DadosAbertosControllerOpenApi;
-import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
 import br.gov.serpro.rtc.domain.model.enumeration.PapelAtorEnum;
+import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
+import br.gov.serpro.rtc.domain.service.VersaoAplicacaoService;
 import br.gov.serpro.rtc.domain.service.VersaoBaseDadosService;
 import br.gov.serpro.rtc.domain.service.dadosabertos.DadosAbertosService;
 import lombok.RequiredArgsConstructor;
@@ -64,11 +65,10 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
     private static final Duration CACHE_PUBLIC_MAX_AGE = Duration.ofHours(1);
     private static final String HEADER_WARNING_DADOS_SIMULADOS = "x-warning-dados-simulados";
 
-    @Value("${info.app.version:unknown}")
-    private String versaoAplicacao;
     private final Environment environment;
     private final VersaoBaseDadosService versaoBaseDadosService;
     private final DadosAbertosService dadosAbertosService;
+    private final VersaoAplicacaoService versaoAplicacaoService;
 
     @Override
     @GetMapping("/ufs")
@@ -206,7 +206,40 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
             ? okComWarningDadosSimulados(resultado, data) 
             : ResponseEntity.ok(resultado);
     }
-
+    
+    /**
+     * Consulta todos os NCMs vigentes na data informada com código completo (8 dígitos).
+     * <p>
+     * Endpoint com cache HTTP de 1 hora ({@code Cache-Control: public, max-age=3600}).
+     * <p>
+     * Regras de negócio:
+     * <ul>
+     *   <li>Data é obrigatória (formato ISO 8601 yyyy-MM-dd).</li>
+     *   <li>Retorna apenas NCMs com código de 8 dígitos vigentes na data.</li>
+     *   <li>Lista vazia é permitida (não é erro), com status HTTP 200.</li>
+     *   <li>Erros de validação (data ausente ou inválida) retornam 400 BAD REQUEST.</li>
+     * </ul>
+     * <p>
+     * Resposta de sucesso (200):
+     * <pre>
+     * [
+     *   { "ncm": "24021000", "descricao": "Cigarro com peso de até 3g..." },
+     *   { "ncm": "22030000", "descricao": "Bebidas não alcoólicas..." }
+     * ]
+     * </pre>
+     * 
+     * @param data data de referência para filtrar vigência (obrigatória)
+     * @return ResponseEntity contendo lista de {@link NcmVigenciaOutput} e headers de cache público
+     * 
+     */
+    @Override
+    @GetMapping(value = "ncm/vigentes", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<NcmVigenciaOutput>> consultarNcmsVigentes(@RequestParam LocalDate data) {
+        return ResponseEntity.ok()
+        		.cacheControl(cacheControlPublicoUmaHora())
+                .body(dadosAbertosService.consultarNcmsVigentes(data));
+    }
+    
     @Override
     @GetMapping("/nbs")
     public ResponseEntity<NbsDadosAbertosOutput> consultarNbs(
@@ -298,7 +331,8 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
         }
         
         VersaoOutput versaoOutput = VersaoOutput.builder()
-                .versaoApp(versaoAplicacao)
+                .versaoApp(versaoAplicacaoService.getVersaoAplicacaoDadosAbertos())
+                .descricaoVersaoApp(versaoAplicacaoService.getDescricaoVersaoAplicacao())
                 .versaoDb(versaoBaseDadosService.getUltimaVersao().getNumeroVersao())
                 .descricaoVersaoDb(versaoBaseDadosService.getUltimaVersao().getDescricao())
                 .dataVersaoDb(versaoBaseDadosService.getUltimaVersao().getData().toString())
@@ -396,5 +430,5 @@ public class DadosAbertosController implements DadosAbertosControllerOpenApi {
                 .header("Cache-Control", "public, max-age=3600")
                 .body(dadosAbertosService.validarNcmAplicavel(cClassTrib, ncm, dataOcorrenciaFatoGerador));
     }
-
+    
 }

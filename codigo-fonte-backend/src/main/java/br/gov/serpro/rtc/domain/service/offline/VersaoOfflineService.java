@@ -61,6 +61,7 @@ public class VersaoOfflineService {
 
         VersaoOutput local = VersaoOutput.builder()
                 .versaoApp(versaoAplicacaoLocal)
+                .descricaoVersaoApp(versaoAplicacaoLocal)
                 .versaoDb(ultimaVersao.getNumeroVersao())
                 .dataVersaoDb(ultimaVersao.getData().toString())
                 .build();

@@ -19,24 +19,42 @@ import org.springframework.web.bind.annotation.RestController;
 import br.gov.serpro.rtc.api.model.input.nfse.NfseBaseCalculoInput;
 import br.gov.serpro.rtc.api.model.input.nfse.NfseValidacaoIndicadorOperacaoInput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseBaseCalculoOutput;
-import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseCodigoDescricaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseIndicadorOperacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseLocalOperacaoOutput;
+import br.gov.serpro.rtc.api.model.output.nfse.NfseSituacaoClassificacaoOutput;
 import br.gov.serpro.rtc.api.model.output.nfse.NfseValidacaoIndicadorOperacaoOutput;
 import br.gov.serpro.rtc.api.openapi.controller.NfseControllerOpenApi;
 import br.gov.serpro.rtc.domain.service.nfse.NfseService;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Controlador REST para cálculo de base de cálculo, validação de indicador de
- * operação e consultas auxiliares de NFS-e.
+ * Controlador REST para operações auxiliares de NFS-e: cálculo de base de cálculo,
+ * validação de indicador de operação e consultas de dados mestres (classificações,
+ * locais de operação).
+ * <p>
+ * Mapeado para {@code /calculadora/nfse}.
+ * <p>
+ * Endpoints:
+ * <ul>
+ *   <li>{@code POST /base-calculo} - Calcula base de cálculo de NFS-e.</li>
+ *   <li>{@code POST /indicador-operacao/validate} - Valida compatibilidade de indicador de operação.</li>
+ *   <li>{@code GET /local-operacao} - Consulta local da operação por cIndOp e data.</li>
+ *   <li>{@code GET /indicador-operacao} - Lista indicadores de operação por data.</li>
+ *   <li>{@code GET /situacoes-classificacoes-tributarias} - Lista classificações e situações por NBS.</li>
+ *   <li>{@code GET /locais-fornecimento} - Lista locais de fornecimento.</li>
+ *   <li>{@code GET /locais-incidencia} - Lista locais de incidência.</li>
+ * </ul>
+ * <p>
+ * Implementa {@link NfseControllerOpenApi} para contrato OpenAPI centralizando anotações Swagger.
+ * 
+ * @see NfseControllerOpenApi
  */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("calculadora/nfse")
 public class NfseController implements NfseControllerOpenApi {
-
+	
     private final NfseService nfseService;
 
     @Override
@@ -107,4 +125,5 @@ public class NfseController implements NfseControllerOpenApi {
         
         return ResponseEntity.ok(resultado);
     }
+
 }

@@ -5,8 +5,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -201,7 +205,16 @@ class DadosAbertosServiceTest {
         assertThat(dadosAbertosService.consultarClassificacaoTributariaIsPorCodigo(C_CLASS_TRIB, DATA))
             .isNotNull();
     }
-
+    
+    @ParameterizedTest(name = "cClassTrib = {0}, exigeGrupoIbsCbs = {1}")
+	@MethodSource("consultarValidadeDfeClassificacaoTributaria_exigeGrupoIbsCbs")
+    void quando_consultarValidadeDfeClassificacaoTributariaExigirGrupoIbcCbs(String cClassTrib, boolean resultado) {
+        assertThat(dadosAbertosService
+                .consultarValidadeDfeClassificacaoTributaria(SIGLA_DFE, cClassTrib, DATA))
+            .isNotNull()
+            .satisfies(r -> assertThat(r.isExigeGrupoIbsCbs()).isEqualTo(resultado));
+    }
+    
     @Test
     void consultarCstsComClassificacoesCbsIbsPorSiglaDfe() {
         assertThat(dadosAbertosService.consultarCstsComClassificacoesCbsIbs(SIGLA_DFE, DATA))
@@ -263,4 +276,25 @@ class DadosAbertosServiceTest {
     void consultarTransferenciasIBS() {
         assertThat(dadosAbertosService.consultarTransferenciasIBS()).isNotNull();
     }
+    
+    private static Stream<Arguments> consultarValidadeDfeClassificacaoTributaria_exigeGrupoIbsCbs() {
+		return Stream.of(
+				Arguments.of("000001", true),
+				Arguments.of("010001", true),
+				Arguments.of("011001", true),
+				Arguments.of("200001", true),
+				Arguments.of("221001", true),
+				Arguments.of("222001", true),
+				Arguments.of("400001", false),
+				Arguments.of("410001", false),
+				Arguments.of("510001", true),
+				Arguments.of("515001", true),
+				Arguments.of("550001", true),
+				Arguments.of("620001", false),
+				Arguments.of("800001", false),
+				Arguments.of("810001", false),
+				Arguments.of("811001", false),
+				Arguments.of("820001", false),
+				Arguments.of("830001", true));
+	}
 }

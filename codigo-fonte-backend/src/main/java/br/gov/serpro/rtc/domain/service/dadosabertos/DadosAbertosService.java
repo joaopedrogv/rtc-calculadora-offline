@@ -4,8 +4,8 @@
 package br.gov.serpro.rtc.domain.service.dadosabertos;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -19,21 +19,22 @@ import br.gov.serpro.rtc.api.model.output.dadosabertos.AliquotaDadosAbertosOutpu
 import br.gov.serpro.rtc.api.model.output.dadosabertos.AtorDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.ClassificacaoTributariaOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.FundamentacaoClassificacaoDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoAtorDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.GrupoDfeDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.MunicipioDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.TipoDfeDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.NomenclaturaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsListaDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmVigenciaOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.NomenclaturaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.RedutorCompraGovernamentalDadosAbertosOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoClassificacaoAninhadoOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.SituacaoTributariaDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TipoDfeClassificacaoDadosAbertosOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.NbsAplicavelOutput;
-import br.gov.serpro.rtc.api.model.output.dadosabertos.NcmAplicavelOutput;
+import br.gov.serpro.rtc.api.model.output.dadosabertos.TipoDfeDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaCBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.TransferenciaIBSDadosAbertosOutput;
 import br.gov.serpro.rtc.api.model.output.dadosabertos.UfDadosAbertosOutput;
@@ -46,8 +47,8 @@ import br.gov.serpro.rtc.domain.model.entity.FundamentacaoLegal;
 import br.gov.serpro.rtc.domain.model.entity.SituacaoTributaria;
 import br.gov.serpro.rtc.domain.model.entity.TipoDfeClassificacao;
 import br.gov.serpro.rtc.domain.model.enumeration.NomenclaturaResultEnum;
-import br.gov.serpro.rtc.domain.model.enumeration.SiglasDFeEnum;
 import br.gov.serpro.rtc.domain.model.enumeration.PapelAtorEnum;
+import br.gov.serpro.rtc.domain.model.enumeration.SiglasDFeEnum;
 import br.gov.serpro.rtc.domain.model.enumeration.TipoWarningDadosSimulados;
 import br.gov.serpro.rtc.domain.repository.ClassificacaoTributariaRepository;
 import br.gov.serpro.rtc.domain.repository.GrupoAtorRepository;
@@ -66,9 +67,10 @@ import br.gov.serpro.rtc.domain.service.AliquotaAdValoremServicoService;
 import br.gov.serpro.rtc.domain.service.AliquotaPadraoService;
 import br.gov.serpro.rtc.domain.service.ClassificacaoTributariaService;
 import br.gov.serpro.rtc.domain.service.FundamentacaoClassificacaoService;
+import br.gov.serpro.rtc.domain.service.MunicipioService;
 import br.gov.serpro.rtc.domain.service.NbsAplicavelService;
 import br.gov.serpro.rtc.domain.service.NcmAplicavelService;
-import br.gov.serpro.rtc.domain.service.MunicipioService;
+import br.gov.serpro.rtc.domain.service.NcmService;
 import br.gov.serpro.rtc.domain.service.NomenclaturaService;
 import br.gov.serpro.rtc.domain.service.TipoDfeClassificacaoService;
 import br.gov.serpro.rtc.domain.service.TributoSituacaoTributariaService;
@@ -115,6 +117,7 @@ public class DadosAbertosService {
     private final AliquotaPadraoService aliquotaPadraoService;
     private final NbsAplicavelService nbsAplicavelService;
     private final NcmAplicavelService ncmAplicavelService;
+    private final NcmService ncmService;
 
     // FIXME aqui retornar somente os dados necessarios para a consulta via service
     public List<UfDadosAbertosOutput> consultarUfs() {
@@ -593,6 +596,7 @@ public class DadosAbertosService {
                 .exigeGrupoTributacaoRegular(resultado[2] != null && ((Number) resultado[2]).intValue() != 0)
                 .permiteDiferimento(resultado[3] != null && ((Number) resultado[3]).intValue() != 0)
                 .possibilidadeCreditoPresumido(resultado[4] != null && ((Number) resultado[4]).intValue() == 1)
+                .exigeGrupoIbsCbs(resultado[5] != null && ((Number) resultado[5]).intValue() == 1)
                 .build();
     }
 
@@ -917,4 +921,8 @@ public class DadosAbertosService {
 
         return new ArrayList<>(gruposPorId.values());
     }
+    
+	public List<NcmVigenciaOutput> consultarNcmsVigentes(LocalDate data) {
+		return ncmService.consultarNcmsVigentes(data);
+	}
 }

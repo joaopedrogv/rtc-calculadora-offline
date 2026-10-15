@@ -22,8 +22,11 @@ import lombok.Setter;
 @JsonInclude(Include.NON_NULL)
 public class VersaoOutput implements SerializationVisibility {
 
-    @Schema(name = "versaoApp", description = "Versão do aplicativo", example = "0.0.0-SNAPSHOT")
+    @Schema(name = "versaoApp", description = "Versão do aplicativo", example = "SNAPSHOT-b7bb06d6")
     private final String versaoApp;
+
+    @Schema(name = "descricaoVersaoApp", description = "Descrição da versão do aplicativo", example = "demanda5430315Cofis42615ValidadeNcm-SNAPSHOT-b7bb06d6")
+    private final String descricaoVersaoApp;
 
     @Schema(name = "versaoDb", description = "Versão do banco de dados", example = "1.0.0")
     private final String versaoDb;
