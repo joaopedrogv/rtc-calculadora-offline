@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  * Enumera os códigos legais de local de fornecimento utilizados nas regras de
  * incidência do IBS/CBS.
  *
- * Os valores {@code LOCAL_1} a {@code LOCAL_28} associam cada código numérico à
+ * Os valores {@code LOCAL_1} a {@code LOCAL_29} associam cada código numérico à
  * respectiva descrição normativa do local da operação ou da prestação.
  */
 @Getter
@@ -43,7 +43,8 @@ public enum LocalFornecimento {
     LOCAL_25(25, "Local do estabelecimento principal do adquirente (assim considerada a matriz), conforme §4º do art. 11"),
     LOCAL_26(26, "Local do estabelecimento do agente ou de seus representados que figurem na posição devedora da liquidação financeira apurada pela Câmara de Comercialização de Energia Elétrica"),
     LOCAL_27(27, "Local do estabelecimento principal do fornecedor"),
-    LOCAL_28(28, "Local do estabelecimento principal do adquirente");
+    LOCAL_28(28, "Local do estabelecimento principal do adquirente"),
+    LOCAL_29(29, "Localidade do Imóvel (BICE)");
 
     private final int codigo;
     private final String descricao;
